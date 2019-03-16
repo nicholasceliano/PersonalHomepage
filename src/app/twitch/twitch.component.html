@@ -1,0 +1,38 @@
+<div>
+  <iframe
+    src="https://player.twitch.tv/?channel=summit1g&muted=true"
+    height="200"
+    width="400"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="true">
+  </iframe>
+</div>
+<div>
+  <div class="row">
+    <div class="col-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="list-twitch-channels-list" data-toggle="list" href="#list-twitch-channels" role="tab" aria-controls="channels">Channels</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="list-twitch-chat-list" data-toggle="list" href="#list-twitch-chat" role="tab" aria-controls="twitch-chat">Chat</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="list-twitch-channels" role="tabpanel" aria-labelledby="list-twitch-channels-list">
+      Channel List Goes Here
+    </div>
+    <div class="tab-pane fade" id="list-twitch-chat" role="tabpanel" aria-labelledby="list-twitch-chat-list">
+        <iframe frameborder="0"
+          scrolling="no"
+          id="chat_embed"
+          src="https://www.twitch.tv/embed/summit1g/chat"
+          height="500"
+          width="400">
+        </iframe>
+    </div>
+  </div>
+</div>

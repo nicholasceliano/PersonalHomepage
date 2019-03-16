@@ -7,15 +7,17 @@ import { AppComponent } from './app.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { QuotesComponent } from './quotes/quotes.component';
-import { PanelComponent } from './panel/panel.component';
+import { TwitchComponent } from './twitch/twitch.component';
 
+import { PanelComponent } from './structure/panel/panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     YoutubeComponent,
     QuotesComponent,
-    PanelComponent
+    PanelComponent,
+    TwitchComponent
   ],
   imports: [
     BrowserModule,

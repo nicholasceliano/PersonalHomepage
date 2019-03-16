@@ -13,11 +13,7 @@ export class PanelComponent implements OnInit {
   @Input('panelName') panelName: string;
   @Input('panelTitle') panelTitle: string;
 
-  constructor() { 
-
-    
-
-  }
+  constructor() {}
 
   ngOnInit() {
   }
