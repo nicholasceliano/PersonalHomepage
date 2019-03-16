@@ -3,15 +3,20 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-        <app-youtube></app-youtube>
+<div class="container-fluid">
+    <div class="d-flex flex-wrap justify-content-center">
+        <app-panel panelName="youtube" panelTitle="Youtube"></app-panel>
+        <app-panel panelName="quotes" panelTitle="Quotes"></app-panel>
+        <app-panel panelName="twitch" panelTitle="Twitch"></app-panel>
+        <app-panel panelName="drive" panelTitle="Google Drive"></app-panel>
+        <app-panel panelName="weather" panelTitle="Weather"></app-panel>
+        <app-panel panelName="financial" panelTitle="Financials"></app-panel>
+        <app-panel panelName="tabs" panelTitle="Tabs"></app-panel>
+        <app-panel panelName="links" panelTitle="Links"></app-panel>
+        <app-panel panelName="trails" panelTitle="Trails"></app-panel>
+        <app-panel panelName="podcasts" panelTitle="Podcasts"></app-panel>
     </div>
-    <div class="col">
-        <app-youtube></app-youtube>
-    </div>
-  </div>
+  
 </div>
 
 <router-outlet></router-outlet>

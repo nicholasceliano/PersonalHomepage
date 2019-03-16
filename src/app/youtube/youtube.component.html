@@ -1,40 +1,37 @@
-<div class="border shadow p-3 mb-5 bg-white rounded">
-  <h1 class="border-bottom text-center">Youtube</h1>
-  <div>
-      <div>
-        video player that pops up up here when a video is clicked
-      </div>
-      <div>
-        <div class="row">
-          <div class="col-12">
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" id="list-watchlist-list" data-toggle="list" href="#list-watchlist" role="tab" aria-controls="watchlist">Watchlist</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="list-subscriptions-list" data-toggle="list" href="#list-subscriptions" role="tab" aria-controls="subscriotions">Subscriptions</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="list-watchlist" role="tabpanel" aria-labelledby="list-watchlist-list">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let watchlistVideo of watchlistVideos">
-                <span>{{watchlistVideo.id}}</span> {{watchlistVideo.name}}
-                <span class="badge badge-primary badge-pill">watched</span>
-              </li>
-            </ul>
-          </div>
-          <div class="tab-pane fade" id="list-subscriptions" role="tabpanel" aria-labelledby="list-subscriptions-list">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let subscriptionVideo of subscriptionVideos">
-                <span>{{subscriptionVideo.id}}</span> {{subscriptionVideo.name}}
-                <span class="badge badge-primary badge-pill">test</span>
-              </li>
-            </ul>
-          </div>
+<div>
+    <div>
+      video player that pops up up here when a video is clicked
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-12">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" id="list-watchlist-list" data-toggle="list" href="#list-watchlist" role="tab" aria-controls="watchlist">Watchlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="list-subscriptions-list" data-toggle="list" href="#list-subscriptions" role="tab" aria-controls="subscriotions">Subscriptions</a>
+            </li>
+          </ul>
         </div>
       </div>
-  </div>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-watchlist" role="tabpanel" aria-labelledby="list-watchlist-list">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let watchlistVideo of watchlistVideos">
+              <span>{{watchlistVideo.id}}</span> {{watchlistVideo.name}}
+              <span class="badge badge-primary badge-pill">watched</span>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane fade" id="list-subscriptions" role="tabpanel" aria-labelledby="list-subscriptions-list">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let subscriptionVideo of subscriptionVideos">
+              <span>{{subscriptionVideo.id}}</span> {{subscriptionVideo.name}}
+              <span class="badge badge-primary badge-pill">test</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 </div>
