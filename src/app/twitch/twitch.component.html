@@ -1,12 +1,17 @@
 <div>
   <iframe
-    src="https://player.twitch.tv/?channel=summit1g&muted=true"
-    height="200"
+    [src]="streamUrl"
+    height="300"
     width="400"
     frameborder="0"
     scrolling="no"
     allowfullscreen="true">
   </iframe>
+  <div>
+    <button (click)="authenticate()">Authenticate</button>
+    <button (click)="revokeTwitchAuthentication()">Logout</button>
+    <button (click)="getUserChannels()">Get Channels</button>
+  </div>
 </div>
 <div>
   <div class="row">
@@ -23,13 +28,19 @@
   </div>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="list-twitch-channels" role="tabpanel" aria-labelledby="list-twitch-channels-list">
-      Channel List Goes Here
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item p-0" style="cursor:pointer;" *ngFor="let followedStream of followedStreams" (click)=showStream(followedStream.channel.name)>
+          <img src={{followedStream.channel.logo}} height="42" width="42">
+          <span>{{followedStream.channel.display_name}}</span> {{followedStream.game}}
+          <span class="badge badge-primary badge-pill">{{followedStream.viewers}}</span>
+        </li>
+      </ul>
     </div>
     <div class="tab-pane fade" id="list-twitch-chat" role="tabpanel" aria-labelledby="list-twitch-chat-list">
         <iframe frameborder="0"
           scrolling="no"
           id="chat_embed"
-          src="https://www.twitch.tv/embed/summit1g/chat"
+          src="https://www.twitch.tv/embed/zeuxo/chat"
           height="500"
           width="400">
         </iframe>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { YoutubeService } from '../youtube.service';
-import { WatchlistVideo } from '../watchlist-video';
-import { SubscriptionVideo } from '../subscription-video';
+import { YoutubeService } from '../_services/youtube.service';
+import { WatchlistVideo } from '../_models/watchlist-video';
+import { SubscriptionVideo } from '../_models/subscription-video';
 
 @Component({
   selector: 'app-youtube',

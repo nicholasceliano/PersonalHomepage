@@ -10,6 +10,12 @@ import { QuotesComponent } from './quotes/quotes.component';
 import { TwitchComponent } from './twitch/twitch.component';
 
 import { PanelComponent } from './structure/panel/panel.component';
+import { TwitchAuthComponent } from './apiAuth/twitch-auth/twitch-auth.component';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'twitchAuth', component: TwitchAuthComponent }
+];
 
 @NgModule({
   declarations: [
@@ -17,12 +23,17 @@ import { PanelComponent } from './structure/panel/panel.component';
     YoutubeComponent,
     QuotesComponent,
     PanelComponent,
-    TwitchComponent
+    TwitchComponent,
+    TwitchAuthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false } // <-- debugging purposes only
+    )
   ],
   providers: [
     {
