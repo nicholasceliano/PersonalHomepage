@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TwitchFollowedStreamsResp } from '../_models/twitch-followed-streams-resp';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,45 +11,35 @@ export class TwitchService {
 
   constructor(private http: HttpClient) { }
 
+  private twitchAuthUri = "https://id.twitch.tv/oauth2";
+  private twitchAPIv5Uri = "https://api.twitch.tv/kraken";
+  private clientId = "x15tbpitfdkjhoiotp5mdivv7ukq5n";//TODO: need to break this out somehow
+  private redirectUri = "http://localhost:4200/twitchAuth";
+
   getFollowedStreamsByUserId(): Observable<TwitchFollowedStreamsResp> {
-    var url = `https://api.twitch.tv/kraken/streams/followed?limit=100`;
+    var url = `${this.twitchAPIv5Uri}/streams/followed?limit=100`;
 
     var httpOptions = { 
       headers: new HttpHeaders ({
-        "Client-ID": this.getClientId(),
+        "Client-ID": this.clientId,
         "Accept": "application/vnd.twitchtv.v5+json"
       })
-    }
+    };
 
     return this.http.get<TwitchFollowedStreamsResp>(url, httpOptions);
   }
 
   authenticate(): void {
-    var clientId = this.getClientId();
-    var redirectUri = "http://localhost:3333/twitchAuth";
-    var respType = "code";
-    var scopes = "channel:read:subscriptions";
-    
-    var url = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${respType}&scope=${scopes}`;
+    var respType = "token";
+    var scopes = "";
+    var url = `${this.twitchAuthUri}/authorize?client_id=${this.clientId}&redirect_uri=${this.redirectUri}&response_type=${respType}&scope=${scopes}`;
 
-    window.location.replace(url);
+    window.location.href = url;
   }
 
-  revokeAuthentication(): void {
-    var clientId = this.getClientId();
-    var token = "7a933w1wif8u2ggyy446dihrgtew52";
-    
-    var url = `https://id.twitch.tv/oauth2/revoke?client_id=${clientId}&token=${token}`;
+  revokeAuthentication(token): void {
+    var url = `${this.twitchAuthUri}/revoke?client_id=${this.clientId}&token=${token}`;
 
-    this.http.post(url, "").subscribe(res => {
-      console.log(res);
-    },
-    (err) => {
-      console.log(err);
-    });
-  }
-
-  private getClientId(): string {
-    return "x15tbpitfdkjhoiotp5mdivv7ukq5n";
+    this.http.post(url, "").subscribe(res => console.log(res), (err) => console.log(err));
   }
 }

@@ -1,0 +1,33 @@
+.twitch-panel-width {
+    width:400px;
+}
+
+#twitchChannelList li div {
+    cursor:pointer;
+}
+
+#twitchNav {
+    border:0;
+}
+
+.nav-link.active {
+    background-color:#232127;
+    border-color:#232127;
+}
+
+.nav-link:not(.active) {
+    background-color:rgb(100, 65, 164);
+}
+
+.badge-twitch {
+    background-color:rgb(14, 155, 216);
+    color:#fff;
+}
+
+.twitch-dark-purple-bkgrnd {
+    background-color:#232127;
+}
+
+p, small, li, .nav-link, .nav-link.active {
+    color: #b8b5c0;
+}

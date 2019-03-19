@@ -12,6 +12,7 @@ export class PanelComponent implements OnInit {
 
   @Input('panelName') panelName: string;
   @Input('panelTitle') panelTitle: string;
+  @Input('panelLogo') panelLogo: string;
 
   constructor() {}
 
