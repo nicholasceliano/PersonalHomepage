@@ -12,6 +12,7 @@ import { TwitchComponent } from './twitch/twitch.component';
 import { PanelComponent } from './structure/panel/panel.component';
 import { TwitchAuthComponent } from './apiAuth/twitch-auth/twitch-auth.component';
 import { Routes, RouterModule } from '@angular/router';
+import { GmailComponent } from './gmail/gmail.component';
 
 const appRoutes: Routes = [
   { path: 'twitchAuth', component: TwitchAuthComponent }
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     QuotesComponent,
     PanelComponent,
     TwitchComponent,
-    TwitchAuthComponent
+    TwitchAuthComponent,
+    GmailComponent
   ],
   imports: [
     BrowserModule,
