@@ -22,6 +22,5 @@ export class GoogleAuthComponent implements OnInit {
   ngOnInit() {
     this.cookie.set("googleAuthUID",this.googleAuthUID)
     this.router.navigate(['/']);
-    //TODO:need to refresh gmail component
   }
 }

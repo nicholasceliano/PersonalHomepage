@@ -15,10 +15,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { GmailComponent } from './gmail/gmail.component';
 import { GoogleAuthComponent } from './apiAuth/google-auth/google-auth.component';
 import { CookieService } from 'ngx-cookie-service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
+  { path: '', component: DashboardComponent },
   { path: 'twitchAuth', component: TwitchAuthComponent },
-  { path: 'googleAuth', component: GoogleAuthComponent }
+  { path: 'googleAuth', component: GoogleAuthComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -30,7 +34,9 @@ const appRoutes: Routes = [
     TwitchComponent,
     TwitchAuthComponent,
     GmailComponent,
-    GoogleAuthComponent
+    GoogleAuthComponent,
+    DashboardComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
