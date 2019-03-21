@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  oauthEndpoint: "http://localhost:3000/oauth",
+  apiEndpoint: "http://localhost:3000/oauth",
+  oauthCookiesName: {
+    google: "googleAuthUID"
+  },
+  test: "",
+  twitchAuthUri:"https://id.twitch.tv/oauth2",//TODO: This is temporary - Need to move all the twitch oAuth to server
+  twitchAPIv5Uri:"https://api.twitch.tv/kraken",
+  twitchClientId:"x15tbpitfdkjhoiotp5mdivv7ukq5n",
+  twitchRedirectUri:"http://localhost:4200/twitchAuth"
 };
 
 /*

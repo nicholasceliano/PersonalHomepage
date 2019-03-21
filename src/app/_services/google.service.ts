@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GoogleService {
     private cookie: CookieService) { }
 
   GetUserAuthUID(): string {
-    return this.cookie.get("googleAuthUID");
+    return this.cookie.get(environment.oauthCookiesName.google);
   }
 
   private SetGoogleApiHeaders() {
@@ -25,10 +26,10 @@ export class GoogleService {
   }
 
   GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {
-    return this.http.get<OAuthUrlResponse>("http://localhost:3000/oauth/google/getUserOAuth2Url");
+    return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/google/getUserOAuth2Url`);
   }
 
   GetGmailData(): Observable<object> {
-    return this.http.get<object>("http://localhost:3000/api/gmail/getLabels", this.SetGoogleApiHeaders())
+    return this.http.get<object>(`${environment.apiEndpoint}/gmail/getLabels`, this.SetGoogleApiHeaders())
   }
 }

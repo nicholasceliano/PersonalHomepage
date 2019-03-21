@@ -22,7 +22,7 @@ export class TwitchAuthComponent implements OnInit {
 
   private token: string;
   ngOnInit() {
-    //Immediatley revoke token. Don't need to use API, just need twitch OAuth loaded
+    //TODO: move this to server - Immediatley revoke token. Don't need to use API, just need twitch OAuth loaded
     this.twitch.revokeAuthentication(this.token);
     this.router.navigate(['/']);
   }

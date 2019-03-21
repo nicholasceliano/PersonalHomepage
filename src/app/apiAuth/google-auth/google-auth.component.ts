@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-google-auth',
@@ -20,7 +21,7 @@ export class GoogleAuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cookie.set("googleAuthUID",this.googleAuthUID)
+    this.cookie.set(environment.oauthCookiesName.google, this.googleAuthUID)
     this.router.navigate(['/']);
   }
 }
