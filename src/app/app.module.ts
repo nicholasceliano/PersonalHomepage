@@ -13,9 +13,12 @@ import { PanelComponent } from './structure/panel/panel.component';
 import { TwitchAuthComponent } from './apiAuth/twitch-auth/twitch-auth.component';
 import { Routes, RouterModule } from '@angular/router';
 import { GmailComponent } from './gmail/gmail.component';
+import { GoogleAuthComponent } from './apiAuth/google-auth/google-auth.component';
+import { CookieService } from 'ngx-cookie-service';
 
 const appRoutes: Routes = [
-  { path: 'twitchAuth', component: TwitchAuthComponent }
+  { path: 'twitchAuth', component: TwitchAuthComponent },
+  { path: 'googleAuth', component: GoogleAuthComponent }
 ];
 
 @NgModule({
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     PanelComponent,
     TwitchComponent,
     TwitchAuthComponent,
-    GmailComponent
+    GmailComponent,
+    GoogleAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
