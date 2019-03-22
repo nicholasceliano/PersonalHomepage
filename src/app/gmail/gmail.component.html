@@ -1,11 +1,41 @@
-<button *ngIf=loginRequired (click)="signIn()">Sign In</button>
-
-<ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let unreadThread of unreadThreads">
-      <span>{{unreadThread.id}}</span> {{unreadThread.historyId}}
-      <div class="m-3" *ngFor="let message of unreadThread.messages">
-        <p class="m-0">{{message.subject}} - {{message.from}} - {{message.date | date:'medium'}}</p>  
-        <small>{{message.snippet}}</small>
-      </div>
-    </li>
-</ul>
+<div class="gmail-panel-width">
+    <div [hidden]="!isPanelLoaded">
+        <button class="btn btn-success btn-block" *ngIf=!googleAuthenicated (click)="authenticate()">Authenticate</button>
+        <h5 *ngIf="googleAuthenicated">Unread Emails ({{unreadThreads.length}})</h5>
+        <div>
+            <ul *ngIf="unreadThreads.length > 0" class="list-group list-group-flush">
+                <li class="list-group-item p-0 bg-transparent" *ngFor="let unreadThread of unreadThreads">
+                    <div *ngFor="let message of unreadThread.messages; first as isFirst">
+                        <div class="bold bg-white p-1" [ngClass]="{'multi-thread-email': unreadThread.messages.length > 1}" *ngIf="isFirst" 
+                            data-toggle="collapse" [attr.data-target]="unreadThread.messages.length > 1 ? '#gmailCollapse' + unreadThread.id : null">
+                            <p class="m-0 d-block text-truncate w-100 font-weight-bold" title={{message.subject}}>
+                                <span class="multi-thread-email-count align-middle" *ngIf="unreadThread.messages.length > 1">({{unreadThread.messages.length}})</span>
+                                {{message.subject}}
+                            </p> 
+                            <p class="m-0 sub-header d-block text-truncate w-100">{{message.from}}</p>
+                            <p class="m-0 sub-header d-block text-truncate w-100">{{message.date | date:'medium'}}</p>
+                            <small class="d-block text-truncate w-100" title={{message.snippet}}>{{message.snippet}}</small>
+                        </div>
+                    </div>
+                    <div class="collapse" id="gmailCollapse{{unreadThread.id}}">
+                        <div class="mb-1">
+                            <div *ngFor="let message of unreadThread.messages; first as isFirst; let i = index">
+                                <div *ngIf="!isFirst" [ngClass]="{'border-top': i == 1}" class="ml-2 bg-white p-1 border-left border-bottom">
+                                    <p class="m-0 d-block text-truncate w-100 font-weight-bold" title={{message.subject}}>{{message.subject}}</p> 
+                                    <p class="m-0 sub-header d-block text-truncate w-100">{{message.from}}</p>
+                                    <p class="m-0 sub-header d-block text-truncate w-100">{{message.date | date:'medium'}}</p>
+                                    <small class="d-block text-truncate w-100" title={{message.snippet}}>{{message.snippet}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div [hidden]="isPanelLoaded" class="text-center p-5">
+        <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>

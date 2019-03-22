@@ -1,0 +1,17 @@
+.gmail-panel-width {
+    min-width:200px;
+    max-width:300px;
+}
+
+.sub-header {
+    font-size: 10px;
+    color:grey;
+}
+
+.multi-thread-email {
+    cursor: pointer;
+}
+
+.multi-thread-email-count {
+    font-size: 10px;
+}
