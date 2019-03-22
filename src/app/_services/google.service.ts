@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
+import { GmailThread } from '../_models/gmail-thread';
+import { APIResponse } from '../_models/apiresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +31,7 @@ export class GoogleService {
     return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/google/getUserOAuth2Url`);
   }
 
-  GetGmailData(): Observable<object> {
-    return this.http.get<object>(`${environment.apiEndpoint}/gmail/getLabels`, this.SetGoogleApiHeaders())
+  GetUnreadEmails(): Observable<APIResponse<GmailThread[]>> {
+    return this.http.get<APIResponse<GmailThread[]>>(`${environment.apiEndpoint}/gmail/getUnreadEmails`, this.SetGoogleApiHeaders())
   }
 }

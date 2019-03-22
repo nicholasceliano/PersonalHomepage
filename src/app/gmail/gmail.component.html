@@ -1,1 +1,11 @@
 <button *ngIf=loginRequired (click)="signIn()">Sign In</button>
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let unreadThread of unreadThreads">
+      <span>{{unreadThread.id}}</span> {{unreadThread.historyId}}
+      <div class="m-3" *ngFor="let message of unreadThread.messages">
+        <p class="m-0">{{message.subject}} - {{message.from}} - {{message.date | date:'medium'}}</p>  
+        <small>{{message.snippet}}</small>
+      </div>
+    </li>
+</ul>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleService } from '../_services/google.service';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
+import { GmailThread } from '../_models/gmail-thread';
 
 @Component({
   selector: 'app-gmail',
@@ -13,13 +14,16 @@ export class GmailComponent implements OnInit {
 
   public signInUrl: string;
   public loginRequired: boolean = true;
+  public unreadThreads: GmailThread[] = [];
 
   ngOnInit() {
     var googleUserAuthUID = this.googleService.GetUserAuthUID();
     
     if (googleUserAuthUID && googleUserAuthUID.length == 36) {
       this.loginRequired = false;
-      this.googleService.GetGmailData().subscribe((res) => console.log(res));
+      this.googleService.GetUnreadEmails().subscribe((res) => {
+        this.unreadThreads = res.data;
+      });
     } else {
       this.loginRequired = true;
       this.googleService.GetOAuth2SignInUrl().subscribe((res: OAuthUrlResponse) => {
