@@ -17,15 +17,15 @@ export class YoutubeComponent implements OnInit {
   subscriptionVideos: SubscriptionVideo[];
 
   ngOnInit() {
-    this.getWatchlistVideos();
+    //this.getWatchlistVideos(); API Doesn't support this right now
     this.getSubscriptionVideos();    
   }
 
   getWatchlistVideos(): void {
-    this.youtubeService.getWatchlistVideos().subscribe(watchlistVideos => this.watchlistVideos = watchlistVideos);
+    this.youtubeService.getWatchlistVideos().subscribe(res => console.log(res));
   }
 
   getSubscriptionVideos(): void {
-    this.youtubeService.getSubscriptionVideos().subscribe(subscriptionVideos => this.subscriptionVideos = subscriptionVideos);
+    this.youtubeService.getSubscriptionVideos().subscribe(res => console.log(res));
   }
 }
