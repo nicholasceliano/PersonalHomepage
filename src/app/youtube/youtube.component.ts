@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { YoutubeService } from '../_services/youtube.service';
-import { WatchlistVideo } from '../_models/watchlist-video';
-import { SubscriptionVideo } from '../_models/subscription-video';
+import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
 
 @Component({
   selector: 'app-youtube',
@@ -13,8 +12,8 @@ export class YoutubeComponent implements OnInit {
 
   constructor(private youtubeService: YoutubeService) { }
 
-  watchlistVideos: WatchlistVideo[];
-  subscriptionVideos: SubscriptionVideo[];
+  recommendedVideos: YoutubePlaylistItem[] = [];
+  subscriptionVideos: YoutubePlaylistItem[] = [];
 
   ngOnInit() {
     //this.getWatchlistVideos(); API Doesn't support this right now
@@ -26,6 +25,6 @@ export class YoutubeComponent implements OnInit {
   }
 
   getSubscriptionVideos(): void {
-    this.youtubeService.getSubscriptionVideos().subscribe(res => console.log(res));
+    this.youtubeService.getSubscriptionVideos().subscribe(res => this.subscriptionVideos = res.data, err => console.log(err));
   }
 }

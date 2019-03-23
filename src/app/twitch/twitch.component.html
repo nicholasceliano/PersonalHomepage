@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane show" [class.active]="!showChatTab" id="list-twitch-channels" role="tabpanel" aria-labelledby="list-twitch-channels-list">
+        <div class="tab-pane show overflow-auto" [class.active]="!showChatTab" id="list-twitch-channels" role="tabpanel" aria-labelledby="list-twitch-channels-list">
           <ul id="twitchChannelList" [hidden]="!isChannelListLoaded" class="list-group list-group-flush">
             <li class="list-group-item p-0 twitch-dark-purple-bkgrnd" data-toggle="tooltip" title="{{followedStream.channel.status}}" *ngFor="let followedStream of followedStreams" (click)="showStream(followedStream)">
               <div class="d-inline-block float-left m-1">

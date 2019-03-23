@@ -1,0 +1,48 @@
+.youtube-panel-width {
+    max-width: 400px;
+}
+
+.tab-content {
+    height: 206px;
+}
+
+.sub-header {
+    font-size: 10px;
+    color:grey;
+}
+
+.list-group-item {
+    cursor: pointer;
+    background-color: #333333;
+}
+
+.nav-link.active {
+    background-color: #333333;
+    border-color: #333333;
+    color:#f8f9fa;
+}
+
+.nav-link:not(.active) {
+    background-color:#505050;
+    color:#f8f9fa;
+}
+
+.nav-tabs {
+    border: 0;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #505050; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333333; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f8f9fa; 
+}

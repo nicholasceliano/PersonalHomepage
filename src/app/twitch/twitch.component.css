@@ -2,6 +2,10 @@
     width:400px;
 }
 
+#list-twitch-channels {
+    height:206px;
+}
+
 #twitchChannelList li div {
     cursor:pointer;
 }
@@ -30,4 +34,20 @@
 
 p, small, li, .nav-link, .nav-link.active {
     color: #b8b5c0;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #505050; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #232127; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b8b5c0; 
 }
