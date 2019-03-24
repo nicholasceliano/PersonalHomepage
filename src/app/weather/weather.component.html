@@ -1,0 +1,9 @@
+
+<div>
+  {{locationData.city}}, {{locationData.state}}
+  {{weatherData.main}}
+</div>
+<div *ngFor="let forecast of weatherData.forecast">
+  {{forecast.main}}
+  <img src="http://openweathermap.org/img/w/{{forecast.icon}}.png">
+</div>

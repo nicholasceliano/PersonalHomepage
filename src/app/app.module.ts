@@ -17,6 +17,7 @@ import { GoogleAuthComponent } from './apiAuth/google-auth/google-auth.component
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WeatherComponent } from './weather/weather.component';
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     GmailComponent,
     GoogleAuthComponent,
     DashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
