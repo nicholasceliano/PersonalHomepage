@@ -1,9 +1,15 @@
 .youtube-panel-width {
-    max-width: 400px;
+    width:400px;
+}
+
+.youtube-panel-loading {
+    height:247px;
+    padding:100px;
 }
 
 .tab-content {
     height: 206px;
+    background-color: #333333;
 }
 
 .sub-header {
@@ -14,6 +20,10 @@
 .list-group-item {
     cursor: pointer;
     background-color: #333333;
+}
+
+.list-group-item.selected {
+    background-color: #505050;
 }
 
 .nav-link.active {

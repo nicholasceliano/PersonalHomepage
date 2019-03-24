@@ -15,10 +15,6 @@ export class YoutubeService {
   constructor(private http: HttpClient,
     private google: GoogleService) { }
 
-  getWatchlistVideos(): Observable<APIResponse<YoutubePlaylistItem[]>> {
-    return this.http.get<APIResponse<YoutubePlaylistItem[]>>(`${environment.apiEndpoint}/youtube/watchlist`, this.google.SetGoogleApiHeaders());
-  }
-
   getSubscriptionVideos(): Observable<APIResponse<YoutubePlaylistItem[]>> {
     return this.http.get<APIResponse<YoutubePlaylistItem[]>>(`${environment.apiEndpoint}/youtube/subscription`, this.google.SetGoogleApiHeaders())
   }

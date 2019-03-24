@@ -10,6 +10,7 @@ export const environment = {
     google: "googleAuthUID"
   },
   mailPanelRefreshTime:30000,
+  youtubePlayerAPIEndpoint: "https://www.youtube.com/iframe_api",
   twitchAuthUri:"https://id.twitch.tv/oauth2",//TODO: This is temporary - Need to move all the twitch oAuth to server
   twitchAPIv5Uri:"https://api.twitch.tv/kraken",
   twitchClientId:"x15tbpitfdkjhoiotp5mdivv7ukq5n",

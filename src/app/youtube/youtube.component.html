@@ -1,26 +1,24 @@
 <div class="youtube-panel-width">
   <div>
-      <iframe id="ytplayer" type="text/html" width="400" height="225"
-      src="https://www.youtube.com/embed/M7lc1UVf-VE"
-      frameborder="0"></iframe>
+    <div id="youtube-player"></div>
+    <div [hidden]="!isPanelLoaded || selectedVideo">
+      <p class="h5 mb-2 text-center" style="color:#fff">Select a video to start watching</p>
+    </div>
   </div>
-  <div>
+  <div [hidden]="!isPanelLoaded">
     <div class="row">
       <div class="col-12">
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" id="list-subscriptions-list" data-toggle="list" href="#list-subscriptions" role="tab" aria-controls="subscriptions">Subscriptions</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" id="list-recommended-list" data-toggle="list" href="#list-recommended" role="tab" aria-controls="recommended">Recommended</a>
-            </li>
         </ul>
       </div>
     </div>
     <div class="tab-content overflow-auto" id="nav-tabContent">
       <div class="tab-pane fade show active" id="list-subscriptions" role="tabpanel" aria-labelledby="list-subscriptions-list">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item p-0" *ngFor="let subscriptionVideo of subscriptionVideos">
+          <li class="list-group-item p-0" [ngClass]="{'selected': selectedVideo == subscriptionVideo.videoId}" *ngFor="let subscriptionVideo of subscriptionVideos" (click)=watchVideo(subscriptionVideo.videoId)>
               <div class="d-inline-block float-left m-1" title="{{subscriptionVideo.videoDesc}}">
                 <img src={{subscriptionVideo.thumbnail.url}} width="80" height="60">
               </div>
@@ -32,14 +30,11 @@
           </li>
         </ul>
       </div>
-      <div class="tab-pane fade" id="list-recommended" role="tabpanel" aria-labelledby="list-recommended-list">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let recommendedVideo of recommendedVideos">
-              <span>{{recommendedVideo.videoId}}</span> {{recommendedVideo.videoName}}
-              <span class="badge badge-primary badge-pill">watched</span>
-            </li>
-          </ul>
-        </div>
+    </div>
+  </div>
+  <div [hidden]="isPanelLoaded" class="youtube-panel-loading text-center">
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
   </div>
 </div>
