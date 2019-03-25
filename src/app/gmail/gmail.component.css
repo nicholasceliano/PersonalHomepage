@@ -1,6 +1,5 @@
 .gmail-panel-width {
-    min-width:200px;
-    max-width:300px;
+    width:300px;
 }
 
 .sub-header {

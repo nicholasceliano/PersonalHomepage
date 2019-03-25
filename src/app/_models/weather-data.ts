@@ -7,6 +7,8 @@ export class WeatherData {
     public main: string;
     public desc: string;
     public icon: string;
+    public rain3h: number;
+    public snow3h: number;
     public windSpeed: number;
     public windDir: string;
     public forecast: WeatherData[] | undefined;

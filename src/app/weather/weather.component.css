@@ -1,0 +1,32 @@
+.weather-panel-width {
+    width:150px;
+}
+
+.header-panel {
+    background-color: #fff
+}
+
+.sub-panel {
+    height:215px;
+}
+
+.sub-header {
+    font-size: 10px;
+    color:grey;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ebebeb; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f8f9fa; 
+}

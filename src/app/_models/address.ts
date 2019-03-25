@@ -4,4 +4,5 @@ export class Address {
     public county: string;
     public postcode: string;
     public state: string;
+    public state_abbr: string;
 }
