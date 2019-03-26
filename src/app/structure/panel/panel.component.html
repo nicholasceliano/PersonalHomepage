@@ -6,8 +6,8 @@
   <div [ngSwitch]="panelName" class="{{panelName}}-panel p-3">
     <app-gmail *ngSwitchCase="'gmail'"></app-gmail>
     <app-youtube *ngSwitchCase="'youtube'"></app-youtube>
-    <app-quotes *ngSwitchCase="'quotes'"></app-quotes>
     <app-twitch *ngSwitchCase="'twitch'"></app-twitch>
     <app-weather *ngSwitchCase="'weather'"></app-weather>
+    <app-quotes *ngSwitchCase="'quotes'"></app-quotes>
   </div>
 </div>

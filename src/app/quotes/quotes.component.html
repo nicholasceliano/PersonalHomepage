@@ -1,3 +1,43 @@
-<p>
-  quotes works!
-</p>
+<div class="quotes-panel-width">
+  <div [hidden]="!isPanelLoaded">
+    <div class="p-1 quote-header" (click)="toggleQuotePanelCollapse()" data-toggle="collapse" data-target="#quote-collapse" [ngClass]="{ 'positive-bkgrnd-header': currStockPercent >= 0, 'negative-bkgrnd-header': currStockPercent < 0 }">
+      <small class="font-italic w-100">Combined Value<small> (as of {{ mostRecentPriceDate | date:'medium'}})</small></small>
+      <div>
+        <p class="m-0 d-inline-block "> {{ currentStockVal | currency}}
+            <small class="m-0" [ngClass]="{'positive-text': currStockPercent >= 0, 'negative-text':currStockPercent < 0}">
+              {{currStockPercent >= 0 ? '+' : '-' }}{{ currentStockVal - pastStockVal | currency}}({{ currStockPercent | percent:'.2' }})
+            </small>
+        </p>
+        <div class="d-inline-block float-right">
+          <span [hidden]="collapsed">&#9660;</span>
+          <span [hidden]="!collapsed">&#9650;</span>
+        </div>
+      </div>
+    </div>
+    <div #collapseDiv id="quote-collapse" class="collapse">
+      <div class="quote-content overflow-auto">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item p-0" [ngClass]="{ 'positive-bkgrnd': stockQuote.priceDiffPercent >= 0, 'negative-bkgrnd': stockQuote.priceDiffPercent < 0 }" *ngFor="let stockQuote of stockQuoteData; index as i;">
+            <div class="d-inline-block m-1">
+              <p class="m-0 d-block w-100" title="{{stockQuote.stockQty}} shares">{{stockQuote.stockName}}
+                <small>({{stockQuote.currStockVal | currency}})</small>
+              </p>
+              
+              <p class="m-0 d-block w-100">{{stockQuote.currPriceVal | currency}}
+                <small [ngClass]="{'positive-text': stockQuote.priceDiffPercent >= 0, 'negative-text':stockQuote.priceDiffPercent < 0}">
+                  {{stockQuote.priceDiffPercent >= 0 ? '+' : '-' }}
+                  {{stockQuote.currStockVal - stockQuote.lastStockVal | currency}} ({{stockQuote.priceDiffPercent | number:'0.2'}}%)</small>
+              </p>
+              <p class="m-0 sub-header d-block w-100" title="{{stockQuote.dateDiff}} since last record.">{{stockQuote.currPriceDate | date:'medium'}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="isPanelLoaded" class="text-center p-2">
+      <div class="spinner-border text-dark" role="status">
+          <span class="sr-only">Loading...</span>
+      </div>
+  </div>
+</div>

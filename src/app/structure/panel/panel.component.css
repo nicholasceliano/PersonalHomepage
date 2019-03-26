@@ -2,14 +2,10 @@
     background-color: #4b367c;
 }
 
-.gmail-panel {
+.gmail-panel, .quotes-panel, .weather-panel {
     background-color: rgba(242, 245, 245, 0.8);
 }
 
 .youtube-panel {
     background-color: #1c1c1c;
-}
-
-.weather-panel {
-    background-color: #ebebeb;
 }

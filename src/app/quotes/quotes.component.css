@@ -1,0 +1,56 @@
+.quotes-panel-width {
+    width:300px;
+}
+
+.quote-header {
+    cursor: pointer;
+}
+
+.quote-content {
+    height:215px;
+}
+
+.sub-header {
+    font-size: 10px;
+    color:grey;
+}
+
+.positive-bkgrnd-header {
+    background-color: #8bceaf;
+}
+
+.negative-bkgrnd-header {
+    background-color: #f39484;
+}
+
+.positive-bkgrnd {
+    background-color: #e7f5ef
+}
+
+.negative-bkgrnd {
+    background-color: #fdeaee
+}
+
+.positive-text {
+    color: green;
+}
+
+.negative-text {
+    color:red;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ebebeb; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f8f9fa; 
+}

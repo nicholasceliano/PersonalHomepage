@@ -20,7 +20,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #ebebeb; 
+    background: rgba(242, 245, 245, 0)
 }
 
 ::-webkit-scrollbar-thumb {

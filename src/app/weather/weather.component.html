@@ -5,9 +5,9 @@
   </div>
   <div *ngIf="locationServiceEnabled === true">
     <div class="p-1 header-panel text-center">
-      <p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100" title="{{locationData.city}}, {{locationData.state}}">{{locationData.city}}, {{locationData.state_abbr}}</p>
+      <p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100" title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}">{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state_abbr}}</p>
       <p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
-      <div [hidden]="!weatherDataLoaded">
+      <div *ngIf="weatherDataLoaded">
         <div title="{{weatherData.desc}}">
           <img class="d-inline-block align-top" src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
           <div class="d-inline-block">
@@ -44,6 +44,6 @@
           </li>
         </ul>
     </div>
-    <div [hidden]="weatherDataLoaded" class="pt-5 sub-panel text-center"></div>
+    <div *ngIf="!weatherDataLoaded" class="pt-5 sub-panel text-center"></div>
   </div>
 </div>
