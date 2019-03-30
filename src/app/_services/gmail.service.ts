@@ -7,14 +7,15 @@ import { GoogleService } from './google.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class GmailService {
 
-  constructor(private http: HttpClient,
-              private google: GoogleService) { }
+	constructor(
+		private http: HttpClient,
+		private google: GoogleService) { }
 
-  GetUnreadEmails(): Observable<APIResponse<GmailThread[]>> {
-    return this.http.get<APIResponse<GmailThread[]>>(`${environment.apiEndpoint}/gmail/unreadEmails`, this.google.SetApiHeaders());
-  }
+	GetUnreadEmails(): Observable<APIResponse<GmailThread[]>> {
+		return this.http.get<APIResponse<GmailThread[]>>(`${environment.apiEndpoint}/gmail/unreadEmails`, this.google.SetApiHeaders());
+	}
 }

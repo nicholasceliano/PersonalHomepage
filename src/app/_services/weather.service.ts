@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { WeatherData } from '../_models/weather-data';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class WeatherService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  GetWeatherForcast(lat: number, lon: number): Observable<APIResponse<WeatherData>> {
-    return this.http.get<APIResponse<WeatherData>>(`${environment.apiEndpoint}/weather/currentWeather?lat=${lat}&lon=${lon}`);
-  }
+	GetWeatherForcast(lat: number, lon: number): Observable<APIResponse<WeatherData>> {
+		return this.http.get<APIResponse<WeatherData>>(`${environment.apiEndpoint}/weather/currentWeather?lat=${lat}&lon=${lon}`);
+	}
 }

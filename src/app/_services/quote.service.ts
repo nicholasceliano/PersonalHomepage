@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { StockQuoteData } from '../_models/stock-quote-data';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class QuoteService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  GetStockQuoteData(): Observable<APIResponse<StockQuoteData[]>> {
-    return this.http.get<APIResponse<StockQuoteData[]>>(`${environment.apiEndpoint}/currency/stockQuoteData`);
-  }
+	GetStockQuoteData(): Observable<APIResponse<StockQuoteData[]>> {
+		return this.http.get<APIResponse<StockQuoteData[]>>(`${environment.apiEndpoint}/currency/stockQuoteData`);
+	}
 }

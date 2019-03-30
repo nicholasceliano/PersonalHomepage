@@ -16,47 +16,50 @@ import { GmailComponent } from './gmail/gmail.component';
 import { GoogleAuthComponent } from './apiAuth/google-auth/google-auth.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 import { WeatherComponent } from './weather/weather.component';
+import { OAuthErrorComponent } from './errors/oauth-error/oauth-error.component';
 
 const appRoutes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'twitchAuth', component: TwitchAuthComponent },
-  { path: 'googleAuth', component: GoogleAuthComponent },
-  { path: '**', component: PageNotFoundComponent }
+	{ path: '', component: DashboardComponent },
+	{ path: 'twitchAuth', component: TwitchAuthComponent },
+	{ path: 'googleAuth', component: GoogleAuthComponent },
+	{ path: 'oautherror', component: OAuthErrorComponent },
+	{ path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    YoutubeComponent,
-    QuotesComponent,
-    PanelComponent,
-    TwitchComponent,
-    TwitchAuthComponent,
-    GmailComponent,
-    GoogleAuthComponent,
-    DashboardComponent,
-    PageNotFoundComponent,
-    WeatherComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
-    )
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
-    },
-    CookieService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		YoutubeComponent,
+		QuotesComponent,
+		PanelComponent,
+		TwitchComponent,
+		TwitchAuthComponent,
+		GmailComponent,
+		GoogleAuthComponent,
+		DashboardComponent,
+		PageNotFoundComponent,
+		WeatherComponent,
+		OAuthErrorComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		RouterModule.forRoot(
+			appRoutes,
+			{ enableTracing: false } // <-- debugging purposes only
+		)
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: HttpErrorInterceptor,
+			multi: true
+		},
+		CookieService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

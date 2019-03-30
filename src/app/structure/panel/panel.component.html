@@ -1,13 +1,13 @@
-<div class="border shadow m-3 mb-4 rounded" >
-  <div class="p-2 text-center">
-      <img *ngIf="panelLogo" height="40" src="{{panelLogo}}">
-      <h1 *ngIf="!panelLogo" class="border-bottom text-center">{{panelTitle}}</h1>
-  </div>
-  <div [ngSwitch]="panelName" class="{{panelName}}-panel p-3">
-    <app-gmail *ngSwitchCase="'gmail'"></app-gmail>
-    <app-youtube *ngSwitchCase="'youtube'"></app-youtube>
-    <app-twitch *ngSwitchCase="'twitch'"></app-twitch>
-    <app-weather *ngSwitchCase="'weather'"></app-weather>
-    <app-quotes *ngSwitchCase="'quotes'"></app-quotes>
-  </div>
+<div class="border shadow m-3 mb-4 rounded">
+	<div class="p-2 text-center">
+		<img *ngIf="panelLogo" height="40" src="{{panelLogo}}">
+		<h1 *ngIf="!panelLogo" class="border-bottom text-center">{{panelTitle}}</h1>
+	</div>
+	<div [ngSwitch]="panelName" class="{{panelName}}-panel p-3">
+		<app-gmail *ngSwitchCase="'gmail'"></app-gmail>
+		<app-youtube *ngSwitchCase="'youtube'"></app-youtube>
+		<app-twitch *ngSwitchCase="'twitch'"></app-twitch>
+		<app-weather *ngSwitchCase="'weather'"></app-weather>
+		<app-quotes *ngSwitchCase="'quotes'"></app-quotes>
+	</div>
 </div>

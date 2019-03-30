@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { Address } from '../_models/address';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class LocationService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  GetAddressFromCoords(lat: number, lon: number): Observable<APIResponse<Address>> {
-    return this.http.get<APIResponse<Address>>(`${environment.apiEndpoint}/location/addressFromCoords?lat=${lat}&lon=${lon}`);
-  }
+	GetAddressFromCoords(lat: number, lon: number): Observable<APIResponse<Address>> {
+		return this.http.get<APIResponse<Address>>(`${environment.apiEndpoint}/location/addressFromCoords?lat=${lat}&lon=${lon}`);
+	}
 }

@@ -9,25 +9,26 @@ import { TwitchStream } from '../_models/twitch-stream';
 import { OAuthService } from './utility/oauth-service.service';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 
 export class TwitchService extends OAuthService {
 
-  constructor(private http: HttpClient,
-              private cookie: CookieService) {
-                super(http, cookie);
-              }
+	constructor(
+		private http: HttpClient,
+		private cookie: CookieService) {
+		super(http, cookie);
+	}
 
-  GetUserAuthUID(): string {
-    return this.cookie.get(environment.oauthCookiesName.twitch);
-  }
+	GetUserAuthUID(): string {
+		return this.cookie.get(environment.oauthCookiesName.twitch);
+	}
 
-  GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {
-    return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/twitch/getUserOAuth2Url`);
-  }
+	GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {
+		return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/twitch/getUserOAuth2Url`);
+	}
 
-  GetFollowedStreams(): Observable<APIResponse<TwitchStream[]>> {
-    return this.http.get<APIResponse<TwitchStream[]>>(`${environment.apiEndpoint}/twitch/followedStreams`, this.SetApiHeaders());
-  }
+	GetFollowedStreams(): Observable<APIResponse<TwitchStream[]>> {
+		return this.http.get<APIResponse<TwitchStream[]>>(`${environment.apiEndpoint}/twitch/followedStreams`, this.SetApiHeaders());
+	}
 }

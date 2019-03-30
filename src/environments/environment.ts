@@ -3,16 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  oauthEndpoint: 'http://localhost:3000/oauth',
-  apiEndpoint: 'http://localhost:3000/api',
-  oauthCookiesName: {
-    google: 'googleAuthUID',
-    twitch: 'twitchAuthUID'
-  },
-  mailPanelRefreshTime: 30000,
-  twitchPanelRefreshTime: 30000,
-  youtubePlayerAPIEndpoint: 'https://www.youtube.com/iframe_api',
+	production: false,
+	oauthEndpoint: 'http://localhost:3000/oauth',
+	apiEndpoint: 'http://localhost:3000/api',
+	oauthCookiesName: {
+		google: 'googleAuthUID',
+		twitch: 'twitchAuthUID'
+	},
+	mailPanelRefreshTime: 30000,
+	twitchPanelRefreshTime: 30000,
+	youtubePlayerAPIEndpoint: 'https://www.youtube.com/iframe_api',
 };
 
 /*

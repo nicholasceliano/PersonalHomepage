@@ -1,49 +1,63 @@
-
 <div class="weather-panel-width">
-  <div *ngIf="locationServiceEnabled === false">
-    <p class="text-center">Location Services must be enabled to retrieve weather data.</p>
-  </div>
-  <div *ngIf="locationServiceEnabled === true">
-    <div class="p-1 header-panel text-center">
-      <p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100" title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}">{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state_abbr}}</p>
-      <p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
-      <div *ngIf="weatherDataLoaded">
-        <div title="{{weatherData.desc}}">
-          <img class="d-inline-block align-top" src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
-          <div class="d-inline-block">
-            <p class="m-0 d-block">{{weatherData.main}}</p>
-            <p class="m-0 d-block">{{weatherData.tempCurr}}°</p>
-          </div>
-        </div>
-        <p class="m-0 sub-header d-block text-truncate w-100">Min: {{weatherData.tempMin}}° Max: {{weatherData.tempMax}}°</p>
-        <p class="m-0 sub-header d-block text-truncate w-100">Wind: {{weatherData.windSpeed}} {{weatherData.windDir}}</p>
-        <p class="m-0 sub-header d-block text-truncate w-100">Humidity: {{weatherData.humidity}}%</p>
-        <p *ngIf="weatherData.forecast[0].rain3h > 0" class="m-0 sub-header d-block text-truncate w-100">Rain 3h: {{weatherData.forecast[0].rain3h}}mm</p>
-        <p *ngIf="weatherData.forecast[0].snow3h > 0" class="m-0 sub-header d-block text-truncate w-100">Snow 3h: {{weatherData.forecast[0].snow3h}}mm</p>
-      </div>
-      <div [hidden]="weatherDataLoaded" class="p-4 text-center">
-        <div class="spinner-border text-dark" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-    </div>
-    <div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item p-0 bg-transparent" *ngFor="let forecast of weatherData.forecast; index as i;">
-            <small class="m-0 d-block text-center">{{forecast.date | date: "EEE h"}}<small>{{forecast.date | date: "a"}}</small></small>
-            <div title="{{forecast.desc}}">
-              <img class="d-inline-block align-top" src="http://openweathermap.org/img/w/{{forecast.icon}}.png">
-              <div class="d-inline-block">
-                <p class="m-0 sub-header d-block text-truncate w-100">Temp: {{forecast.tempCurr}}°</p>
-                <p class="m-0 sub-header d-block text-truncate w-100">Wind: {{forecast.windSpeed}} {{forecast.windDir}}</p>
-                <p class="m-0 sub-header d-block text-truncate w-100">Humidity: {{forecast.humidity}}%</p>
-                <p *ngIf="weatherData.forecast[i+1] != undefined && weatherData.forecast[i+1].rain3h > 0" class="m-0 sub-header d-block text-truncate w-100">Rain 3h: {{weatherData.forecast[i+1].rain3h}}mm</p>
-                <p *ngIf="weatherData.forecast[i+1] != undefined && weatherData.forecast[i+1].snow3h > 0" class="m-0 sub-header d-block text-truncate w-100">Snow 3h: {{weatherData.forecast[i+1].snow3h}}mm</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-    </div>
-    <div *ngIf="!weatherDataLoaded" class="pt-5 sub-panel text-center"></div>
-  </div>
+	<div *ngIf="locationServiceEnabled === false">
+		<p class="text-center">Location Services must be enabled to retrieve weather data.</p>
+	</div>
+	<div *ngIf="locationServiceEnabled === true">
+		<div class="p-1 header-panel text-center">
+			<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"
+				title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}">
+				{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state_abbr}}</p>
+			<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
+			<div *ngIf="weatherDataLoaded">
+				<div title="{{weatherData.desc}}">
+					<img class="d-inline-block align-top"
+						src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
+					<div class="d-inline-block">
+						<p class="m-0 d-block">{{weatherData.main}}</p>
+						<p class="m-0 d-block">{{weatherData.tempCurr}}°</p>
+					</div>
+				</div>
+				<p class="m-0 sub-header d-block text-truncate w-100">Min: {{weatherData.tempMin}}° Max:
+					{{weatherData.tempMax}}°</p>
+				<p class="m-0 sub-header d-block text-truncate w-100">Wind: {{weatherData.windSpeed}}
+					{{weatherData.windDir}}</p>
+				<p class="m-0 sub-header d-block text-truncate w-100">Humidity: {{weatherData.humidity}}%</p>
+				<p *ngIf="weatherData.forecast[0].rain3h > 0" class="m-0 sub-header d-block text-truncate w-100">Rain
+					3h: {{weatherData.forecast[0].rain3h}}mm</p>
+				<p *ngIf="weatherData.forecast[0].snow3h > 0" class="m-0 sub-header d-block text-truncate w-100">Snow
+					3h: {{weatherData.forecast[0].snow3h}}mm</p>
+			</div>
+			<div [hidden]="weatherDataLoaded" class="p-4 text-center">
+				<div class="spinner-border text-dark" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</div>
+		</div>
+		<div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item p-0 bg-transparent"
+					*ngFor="let forecast of weatherData.forecast; index as i;">
+					<small
+						class="m-0 d-block text-center">{{forecast.date | date: "EEE h"}}<small>{{forecast.date | date: "a"}}</small></small>
+					<div title="{{forecast.desc}}">
+						<img class="d-inline-block align-top"
+							src="http://openweathermap.org/img/w/{{forecast.icon}}.png">
+						<div class="d-inline-block">
+							<p class="m-0 sub-header d-block text-truncate w-100">Temp: {{forecast.tempCurr}}°</p>
+							<p class="m-0 sub-header d-block text-truncate w-100">Wind: {{forecast.windSpeed}}
+								{{forecast.windDir}}</p>
+							<p class="m-0 sub-header d-block text-truncate w-100">Humidity: {{forecast.humidity}}%</p>
+							<p *ngIf="weatherData.forecast[i+1] != undefined && weatherData.forecast[i+1].rain3h > 0"
+								class="m-0 sub-header d-block text-truncate w-100">Rain 3h:
+								{{weatherData.forecast[i+1].rain3h}}mm</p>
+							<p *ngIf="weatherData.forecast[i+1] != undefined && weatherData.forecast[i+1].snow3h > 0"
+								class="m-0 sub-header d-block text-truncate w-100">Snow 3h:
+								{{weatherData.forecast[i+1].snow3h}}mm</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div *ngIf="!weatherDataLoaded" class="pt-5 sub-panel text-center"></div>
+	</div>
 </div>

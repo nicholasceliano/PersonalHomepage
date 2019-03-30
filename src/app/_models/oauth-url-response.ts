@@ -1,3 +1,3 @@
 export class OAuthUrlResponse {
-    public url: string;
+	public url: string;
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PanelComponent } from './panel.component';
+import { OAuthErrorComponent } from './oauth-error.component';
 
-describe('PanelComponent', () => {
-	let component: PanelComponent;
-	let fixture: ComponentFixture<PanelComponent>;
+describe('OAuthErrorComponent', () => {
+	let component: OAuthErrorComponent;
+	let fixture: ComponentFixture<OAuthErrorComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [PanelComponent]
+			declarations: [OAuthErrorComponent]
 		})
 			.compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(PanelComponent);
+		fixture = TestBed.createComponent(OAuthErrorComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
