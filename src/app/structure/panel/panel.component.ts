@@ -6,10 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./panel.component.css']
 })
 
-
-
 export class PanelComponent implements OnInit {
-
+  // tslint:disable:no-input-rename
   @Input('panelName') panelName: string;
   @Input('panelTitle') panelTitle: string;
   @Input('panelLogo') panelLogo: string;
@@ -18,5 +16,4 @@ export class PanelComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -12,11 +12,11 @@ import { Address } from '../_models/address';
 export class WeatherComponent implements OnInit {
 
   constructor(private weatherService: WeatherService,
-    private locationService: LocationService) { }
+              private locationService: LocationService) { }
 
   public locationServiceEnabled: boolean;
-  public weatherDataLoaded: boolean = false;
-  public locationDataLoaded: boolean = false;
+  public weatherDataLoaded = false;
+  public locationDataLoaded = false;
   public weatherData: WeatherData = new WeatherData();
   public locationData: Address = new Address();
 
@@ -27,13 +27,13 @@ export class WeatherComponent implements OnInit {
   private GetWeatherForecast() {
     navigator.geolocation.getCurrentPosition((res) => {
       this.locationServiceEnabled = true;
-      this.locationService.GetAddressFromCoords(res.coords.latitude, res.coords.longitude).subscribe((res) => {
-        this.locationData = res.data;
+      this.locationService.GetAddressFromCoords(res.coords.latitude, res.coords.longitude).subscribe((locRes) => {
+        this.locationData = locRes.data;
         this.locationDataLoaded = true;
       }, (err => console.log(err)));
 
-      this.weatherService.GetWeatherForcast(res.coords.latitude, res.coords.longitude).subscribe((res) => {
-        this.weatherData = res.data
+      this.weatherService.GetWeatherForcast(res.coords.latitude, res.coords.longitude).subscribe((weatherRes) => {
+        this.weatherData = weatherRes.data;
         this.weatherDataLoaded = true;
       }, (err) => console.log(err));
     }, (err) => {

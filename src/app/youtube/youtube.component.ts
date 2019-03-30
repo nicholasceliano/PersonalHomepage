@@ -13,14 +13,14 @@ export class YoutubeComponent implements OnInit {
 
   constructor(private youtubeService: YoutubeService) { }
 
-  public isPanelLoaded: boolean = false;
+  public isPanelLoaded = false;
   public selectedVideo: string;
   public subscriptionVideos: YoutubePlaylistItem[] = [];
   private player: any;
 
   ngOnInit() {
     this.loadYoutubePlayerScript();
-    this.getSubscriptionVideos();    
+    this.getSubscriptionVideos();
   }
 
   watchVideo(videoId: string) {
@@ -29,25 +29,25 @@ export class YoutubeComponent implements OnInit {
   }
 
   private loadYoutubePlayerScript() {
-    var tag = document.createElement('script');
+    const tag = document.createElement('script');
     tag.src = environment.youtubePlayerAPIEndpoint;
-    var firstScriptTag = document.getElementsByTagName('script')[0];
+    const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
-  
-  private loadYoutubeVideo(videoId: string) {
+
+  private loadYoutubeVideo(vidId: string) {
     if (this.player) {
-      this.player.loadVideoById({videoId: videoId});
-    } else { 
-      this.player = new (<any>window).YT.Player('youtube-player', {
+      this.player.loadVideoById({ videoId: vidId });
+    } else {
+      this.player = new (window as any).YT.Player('youtube-player', {
         height: '225', width: '400',
-        videoId: videoId,
-        playerVars: {'autoplay': 1, 'modestbranding': 1},
-        events: { 'onReady': (e) => e.target.playVideo() }
+        videoId: vidId,
+        playerVars: { autoplay: 1, modestbranding: 1},
+        events: { onReady: (e) => e.target.playVideo() }
       });
     }
   }
-  
+
   private getSubscriptionVideos(): void {
     this.youtubeService.getSubscriptionVideos().subscribe((res) => {
       this.subscriptionVideos = res.data;

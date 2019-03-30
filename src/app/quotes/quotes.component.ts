@@ -9,14 +9,14 @@ import { StockQuoteData } from '../_models/stock-quote-data';
 })
 export class QuotesComponent implements OnInit {
   @ViewChild('collapseDiv') collapseDiv: ElementRef;
-  
-  public isPanelLoaded: boolean = false;
+
+  public isPanelLoaded = false;
   public stockQuoteData: StockQuoteData[] = [];
   public currentStockVal: number;
   public pastStockVal: number;
   public currStockPercent: number;
   public mostRecentPriceDate: Date;
-  public collapsed: boolean = false;
+  public collapsed = false;
 
   constructor(private quotes: QuoteService) { }
 
@@ -25,26 +25,27 @@ export class QuotesComponent implements OnInit {
   }
 
   toggleQuotePanelCollapse() {
-    this.collapsed = this.collapseDiv.nativeElement.classList.contains('show')? false : true;
+    this.collapsed = this.collapseDiv.nativeElement.classList.contains('show') ? false : true;
   }
 
   private GetStockQuoteData() {
     this.quotes.GetStockQuoteData().subscribe((res) => {
       this.stockQuoteData = res.data;
+      console.log(res.data);
       this.currentStockVal = this.getSum('currStockVal');
       this.pastStockVal = this.getSum('lastStockVal');
-      this.currStockPercent = ((this.currentStockVal - this.pastStockVal) / this.pastStockVal)
-      this.mostRecentPriceDate = new Date(Math.max.apply(null, this.stockQuoteData.map(function(e) {
+      this.currStockPercent = ((this.currentStockVal - this.pastStockVal) / this.pastStockVal);
+      this.mostRecentPriceDate = new Date(Math.max.apply(null, this.stockQuoteData.map((e) => {
         return new Date(e.currPriceDate);
       })));
       this.isPanelLoaded = true;
     }, (err => console.log(err)));
   }
 
-  private getSum(index: string) : number {
+  private getSum(index: string): number {
     let sum = 0;
-    for(let i = 0; i < this.stockQuoteData.length; i++) {
-      sum += this.stockQuoteData[i][index];
+    for (const i of this.stockQuoteData) {
+      sum += i[index];
     }
     return sum;
   }

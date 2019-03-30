@@ -15,14 +15,14 @@ import { GmailService } from '../_services/gmail.service';
 export class GmailComponent implements OnInit {
 
   constructor(private gmailService: GmailService,
-    private googleService: GoogleService) { }
+              private googleService: GoogleService) { }
 
   private pollSubscription: Subscription;
-  public isPanelLoaded: boolean = false;
+  public isPanelLoaded = false;
   public signInUrl: string;
-  public googleAuthenicated: boolean = false;
+  public googleAuthenicated = false;
   public unreadThreads: GmailThread[] = [];
-  
+
   ngOnInit() {
     this.pollSubscription = timer(0, environment.mailPanelRefreshTime).subscribe(() => this.refreshGmailPanel());
   }
@@ -32,17 +32,18 @@ export class GmailComponent implements OnInit {
   }
 
   private refreshGmailPanel() {
-    var googleUserAuthUID = this.googleService.GetUserAuthUID();
-    
-    if (googleUserAuthUID && googleUserAuthUID.length == 36) {
+    const googleUserAuthUID = this.googleService.GetUserAuthUID();
+
+    if (googleUserAuthUID && googleUserAuthUID.length === 36) {
       this.gmailService.GetUnreadEmails().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
         if (res.err) {
           this.failedAuthentication(res.msg);
         } else {
           this.googleAuthenicated = true;
-          
-          if (JSON.stringify(this.unreadThreads) !== JSON.stringify(res.data))
+
+          if (JSON.stringify(this.unreadThreads) !== JSON.stringify(res.data)) {
             this.unreadThreads = res.data;
+          }
         }
       }, (err) => {
         this.failedAuthentication(err);

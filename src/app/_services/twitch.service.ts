@@ -1,43 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TwitchFollowedStreamsResp } from '../_models/twitch-followed-streams-resp';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { OAuthUrlResponse } from '../_models/oauth-url-response';
+import { CookieService } from 'ngx-cookie-service';
+import { APIResponse } from '../_models/apiresponse';
+import { TwitchStream } from '../_models/twitch-stream';
+import { OAuthService } from './utility/oauth-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class TwitchService {
+export class TwitchService extends OAuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private cookie: CookieService) {
+                super(http, cookie);
+              }
 
-  //TODO:Need to move all this to server
-  
-  getFollowedStreamsByUserId(): Observable<TwitchFollowedStreamsResp> {
-    var url = `${environment.twitchAPIv5Uri}/streams/followed?limit=100`;
-
-    var httpOptions = { 
-      headers: new HttpHeaders ({
-        "Client-ID": environment.twitchClientId,
-        "Accept": "application/vnd.twitchtv.v5+json"
-      })
-    };
-
-    return this.http.get<TwitchFollowedStreamsResp>(url, httpOptions);
+  GetUserAuthUID(): string {
+    return this.cookie.get(environment.oauthCookiesName.twitch);
   }
 
-  authenticate(): void {
-    var respType = "token";
-    var scopes = "";
-    var url = `${environment.twitchAuthUri}/authorize?client_id=${environment.twitchClientId}&redirect_uri=${environment.twitchRedirectUri}&response_type=${respType}&scope=${scopes}`;
-
-    window.location.href = url;
+  GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {
+    return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/twitch/getUserOAuth2Url`);
   }
 
-  revokeAuthentication(token): void {
-    var url = `${environment.twitchAuthUri}/revoke?client_id=${environment.twitchClientId}&token=${token}`;
-
-    this.http.post(url, "").subscribe(res => console.log(res), (err) => console.log(err));
+  GetFollowedStreams(): Observable<APIResponse<TwitchStream[]>> {
+    return this.http.get<APIResponse<TwitchStream[]>>(`${environment.apiEndpoint}/twitch/followedStreams`, this.SetApiHeaders());
   }
 }

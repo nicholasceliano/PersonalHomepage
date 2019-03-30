@@ -13,9 +13,10 @@ import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
 export class YoutubeService {
 
   constructor(private http: HttpClient,
-    private google: GoogleService) { }
+              private google: GoogleService) { }
 
   getSubscriptionVideos(): Observable<APIResponse<YoutubePlaylistItem[]>> {
-    return this.http.get<APIResponse<YoutubePlaylistItem[]>>(`${environment.apiEndpoint}/youtube/subscription`, this.google.SetGoogleApiHeaders())
+    return this.http.get<APIResponse<YoutubePlaylistItem[]>>(`${environment.apiEndpoint}/youtube/subscription`,
+                                                              this.google.SetApiHeaders());
   }
 }

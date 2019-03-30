@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
+import { OAuthService } from './utility/oauth-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GoogleService {
+export class GoogleService extends OAuthService {
 
   constructor(private http: HttpClient,
-    private cookie: CookieService) { }
+              private cookie: CookieService) {
+                super(http, cookie);
+              }
 
   GetUserAuthUID(): string {
     return this.cookie.get(environment.oauthCookiesName.google);
-  }
-
-  SetGoogleApiHeaders() {
-    return {
-      headers: new HttpHeaders({
-        'UserAuthUID':  this.GetUserAuthUID()
-      })
-    };
   }
 
   GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {

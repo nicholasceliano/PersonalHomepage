@@ -4,17 +4,15 @@
 
 export const environment = {
   production: false,
-  oauthEndpoint: "http://localhost:3000/oauth",
-  apiEndpoint: "http://localhost:3000/api",
+  oauthEndpoint: 'http://localhost:3000/oauth',
+  apiEndpoint: 'http://localhost:3000/api',
   oauthCookiesName: {
-    google: "googleAuthUID"
+    google: 'googleAuthUID',
+    twitch: 'twitchAuthUID'
   },
-  mailPanelRefreshTime:30000,
-  youtubePlayerAPIEndpoint: "https://www.youtube.com/iframe_api",
-  twitchAuthUri:"https://id.twitch.tv/oauth2",//TODO: This is temporary - Need to move all the twitch oAuth to server
-  twitchAPIv5Uri:"https://api.twitch.tv/kraken",
-  twitchClientId:"x15tbpitfdkjhoiotp5mdivv7ukq5n",
-  twitchRedirectUri:"http://localhost:4200/twitchAuth"
+  mailPanelRefreshTime: 30000,
+  twitchPanelRefreshTime: 30000,
+  youtubePlayerAPIEndpoint: 'https://www.youtube.com/iframe_api',
 };
 
 /*

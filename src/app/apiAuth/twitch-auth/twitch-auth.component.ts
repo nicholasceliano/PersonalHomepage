@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TwitchService } from 'src/app/_services/twitch.service';
-import { ApiHelperService } from 'src/app/_services/utility/api-helper.service';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-twitch-auth',
@@ -10,20 +10,18 @@ import { ApiHelperService } from 'src/app/_services/utility/api-helper.service';
 })
 export class TwitchAuthComponent implements OnInit {
 
+  private twitchAuthUID: string;
+
   constructor(private router: Router,
-    private twitch: TwitchService,
-    private route: ActivatedRoute,
-    private apiHelper: ApiHelperService) { 
+              private route: ActivatedRoute,
+              private cookie: CookieService) {
+              this.route.queryParamMap.subscribe(params => {
+                this.twitchAuthUID = params.get('uid');
+              });
+            }
 
-      this.route.fragment.subscribe(fragment => {
-        this.token = this.apiHelper.parseUrlFragmentToQueryParameterDict(fragment)["access_token"]
-    });
-  }
-
-  private token: string;
   ngOnInit() {
-    //TODO: move this to server - Immediatley revoke token. Don't need to use API, just need twitch OAuth loaded
-    this.twitch.revokeAuthentication(this.token);
+    this.cookie.set(environment.oauthCookiesName.twitch, this.twitchAuthUID);
     this.router.navigate(['/']);
   }
 }

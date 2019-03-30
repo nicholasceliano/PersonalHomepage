@@ -12,9 +12,9 @@ import { environment } from 'src/environments/environment';
 export class GmailService {
 
   constructor(private http: HttpClient,
-    private google: GoogleService) { }
+              private google: GoogleService) { }
 
   GetUnreadEmails(): Observable<APIResponse<GmailThread[]>> {
-    return this.http.get<APIResponse<GmailThread[]>>(`${environment.apiEndpoint}/gmail/unreadEmails`, this.google.SetGoogleApiHeaders())
+    return this.http.get<APIResponse<GmailThread[]>>(`${environment.apiEndpoint}/gmail/unreadEmails`, this.google.SetApiHeaders());
   }
 }
