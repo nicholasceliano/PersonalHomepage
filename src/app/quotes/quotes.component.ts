@@ -31,7 +31,7 @@ export class QuotesComponent implements OnInit {
 	private GetStockQuoteData() {
 		this.quotes.GetStockQuoteData().subscribe((res) => {
 			this.stockQuoteData = res.data;
-			console.log(res.data);
+
 			this.currentStockVal = this.getSum('currStockVal');
 			this.pastStockVal = this.getSum('lastStockVal');
 			this.currStockPercent = ((this.currentStockVal - this.pastStockVal) / this.pastStockVal);

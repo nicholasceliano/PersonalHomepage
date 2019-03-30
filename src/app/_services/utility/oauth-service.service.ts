@@ -23,6 +23,7 @@ export abstract class OAuthService {
 
 	SetApiHeaders() {
 		return {
+			withCredentails: true,
 			headers: new HttpHeaders({
 				UserAuthUID: this.GetUserAuthUID()
 			})

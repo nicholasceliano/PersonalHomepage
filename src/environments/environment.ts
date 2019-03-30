@@ -11,7 +11,7 @@ export const environment = {
 		twitch: 'twitchAuthUID'
 	},
 	mailPanelRefreshTime: 30000,
-	twitchPanelRefreshTime: 30000,
+	twitchPanelRefreshTime: 60000,
 	youtubePlayerAPIEndpoint: 'https://www.youtube.com/iframe_api',
 };
 
