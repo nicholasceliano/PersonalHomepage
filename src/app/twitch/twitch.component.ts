@@ -112,9 +112,9 @@ export class TwitchComponent implements OnInit {
 
 	public setChatMessage(chatMsg: TwitchChatMessage) {
 		if (this.chatMsgs.length > 50) {
-			this.chatMsgs.shift();
+			this.chatMsgs.pop();
 		}
-		this.chatMsgs.push(chatMsg);
+		this.chatMsgs.unshift(chatMsg);
 	}
 
 	public showTwitchFullscreen() {

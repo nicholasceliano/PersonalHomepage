@@ -74,6 +74,6 @@
 
 <div id="twitchChatVideoOverlay" class="overflow-hidden position-absolute">
 	<div>
-		<p *ngFor="let msg of chatMsgs.reverse()" class="m-0" [ngStyle]="{'color': msg.color}">{{msg.username}}: <small class="text-light" [innerHTML]="msg.msg"></small></p>
+		<p *ngFor="let msg of chatMsgs" class="m-0" [ngStyle]="{'color': msg.color}">{{msg.username}}: <small class="text-light" [innerHTML]="msg.msg"></small></p>
 	</div>
 </div>
