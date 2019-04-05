@@ -37,7 +37,7 @@ export class TwitchComponent implements OnInit {
 	public streamTitle: string;
 	public streamChannel: string;
 	public streamGame: string;
-	
+
 	ngOnInit() {
 		this.pollSubscription = timer(0, environment.twitchPanelRefreshTime).subscribe(() => this.refreshTwitchPanel());
 		this.loadTwitchPlayerScript();
@@ -59,28 +59,16 @@ export class TwitchComponent implements OnInit {
 
 		if (twitchUserAuthUID && twitchUserAuthUID.length === 36) {
 			this.twitchService.GetFollowedStreams().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
-				if (res.err) {
-					this.failedAuthentication(res.msg);
-				} else {
-					this.twitchAuthenticated = true;
+				this.twitchAuthenticated = true;
 
-					if (JSON.stringify(this.followedStreams) !== JSON.stringify(res.data)) {
-						this.followedStreams = res.data;
-					}
+				if (JSON.stringify(this.followedStreams) !== JSON.stringify(res)) {
+					this.followedStreams = res;
 				}
-			}, (err) => {
-				this.failedAuthentication(err);
 			});
 
 			if (!this.twitchUserInfo) {
 				this.twitchService.GetTwitchUserInfo().subscribe((res) => {
-					if (res.err) {
-						alert(res.err);
-					} else {
-						this.twitchUserInfo = res.data;
-					}
-				}, (err) => {
-					alert(err);
+					this.twitchUserInfo = res;
 				});
 			}
 		} else {
@@ -88,15 +76,12 @@ export class TwitchComponent implements OnInit {
 		}
 	}
 
-	private failedAuthentication(err?: string) {
+	private failedAuthentication() {
 		this.twitchAuthenticated = false;
 		this.followedStreams = [];
 		this.twitchService.GetOAuth2SignInUrl().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res: OAuthUrlResponse) => {
 			this.signInUrl = res.url;
 		});
-		if (err) {
-			alert(err);
-		}
 	}
 
 	public showStream(followedStream: TwitchStream) {

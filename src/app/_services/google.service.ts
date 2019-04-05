@@ -14,7 +14,7 @@ export class GoogleService extends OAuthService {
 	constructor(
 		private http: HttpClient,
 		private cookie: CookieService) {
-		super(http, cookie);
+		super();
 	}
 
 	GetUserAuthUID(): string {

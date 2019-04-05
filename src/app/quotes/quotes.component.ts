@@ -30,16 +30,19 @@ export class QuotesComponent implements OnInit {
 
 	private GetStockQuoteData() {
 		this.quotes.GetStockQuoteData().subscribe((res) => {
-			this.stockQuoteData = res.data;
+			this.stockQuoteData = res;
 
-			this.currentStockVal = this.getSum('currStockVal');
-			this.pastStockVal = this.getSum('lastStockVal');
+			this.currentStockVal = this.stockQuoteData.length > 0 ? this.getSum('currStockVal') : 0;
+			this.pastStockVal = this.stockQuoteData.length > 0 ? this.getSum('lastStockVal') : 0;
 			this.currStockPercent = ((this.currentStockVal - this.pastStockVal) / this.pastStockVal);
-			this.mostRecentPriceDate = new Date(Math.max.apply(null, this.stockQuoteData.map((e) => {
-				return new Date(e.currPriceDate);
-			})));
+			if (this.stockQuoteData.length > 0) {
+				this.mostRecentPriceDate = new Date(Math.max.apply(null, this.stockQuoteData.map((e) => {
+					return new Date(e.currPriceDate);
+				})));
+			}
+
 			this.isPanelLoaded = true;
-		}, (err => console.log(err)));
+		});
 	}
 
 	private getSum(index: string): number {

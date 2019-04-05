@@ -50,8 +50,8 @@ export class YoutubeComponent implements OnInit {
 
 	private getSubscriptionVideos(): void {
 		this.youtubeService.getSubscriptionVideos().subscribe((res) => {
-			this.subscriptionVideos = res.data;
+			this.subscriptionVideos = res;
 			this.isPanelLoaded = true;
-		}, err => console.log(err));
+		});
 	}
 }

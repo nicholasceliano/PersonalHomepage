@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OAuthUrlResponse } from 'src/app/_models/oauth-url-response';
 
@@ -8,15 +7,7 @@ import { OAuthUrlResponse } from 'src/app/_models/oauth-url-response';
 	providedIn: 'root'
 })
 export abstract class OAuthService {
-	private parentCookie: CookieService;
-	private parentHttp: HttpClient;
-
-	constructor(
-		private _http: HttpClient,
-		private _cookie: CookieService) {
-		this.parentCookie = _cookie;
-		this.parentHttp = _http;
-	}
+	constructor() {}
 
 	public abstract GetUserAuthUID(): string;
 	public abstract GetOAuth2SignInUrl(): Observable<OAuthUrlResponse>;

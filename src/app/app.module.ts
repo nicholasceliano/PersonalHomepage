@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { YoutubeComponent } from './youtube/youtube.component';
-import { HttpErrorInterceptor } from './http-error.interceptor';
 import { QuotesComponent } from './quotes/quotes.component';
 import { TwitchComponent } from './twitch/twitch.component';
 
@@ -20,6 +19,7 @@ import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.co
 import { WeatherComponent } from './weather/weather.component';
 import { OAuthErrorComponent } from './errors/oauth-error/oauth-error.component';
 import { OcticonDirective } from './_directives/octicon.directive';
+import { APIMiddlewareInterceptor } from './_interceptors/apimiddleware.interceptor';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -57,7 +57,7 @@ const appRoutes: Routes = [
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: HttpErrorInterceptor,
+			useClass: APIMiddlewareInterceptor,
 			multi: true
 		},
 		CookieService

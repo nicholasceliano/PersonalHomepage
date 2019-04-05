@@ -29,16 +29,14 @@ export class WeatherComponent implements OnInit {
 		navigator.geolocation.getCurrentPosition((res) => {
 			this.locationServiceEnabled = true;
 			this.locationService.GetAddressFromCoords(res.coords.latitude, res.coords.longitude).subscribe((locRes) => {
-				this.locationData = locRes.data;
+				this.locationData = locRes;
 				this.locationDataLoaded = true;
-			}, (err => console.log(err)));
+			});
 
 			this.weatherService.GetWeatherForcast(res.coords.latitude, res.coords.longitude).subscribe((weatherRes) => {
-				this.weatherData = weatherRes.data;
+				this.weatherData = weatherRes;
 				this.weatherDataLoaded = true;
-			}, (err) => console.log(err));
-		}, (err) => {
-			this.locationServiceEnabled = false;
+			});
 		});
 	}
 }

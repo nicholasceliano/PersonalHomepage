@@ -37,32 +37,22 @@ export class GmailComponent implements OnInit {
 
 		if (googleUserAuthUID && googleUserAuthUID.length === 36) {
 			this.gmailService.GetUnreadEmails().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
-				if (res.err) {
-					this.failedAuthentication(res.msg);
-				} else {
-					this.googleAuthenicated = true;
+				this.googleAuthenicated = true;
 
-					if (JSON.stringify(this.unreadThreads) !== JSON.stringify(res.data)) {
-						this.unreadThreads = res.data;
-					}
+				if (JSON.stringify(this.unreadThreads) !== JSON.stringify(res)) {
+					this.unreadThreads = res;
 				}
-			}, (err) => {
-				this.failedAuthentication(err);
 			});
 		} else {
 			this.failedAuthentication();
 		}
 	}
 
-	private failedAuthentication(err?: string) {
+	private failedAuthentication() {
 		this.googleAuthenicated = false;
 		this.unreadThreads = [];
 		this.googleService.GetOAuth2SignInUrl().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res: OAuthUrlResponse) => {
 			this.signInUrl = res.url;
 		});
-
-		if (err) {
-			console.log(err);
-		}
 	}
 }
