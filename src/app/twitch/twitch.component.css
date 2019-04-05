@@ -6,12 +6,32 @@
     height:206px;
 }
 
-#twitchChannelList li div {
+#twitch-chat-panel {
+	height:300px;
+}
+
+#twitchChannelList li div, .octicon {
     cursor:pointer;
 }
 
 #twitchNav {
     border:0;
+}
+
+#twitchChatVideoOverlay {
+	height:300px;
+	width:250px;
+	display:none;
+	left:calc(100% - 250px);
+	top:calc(50% - 200px)
+}
+
+#twitchChatVideoOverlay div {
+	flex:1; 
+	height:100%;
+	overflow:auto;
+	display:flex;
+	flex-direction:column-reverse;
 }
 
 .nav-link.active {

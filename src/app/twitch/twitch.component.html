@@ -1,11 +1,13 @@
 <div class="twitch-panel-width">
 	<div [hidden]="!isPanelLoaded">
-		<iframe [hidden]="!channelSelected" [src]="streamUrl" height="300" class="twitch-panel-width" frameborder="0"
-			scrolling="no" allowfullscreen="true"></iframe>
-		<div class="m-1" [hidden]="!channelSelected">
-			<p class="h5 m-0 text-nowrap text-truncate" data-toggle="tooltip" title="{{streamTitle}}">{{streamTitle}}
-			</p>
-			<small class="text-nowrap text-truncate">{{streamChannel}} - {{streamGame}}</small>
+		<div id="twitch-player"></div>
+		<div class="m-1" [hidden]="!channelSelected"> 
+			<div class="d-flex flex-row">
+				<p class="h5 m-0 text-nowrap text-truncate pr-1 w-100" data-toggle="tooltip" title="{{streamTitle}}">{{streamTitle}}
+				</p>
+				<span class="octicon" octicon="screen-full" color="#b8b5c0" width="18px" (click)="showTwitchFullscreen();" title="Fullscreen"></span>
+			</div>
+			<small class="text-nowrap text-truncate d-inline">{{streamChannel}} - {{streamGame}}</small>
 		</div>
 		<div *ngIf="twitchAuthenticated" [hidden]="channelSelected">
 			<p class="h5 mb-2 text-center">Select a channel to start watching</p>
@@ -54,11 +56,9 @@
 				</div>
 				<div class="tab-pane show" [class.active]="showChatTab" id="list-twitch-chat" role="tabpanel"
 					aria-labelledby="list-twitch-chat-list">
-					<iframe (load)="loadedChat()" [hidden]="!isChatLoaded" frameborder="0" scrolling="no"
-						id="chat_embed" [src]=chatUrl height="500" class="twitch-panel-width"></iframe>
-					<div [hidden]="isChatLoaded" class="text-center p-5 twitch-dark-purple-bkgrnd">
-						<div class="spinner-border text-light" role="status">
-							<span class="sr-only">Loading...</span>
+					<div id="twitch-chat-panel" class="overflow-auto twitch-panel-width text-secondary">
+						<div *ngFor="let msg of chatMsgs">
+							<p class="m-0" [ngStyle]="{'color': msg.color}">{{msg.username}}: <small class="text-light" [innerHTML]="msg.msg"></small></p>
 						</div>
 					</div>
 				</div>
@@ -69,5 +69,11 @@
 		<div class="spinner-border text-light" role="status">
 			<span class="sr-only">Loading...</span>
 		</div>
+	</div>
+</div>
+
+<div id="twitchChatVideoOverlay" class="overflow-hidden position-absolute">
+	<div>
+		<p *ngFor="let msg of chatMsgs.reverse()" class="m-0" [ngStyle]="{'color': msg.color}">{{msg.username}}: <small class="text-light" [innerHTML]="msg.msg"></small></p>
 	</div>
 </div>

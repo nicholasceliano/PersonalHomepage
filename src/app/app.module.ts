@@ -19,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 import { WeatherComponent } from './weather/weather.component';
 import { OAuthErrorComponent } from './errors/oauth-error/oauth-error.component';
+import { OcticonDirective } from './_directives/octicon.directive';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
 		DashboardComponent,
 		PageNotFoundComponent,
 		WeatherComponent,
-		OAuthErrorComponent
+		OAuthErrorComponent,
+		OcticonDirective
 	],
 	imports: [
 		BrowserModule,

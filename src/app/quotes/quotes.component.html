@@ -9,7 +9,7 @@
 				<p class="m-0 d-inline-block "> {{ currentStockVal | currency}}
 					<small class="m-0"
 						[ngClass]="{'positive-text': currStockPercent >= 0, 'negative-text':currStockPercent < 0}">
-						{{currStockPercent >= 0 ? '+' : '-' }}{{ currentStockVal - pastStockVal | currency}}({{ currStockPercent | percent:'.2' }})
+						{{currStockPercent >= 0 ? '+' : '' }}{{ currentStockVal - pastStockVal | currency}}({{ currStockPercent | percent:'.2' }})
 					</small>
 				</p>
 				<div class="d-inline-block float-right">
@@ -32,7 +32,7 @@
 							<p class="m-0 d-block w-100">{{stockQuote.currPriceVal | currency}}
 								<small
 									[ngClass]="{'positive-text': stockQuote.priceDiffPercent >= 0, 'negative-text':stockQuote.priceDiffPercent < 0}">
-									{{stockQuote.priceDiffPercent >= 0 ? '+' : '-' }}
+									{{stockQuote.priceDiffPercent >= 0 ? '+' : '' }}
 									{{stockQuote.currStockVal - stockQuote.lastStockVal | currency}}
 									({{stockQuote.priceDiffPercent | number:'0.2'}}%)</small>
 							</p>

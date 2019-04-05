@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { APIResponse } from '../_models/apiresponse';
 import { TwitchStream } from '../_models/twitch-stream';
 import { OAuthService } from './utility/oauth-service.service';
+import { TwitchUser } from '../_models/twitch-user';
 
 @Injectable({
 	providedIn: 'root'
@@ -30,5 +31,9 @@ export class TwitchService extends OAuthService {
 
 	GetFollowedStreams(): Observable<APIResponse<TwitchStream[]>> {
 		return this.http.get<APIResponse<TwitchStream[]>>(`${environment.apiEndpoint}/twitch/followedStreams`, this.SetApiHeaders());
+	}
+
+	GetTwitchUserInfo(): Observable<APIResponse<TwitchUser>> {
+		return this.http.get<APIResponse<TwitchUser>>(`${environment.apiEndpoint}/twitch/userInfo`, this.SetApiHeaders());
 	}
 }
