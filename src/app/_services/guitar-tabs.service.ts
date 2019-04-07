@@ -16,6 +16,7 @@ export class GuitarTabsService {
 	}
 
 	openGuitarTab(path: string, fileName: string) {
-		return this.http.get<FolderFile>(`${environment.apiEndpoint}/files/openFile?path=${encodeURI(path)}&fileName=${encodeURI(fileName)}`);
+		return this.http.get<FolderFile>(`${environment.apiEndpoint}/files/openFile?type=1&` +
+										`path=${encodeURI(path)}&fileName=${encodeURI(fileName)}`);
 	}
 }

@@ -1,3 +1,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~octicons/build/build.css"
+@import "~octicons/build/build.css";
+
+.files-modalbox .mat-dialog-content {
+    max-height: calc(95vh - 120px);
+}
+
+.pointer {
+	cursor: pointer;
+}

@@ -1,7 +1,15 @@
-<h1 mat-dialog-title>{{title}}</h1>
+<h1 mat-dialog-title class="d-flex">
+	<div title="{{titleTooltip}}">{{title}}</div>
+	<span class="octicon ml-auto pointer" title="Hotkey: Esc" octicon="x" width="18px" (click)="closeDialog()"></span>
+</h1>
 <mat-dialog-content>
 	<div [innerHtml]="content"></div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-	<button type="button" class="btn btn-light" tabindex="-1" mat-button [mat-dialog-close]="true">Close</button>
+<mat-dialog-actions>
+	<div class="mr-3">
+		<span>Scroll Speed(x{{scrollMultiplier() | number:'1.0-2'}}): </span>
+		<button type="button" title="Hotkey: -" class="btn btn-outline-dark ml-1 mr-1" (click)="decreaseScrollSpeed()" mat-button tabindex="-1">-</button>
+		<button type="button" title="Hotkey: =" class="btn btn-outline-dark ml-1 mr-1" (click)="increaseScrollSpeed()" mat-button tabindex="-1">+</button>
+	</div>
+	<button type="button" title="Hotkey: Enter" class="btn btn-outline-dark" (click)="toggleScroll()" mat-button tabindex="-1">{{ toggleBtnText() }}</button>
 </mat-dialog-actions>

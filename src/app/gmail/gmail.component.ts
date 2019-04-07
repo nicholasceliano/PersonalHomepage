@@ -22,7 +22,7 @@ export class GmailComponent implements OnInit {
 	public isPanelLoaded = false;
 	public signInUrl: string;
 	public googleAuthenicated = false;
-	public unreadThreads: GmailThread[] = [];
+	public unreadThreads: GmailThread[];
 
 	ngOnInit() {
 		this.pollSubscription = timer(0, environment.mailPanelRefreshTime).subscribe(() => this.refreshGmailPanel());

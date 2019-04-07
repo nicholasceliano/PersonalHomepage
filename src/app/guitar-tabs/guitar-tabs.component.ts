@@ -30,14 +30,19 @@ export class GuitarTabsComponent implements OnInit {
 	openGuitarTab(path: string, name: string, type: string) {
 		const fileName = name + type;
 		this.gts.openGuitarTab(path, fileName).subscribe((res) => {
-			this.dialog.open(FileDialogComponent, {
-				data: {
-					title: res.path + ' ' + res.name,
-					content: res.fileData,
-				},
-				disableClose: true,
-				autoFocus: true
-			});
+			if (res) {
+				this.dialog.open(FileDialogComponent, {
+					data: {
+						title: `${res.path.replace('/', '')} - ${res.name}`,
+						titleTooltip: `File Name: ${res.name + res.type}\nCreate Date: ${new Date(res.createDate).toLocaleString()}\n` +
+										`Edit Date: ${new Date(res.editDate).toLocaleString()}\nSize: ${res.size}`,
+						content: res.fileData,
+					},
+					disableClose: true,
+					autoFocus: true,
+					panelClass: 'files-modalbox'
+				});
+			}
 		});
 	}
 }

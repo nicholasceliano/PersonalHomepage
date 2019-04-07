@@ -5,7 +5,7 @@
 			<div class="d-flex flex-row">
 				<p class="h5 m-0 text-nowrap text-truncate pr-1 w-100" data-toggle="tooltip" title="{{streamTitle}}">{{streamTitle}}
 				</p>
-				<span class="octicon" octicon="screen-full" color="#b8b5c0" width="18px" (click)="showTwitchFullscreen();" title="Fullscreen"></span>
+				<span class="octicon pointer" octicon="screen-full" color="#b8b5c0" width="18px" (click)="showTwitchFullscreen();" title="Fullscreen"></span>
 			</div>
 			<small class="text-nowrap text-truncate d-inline">{{streamChannel}} - {{streamGame}}</small>
 		</div>
@@ -36,7 +36,7 @@
 				<div class="tab-pane show overflow-auto" [class.active]="!showChatTab" id="list-twitch-channels"
 					role="tabpanel" aria-labelledby="list-twitch-channels-list">
 					<ul id="twitchChannelList" class="list-group list-group-flush">
-						<li class="list-group-item p-0 twitch-dark-purple-bkgrnd" data-toggle="tooltip"
+						<li class="list-group-item p-0 twitch-dark-purple-bkgrnd pointer" data-toggle="tooltip"
 							title="{{followedStream.channelStatus}}" *ngFor="let followedStream of followedStreams"
 							(click)="showStream(followedStream)">
 							<div class="d-inline-block float-left m-1">

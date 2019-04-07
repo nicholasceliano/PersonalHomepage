@@ -2,13 +2,13 @@
 	<div [hidden]="!isPanelLoaded">
 		<button class="btn btn-success btn-block" *ngIf=!googleAuthenicated
 			(click)="authenticate()">Authenticate</button>
-		<h5 *ngIf="googleAuthenicated">Unread Emails ({{unreadThreads.length}})</h5>
+		<h5 *ngIf="googleAuthenicated">Unread Emails ({{unreadThreads ? unreadThreads.length : 0}})</h5>
 		<div>
-			<ul *ngIf="unreadThreads.length > 0" class="list-group list-group-flush">
+			<ul class="list-group list-group-flush">
 				<li class="list-group-item p-0 bg-transparent" *ngFor="let unreadThread of unreadThreads">
 					<div *ngFor="let message of unreadThread.messages; first as isFirst">
 						<div class="bold bg-white p-1"
-							[ngClass]="{'multi-thread-email': unreadThread.messages.length > 1}" *ngIf="isFirst"
+							[ngClass]="{'pointer': unreadThread.messages.length > 1}" *ngIf="isFirst"
 							data-toggle="collapse"
 							[attr.data-target]="unreadThread.messages.length > 1 ? '#gmailCollapse' + unreadThread.id : null">
 							<p class="m-0 d-block text-truncate w-100 font-weight-bold" title={{message.subject}}>

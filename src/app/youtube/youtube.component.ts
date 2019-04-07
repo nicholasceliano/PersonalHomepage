@@ -15,7 +15,7 @@ export class YoutubeComponent implements OnInit {
 
 	public isPanelLoaded = false;
 	public selectedVideo: string;
-	public subscriptionVideos: YoutubePlaylistItem[] = [];
+	public subscriptionVideos: YoutubePlaylistItem[];
 	private player: any;
 
 	ngOnInit() {

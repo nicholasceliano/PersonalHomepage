@@ -10,10 +10,6 @@
 	height:300px;
 }
 
-#twitchChannelList li div, .octicon {
-    cursor:pointer;
-}
-
 #twitchChatVideoOverlay {
 	height:300px;
 	width:250px;

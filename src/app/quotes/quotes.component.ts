@@ -11,7 +11,7 @@ export class QuotesComponent implements OnInit {
 	@ViewChild('collapseDiv') collapseDiv: ElementRef;
 
 	public isPanelLoaded = false;
-	public stockQuoteData: StockQuoteData[] = [];
+	public stockQuoteData: StockQuoteData[];
 	public currentStockVal: number;
 	public pastStockVal: number;
 	public currStockPercent: number;
@@ -32,10 +32,10 @@ export class QuotesComponent implements OnInit {
 		this.quotes.GetStockQuoteData().subscribe((res) => {
 			this.stockQuoteData = res;
 
-			this.currentStockVal = this.stockQuoteData.length > 0 ? this.getSum('currStockVal') : 0;
-			this.pastStockVal = this.stockQuoteData.length > 0 ? this.getSum('lastStockVal') : 0;
+			this.currentStockVal = this.stockQuoteData ? this.getSum('currStockVal') : 0;
+			this.pastStockVal = this.stockQuoteData ? this.getSum('lastStockVal') : 0;
 			this.currStockPercent = ((this.currentStockVal - this.pastStockVal) / this.pastStockVal);
-			if (this.stockQuoteData.length > 0) {
+			if (this.stockQuoteData) {
 				this.mostRecentPriceDate = new Date(Math.max.apply(null, this.stockQuoteData.map((e) => {
 					return new Date(e.currPriceDate);
 				})));

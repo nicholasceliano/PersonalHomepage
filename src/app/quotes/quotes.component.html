@@ -1,6 +1,6 @@
 <div class="quotes-panel-width">
 	<div [hidden]="!isPanelLoaded">
-		<div class="p-1 quote-header" (click)="toggleQuotePanelCollapse()" data-toggle="collapse"
+		<div class="p-1 pointer" (click)="toggleQuotePanelCollapse()" data-toggle="collapse"
 			data-target="#quote-collapse"
 			[ngClass]="{ 'positive-bkgrnd-header': currStockPercent >= 0, 'negative-bkgrnd-header': currStockPercent < 0 }">
 			<small class="font-italic w-100">Combined Value<small> (as of
