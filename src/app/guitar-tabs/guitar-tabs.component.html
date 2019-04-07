@@ -1,3 +1,20 @@
-<p>
-	guitar-tabs works!
-</p>
+<div class="guitar-tabs-panel-width">
+	<ul *ngIf="guitarTabsFolders.length > 0" class="list-group list-group-flush">
+		<li class="list-group-item p-0 bg-transparent" *ngFor="let folder of guitarTabsFolders; let i = index">
+			<div class="pointer" data-toggle="collapse" [attr.data-target]="'#guitarTabsCollapse_' + i">
+				<span class="d-block text-truncate w-100" title="{{folder.name}}">{{folder.name}}</span>
+			</div>
+			<div class="collapse" id="guitarTabsCollapse_{{i}}">
+				<div class="mb-1">
+					<div *ngFor="let file of folder.files; let j = index">
+						<div (click)="openGuitarTab(file.path, file.name, file.type)" [ngClass]="{'border-top': j == 0}" class="bg-white border-left border-bottom w-100">
+							<p class="pointer m-0 p-1 d-block text-truncate w-100"
+								title="File Name: {{file.name}}{{file.type}}&#10;Create Date: {{file.createDate | date:'medium'}}&#10;Edit Date: {{file.editDate | date:'medium'}}&#10;Size: {{file.size}}">
+								{{file.name}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

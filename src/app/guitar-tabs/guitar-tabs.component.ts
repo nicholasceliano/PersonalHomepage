@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GuitarTabsService } from '../_services/guitar-tabs.service';
+import { Folder } from '../_models/folder';
+import { MatDialog } from '@angular/material';
+import { FileDialogComponent } from '../structure/file-dialog/file-dialog.component';
 
 @Component({
 	selector: 'app-guitar-tabs',
@@ -8,27 +11,33 @@ import { GuitarTabsService } from '../_services/guitar-tabs.service';
 })
 export class GuitarTabsComponent implements OnInit {
 
-	constructor(private gts: GuitarTabsService) { }
+	constructor(
+		private gts: GuitarTabsService,
+		private dialog: MatDialog) { }
+
+	public guitarTabsFolders: Folder[] = [];
 
 	ngOnInit() {
-		this.getGuitarTabs()
+		this.getGuitarTabs();
 	}
 
 	private getGuitarTabs() {
 		this.gts.getGuitarTabs().subscribe((res) => {
-			console.log(res);
-
+			this.guitarTabsFolders = res;
 		});
 	}
 
-	openGuitarTab() {
-		this.gts.openGuitarTab(1).subscribe((res) => {
-
-			//then i need to display the html
-
-		})
+	openGuitarTab(path: string, name: string, type: string) {
+		const fileName = name + type;
+		this.gts.openGuitarTab(path, fileName).subscribe((res) => {
+			this.dialog.open(FileDialogComponent, {
+				data: {
+					title: res.path + ' ' + res.name,
+					content: res.fileData,
+				},
+				disableClose: true,
+				autoFocus: true
+			});
+		});
 	}
-
-
-
 }

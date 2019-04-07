@@ -21,6 +21,9 @@ import { OAuthErrorComponent } from './errors/oauth-error/oauth-error.component'
 import { OcticonDirective } from './_directives/octicon.directive';
 import { APIMiddlewareInterceptor } from './_interceptors/apimiddleware.interceptor';
 import { GuitarTabsComponent } from './guitar-tabs/guitar-tabs.component';
+import { MatDialogModule } from '@angular/material';
+import { FileDialogComponent } from './structure/file-dialog/file-dialog.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -45,7 +48,8 @@ const appRoutes: Routes = [
 		WeatherComponent,
 		OAuthErrorComponent,
 		OcticonDirective,
-		GuitarTabsComponent
+		GuitarTabsComponent,
+		FileDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -54,7 +58,9 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(
 			appRoutes,
 			{ enableTracing: false } // <-- debugging purposes only
-		)
+		),
+		MatDialogModule,
+		NoopAnimationsModule
 	],
 	providers: [
 		{
@@ -64,6 +70,7 @@ const appRoutes: Routes = [
 		},
 		CookieService
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [FileDialogComponent]
 })
 export class AppModule { }
