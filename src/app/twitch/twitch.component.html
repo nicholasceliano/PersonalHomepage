@@ -14,10 +14,10 @@
 		</div>
 		<button *ngIf="!twitchAuthenticated" type="button" class="btn btn-success btn-block"
 			(click)="authenticate()">Authenticate</button>
-		<div *ngIf="twitchAuthenticated">
+		<div id="twitchTabs" *ngIf="twitchAuthenticated">
 			<div class="row">
 				<div class="col-12">
-					<ul id="twitchNav" class="nav nav-tabs">
+					<ul class="nav nav-tabs border-0">
 						<li class="nav-item">
 							<a class="nav-link" (click)="clickChannelsTab()"
 								[class.active]="!channelSelected || !showChatTab" id="list-twitch-channels-list"

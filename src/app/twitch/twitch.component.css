@@ -14,16 +14,13 @@
     cursor:pointer;
 }
 
-#twitchNav {
-    border:0;
-}
-
 #twitchChatVideoOverlay {
 	height:300px;
 	width:250px;
 	display:none;
 	left:calc(100% - 250px);
-	top:calc(50% - 200px)
+	top:calc(50% - 200px);
+	z-index:1040;
 }
 
 #twitchChatVideoOverlay div {

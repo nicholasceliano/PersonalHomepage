@@ -20,6 +20,7 @@ import { WeatherComponent } from './weather/weather.component';
 import { OAuthErrorComponent } from './errors/oauth-error/oauth-error.component';
 import { OcticonDirective } from './_directives/octicon.directive';
 import { APIMiddlewareInterceptor } from './_interceptors/apimiddleware.interceptor';
+import { GuitarTabsComponent } from './guitar-tabs/guitar-tabs.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
 		PageNotFoundComponent,
 		WeatherComponent,
 		OAuthErrorComponent,
-		OcticonDirective
+		OcticonDirective,
+		GuitarTabsComponent
 	],
 	imports: [
 		BrowserModule,

@@ -24,9 +24,12 @@ export class TwitchComponent implements OnInit {
 
 	private pollSubscription: Subscription;
 	private twitchChatOverlay = '#twitchChatVideoOverlay';
-	private fullscreenVideoPlayer = '#fullscreenVideoPlayer';
-	private twitchUserInfo: TwitchUser;
+	private twitchPlayerElement = '#twitch-player';
+	private twitchPanelTabs = '#twitchTabs';
 	private twitchPlayer;
+	private twitchPlayerWidth = 400;
+	private twitchPlayerHeight = 300;
+	private twitchUserInfo: TwitchUser;
 	public chatMsgs: TwitchChatMessage[] = [];
 	public isPanelLoaded = false;
 	public signInUrl: string;
@@ -90,10 +93,10 @@ export class TwitchComponent implements OnInit {
 		this.streamTitle = followedStream.channelStatus;
 		this.streamChannel = followedStream.channelDisplayName;
 		this.streamGame = followedStream.game;
-		$('#twitch-player').empty();
+		$(this.twitchPlayerElement).empty();
 		this.twitchPlayer = new (window as any).Twitch.Player('twitch-player', {
-			width: 400,
-			height: 300,
+			width: this.twitchPlayerWidth,
+			height: this.twitchPlayerHeight,
 			channel: followedStream.channelName,
 			allowfullscreen: false,
 		});
@@ -118,27 +121,29 @@ export class TwitchComponent implements OnInit {
 	}
 
 	public showTwitchFullscreen() {
-		this.twitchPlayer.pause();
-
 		document.onfullscreenchange = () => {
 			if (!(window as any).document.fullscreenElement) {
-				$(this.fullscreenVideoPlayer).empty();
 				$(this.twitchChatOverlay).hide();
 				$('body').removeClass('overflow-hidden');
+
+				$(this.twitchPanelTabs).show();
+				$(this.twitchPlayerElement).removeClass('fixed-top');
+
+				this.twitchPlayer.setWidth(this.twitchPlayerWidth);
+				this.twitchPlayer.setHeight(this.twitchPlayerHeight);
 			}
 		};
 
 		document.documentElement.requestFullscreen().then (() => {
+			$(this.twitchChatOverlay).show();
 			$('body').addClass('overflow-hidden');
 
-			const fullscreenVideoPlayer = new (window as any).Twitch.Player('fullscreenVideoPlayer', {
-				width: $(window).width(),
-				height: $(window).height(),
-				channel: this.streamChannel,
-				allowfullscreen: false,
-			});
+			$(this.twitchPanelTabs).hide();
+			$(this.twitchPlayerElement).addClass('fixed-top');
 
-			$(this.twitchChatOverlay).show();
+			this.twitchPlayer.setWidth($(window).width());
+			this.twitchPlayer.setHeight($(window).height());
+
 			window.scrollTo(0, 0);
 		});
 	}
