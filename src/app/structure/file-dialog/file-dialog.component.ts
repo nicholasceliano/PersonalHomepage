@@ -17,7 +17,7 @@ export class FileDialogComponent implements OnInit {
 	private scrollSpeed = 300;
 	private scrollSpeedInterval = 10;
 	private scrollingInterval;
-	private scrollMultiplier = () => this.initialScrollSpeed / this.scrollSpeed;
+	public scrollMultiplier = () => this.initialScrollSpeed / this.scrollSpeed;
 	public toggleBtnText = () => this.scrollingInterval ? 'Stop' : 'Start';
 
 	constructor(
