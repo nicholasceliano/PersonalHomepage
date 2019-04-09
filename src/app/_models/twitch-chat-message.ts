@@ -1,5 +1,7 @@
+import { TwitchChatMessageText } from './twitch-chat-message-text';
+
 export class TwitchChatMessage {
-	msg: string;
+	msg: TwitchChatMessageText[];
 	username: string;
 	color: string;
 }

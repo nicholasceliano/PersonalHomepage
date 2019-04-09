@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TwitchChatMessage } from '../_models/twitch-chat-message';
+import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,23 +24,28 @@ export class TwitchChatService {
 		this.socket = new WebSocket(environment.twitchChatWSEndpoint);
 
 		this.socket.onmessage = (message) => {
-			const msgText = message.data;
+			let msgText = message.data;
 
 			if (msgText.indexOf('PRIVMSG') > -1) {
+				const chatBotMsgIdentifier = `${String.fromCharCode(0o1)}ACTION `;
+				if (msgText.indexOf(chatBotMsgIdentifier) > -1) {
+					msgText = msgText.replace(chatBotMsgIdentifier, '').replace(new RegExp(String.fromCharCode(0o1), 'g'), '');
+				}
+
 				const tagInfoEndIndex = msgText.indexOf(' :');
 				const tagInfo = msgText.substring(1, tagInfoEndIndex);
 				const chatInfo = msgText.substring(tagInfoEndIndex, msgText.length);
 
 				const tagInfoHash = this.getMessageTagInfo(tagInfo);
-				let chatMsg = this.getChatText(chatInfo, channelName);
+				const chatMsg = this.getChatText(chatInfo, channelName);
 				/* tslint:disable: no-string-literal */
 				const nameColor = tagInfoHash['color'];
 				const displayName = tagInfoHash['display-name'];
 				const emotes = tagInfoHash['emotes'];
 
-				chatMsg = this.setChatEmotes(emotes, chatMsg);
+				const chatArray = this.setEmotesChatArray(emotes, chatMsg);
 
-				callback({ username: displayName, msg: chatMsg, color: nameColor } as TwitchChatMessage);
+				callback({ username: displayName, msg: chatArray, color: nameColor } as TwitchChatMessage);
 			}
 
 			if (message.data.lastIndexOf('PING', 0) === 0) {
@@ -77,7 +83,9 @@ export class TwitchChatService {
 		return chatMsg;
 	}
 
-	private setChatEmotes(emotesTag, chatMsg: string): string {
+	private setEmotesChatArray(emotesTag, chatMsg: string): TwitchChatMessageText[] {
+		const chatMsgTextArray: TwitchChatMessageText[] = [];
+
 		if (emotesTag.length > 0) {
 			const emoteArray = emotesTag.split('/');
 
@@ -95,17 +103,25 @@ export class TwitchChatService {
 					emoteLocations.push({ id: emoteId, s: parseInt(charStart, 10), e: parseInt(charEnd, 10) });
 				});
 			});
-			emoteLocations.sort((a, b) => (a.s > b.s ? -1 : 1));
+			emoteLocations.sort((a, b) => (a.s < b.s ? -1 : 1));
 
+			let lastStart = 0;
 			emoteLocations.forEach(loc => {
 				const chatString = chatMsg.substring(loc.s, loc.e + 1);
-				const first = chatMsg.substring(0, loc.s);
-				const last = chatMsg.substring(loc.e + 1, chatMsg.length);
+				const first = chatMsg.substring(lastStart, loc.s);
 
-				chatMsg = `${first}<img src="http://static-cdn.jtvnw.net/emoticons/v1/${loc.id}/1.0" title="${chatString}" />${last}`;
+				chatMsgTextArray.push({ text: first, isEmote: false } as TwitchChatMessageText);
+				chatMsgTextArray.push({ text: chatString, isEmote: true, emoteId: loc.id } as TwitchChatMessageText);
+
+				lastStart = loc.e + 1;
 			});
+
+			chatMsgTextArray.push({ text: chatMsg.substring(lastStart, chatMsg.length), isEmote: false } as TwitchChatMessageText);
+			lastStart = 0;
+		} else {
+			chatMsgTextArray.push({ text: chatMsg, isEmote: false } as TwitchChatMessageText);
 		}
 
-		return chatMsg;
+		return chatMsgTextArray;
 	}
 }

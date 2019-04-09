@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { TwitchChatService } from '../_services/twitch-chat.service';
 import { TwitchChatMessage } from '../_models/twitch-chat-message';
+import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
 import { TwitchUser } from '../_models/twitch-user';
 declare var $: any;
 
@@ -40,6 +41,7 @@ export class TwitchComponent implements OnInit {
 	public streamTitle: string;
 	public streamChannel: string;
 	public streamGame: string;
+	public emoteUrl = (id) => `http://static-cdn.jtvnw.net/emoticons/v1/${id}/1.0`;
 
 	ngOnInit() {
 		this.pollSubscription = timer(0, environment.twitchPanelRefreshTime).subscribe(() => this.refreshTwitchPanel());
@@ -109,12 +111,14 @@ export class TwitchComponent implements OnInit {
 
 	public loadChat(channelName: string) {
 		this.chatMsgs = [];
-		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: 'Joining my Channel :D', } as TwitchChatMessage);
+		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
+			text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
+		} as TwitchChatMessage);
 		this.twitchChatService.loadTwitchChat(channelName, this.twitchUserInfo.name, this.twitchUserInfo.token, this.setChatMessage.bind(this));
 	}
 
 	public setChatMessage(chatMsg: TwitchChatMessage) {
-		if (this.chatMsgs.length > 50) {
+		if (this.chatMsgs.length > 75) {
 			this.chatMsgs.pop();
 		}
 		this.chatMsgs.unshift(chatMsg);
