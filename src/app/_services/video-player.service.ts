@@ -1,9 +1,4 @@
-import { Injectable } from '@angular/core';
 import $ from 'jquery';
-
-@Injectable({
-	providedIn: 'root'
-})
 
 export abstract class VideoPlayerService {
 
