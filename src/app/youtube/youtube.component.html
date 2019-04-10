@@ -1,8 +1,15 @@
 <div class="youtube-panel-width">
 	<div>
 		<div id="youtube-player"></div>
+		<div class="m-1" [hidden]="!selectedVideo"> 
+			<div class="d-flex flex-row">
+				<p class="h5 m-0 text-nowrap text-truncate pr-1 text-light w-100" data-toggle="tooltip" title="{{videoTitle}}">{{videoTitle}}
+				</p>
+				<span class="octicon pointer pl-1" octicon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Stream"></span>
+			</div>
+		</div>
 		<div [hidden]="!isPanelLoaded || selectedVideo">
-			<p class="h5 mb-2 text-center" style="color:#fff">Select a video to start watching</p>
+			<p class="h5 mb-2 text-center text-light">Select a video to start watching</p>
 		</div>
 	</div>
 	<div [hidden]="!isPanelLoaded">
@@ -22,7 +29,7 @@
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item pointer p-0" [ngClass]="{'selected': selectedVideo == subscriptionVideo.videoId}"
 						*ngFor="let subscriptionVideo of subscriptionVideos"
-						(click)=watchVideo(subscriptionVideo.videoId)>
+						(click)=watchVideo(subscriptionVideo)>
 						<div class="d-inline-block float-left m-1" title="{{subscriptionVideo.videoDesc}}">
 							<img src={{subscriptionVideo.thumbnail.url}} width="80" height="60">
 						</div>

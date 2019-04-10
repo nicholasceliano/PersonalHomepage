@@ -13,13 +13,13 @@
 					</small>
 				</p>
 				<div class="d-inline-block float-right">
-					<span [hidden]="collapsed">&#9660;</span>
-					<span [hidden]="!collapsed">&#9650;</span>
+					<span [hidden]="collapsed" class="octicon pointer" octicon="chevron-down"></span>
+					<span [hidden]="!collapsed" class="octicon pointer" octicon="chevron-up"></span>
 				</div>
 			</div>
 		</div>
 		<div #collapseDiv id="quote-collapse" class="collapse">
-			<div class="quote-content overflow-auto">
+			<div class="quote-content overflow-auto scroll-light">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item p-0"
 						[ngClass]="{ 'positive-bkgrnd': stockQuote.priceDiffPercent >= 0, 'negative-bkgrnd': stockQuote.priceDiffPercent < 0 }"

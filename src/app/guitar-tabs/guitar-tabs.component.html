@@ -1,4 +1,4 @@
-<div class="guitar-tabs-panel-width">
+<div class="guitar-tabs-panel scroll-light overflow-auto">
 	<ul *ngIf="guitarTabsFolders.length > 0" class="list-group list-group-flush">
 		<li class="list-group-item p-0 bg-transparent" *ngFor="let folder of guitarTabsFolders; let i = index">
 			<div class="pointer" data-toggle="collapse" [attr.data-target]="'#guitarTabsCollapse_' + i">
@@ -8,7 +8,7 @@
 				<div class="mb-1">
 					<div *ngFor="let file of folder.files; let j = index">
 						<div (click)="openGuitarTab(file.path, file.name, file.type)" [ngClass]="{'border-top': j == 0}" class="bg-white border-left border-bottom w-100">
-							<p class="pointer m-0 p-1 d-block text-truncate w-100"
+							<p class="pointer m-0 pl-1 d-block text-truncate w-100"
 								title="File Name: {{file.name}}{{file.type}}&#10;Create Date: {{file.createDate | date:'medium'}}&#10;Edit Date: {{file.editDate | date:'medium'}}&#10;Size: {{file.size}}">
 								{{file.name}}</p>
 						</div>

@@ -9,6 +9,7 @@ import { TwitchChatService } from '../_services/twitch-chat.service';
 import { TwitchChatMessage } from '../_models/twitch-chat-message';
 import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
 import { TwitchUser } from '../_models/twitch-user';
+import { VideoPlayerService } from '../_services/video-player.service';
 declare var $: any;
 
 @Component({
@@ -17,11 +18,13 @@ declare var $: any;
 	styleUrls: ['./twitch.component.css']
 })
 
-export class TwitchComponent implements OnInit {
+export class TwitchComponent extends VideoPlayerService implements OnInit {
 
 	constructor(
 		private twitchService: TwitchService,
-		private twitchChatService: TwitchChatService) { }
+		private twitchChatService: TwitchChatService) {
+			super();
+		}
 
 	private pollSubscription: Subscription;
 	private twitchChatOverlay = '#twitchChatVideoOverlay';
@@ -45,18 +48,11 @@ export class TwitchComponent implements OnInit {
 
 	ngOnInit() {
 		this.pollSubscription = timer(0, environment.twitchPanelRefreshTime).subscribe(() => this.refreshTwitchPanel());
-		this.loadTwitchPlayerScript();
+		this.loadVideoPlayerScript(environment.twitchPlayerAPIEndpoint);
 	}
 
 	authenticate() {
 		window.location.href = this.signInUrl;
-	}
-
-	private loadTwitchPlayerScript() {
-		const tag = document.createElement('script');
-		tag.src = environment.twitchPlayerAPIEndpoint;
-		const firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	}
 
 	private refreshTwitchPanel() {
@@ -89,7 +85,7 @@ export class TwitchComponent implements OnInit {
 		});
 	}
 
-	public showStream(followedStream: TwitchStream) {
+	public watchVideo(followedStream: TwitchStream) {
 		this.channelSelected = true;
 		this.showChatTab = true;
 		this.streamTitle = followedStream.channelStatus;
@@ -109,7 +105,7 @@ export class TwitchComponent implements OnInit {
 		this.showChatTab = false;
 	}
 
-	public loadChat(channelName: string) {
+	private loadChat(channelName: string) {
 		this.chatMsgs = [];
 		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
 			text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
@@ -122,6 +118,18 @@ export class TwitchComponent implements OnInit {
 			this.chatMsgs.pop();
 		}
 		this.chatMsgs.unshift(chatMsg);
+	}
+
+	public closeVideo() {
+		this.channelSelected = false;
+		this.showChatTab = false;
+		this.streamTitle = '';
+		this.streamChannel = '';
+		this.streamGame = '';
+		$(this.twitchPlayerElement).empty();
+
+		this.twitchChatService.closeTwitchChat();
+		this.chatMsgs = [];
 	}
 
 	public showTwitchFullscreen() {

@@ -13,3 +13,19 @@
 .overflow-x-hidden {
 	overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-light::-webkit-scrollbar-track {
+    background: rgba(242, 245, 245, 0)
+}
+
+.scroll-light::-webkit-scrollbar-thumb {
+    background: grey; 
+}
+
+.scroll-light::-webkit-scrollbar-thumb:hover {
+    background: #f8f9fa; 
+}

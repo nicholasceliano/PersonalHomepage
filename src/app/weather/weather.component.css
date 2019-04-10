@@ -14,19 +14,3 @@
     font-size: 10px;
     color:grey;
 }
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(242, 245, 245, 0)
-}
-
-::-webkit-scrollbar-thumb {
-    background: grey; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #f8f9fa; 
-}

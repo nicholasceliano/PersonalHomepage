@@ -7,7 +7,7 @@ import { map, catchError, retry } from 'rxjs/operators';
 @Injectable()
 export class APIMiddlewareInterceptor implements HttpInterceptor {
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		
+
 		return next.handle(req).pipe(
 			map((event: HttpEvent<any>) => {
 				if (event instanceof HttpResponse) {

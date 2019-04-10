@@ -12,14 +12,18 @@ export class TwitchChatService {
 
 	private socket: WebSocket = null;
 
-	public loadTwitchChat(
-		channelName: string, twitchUsername: string, twitchOAuthToken: string,
-		callback: (msg: TwitchChatMessage) => TwitchChatMessage) {
-
+	public closeTwitchChat() {
 		if (this.socket) {
 			this.socket.close();
 			this.socket = null;
 		}
+	}
+
+	public loadTwitchChat(
+		channelName: string, twitchUsername: string, twitchOAuthToken: string,
+		callback: (msg: TwitchChatMessage) => TwitchChatMessage) {
+
+		this.closeTwitchChat();
 
 		this.socket = new WebSocket(environment.twitchChatWSEndpoint);
 

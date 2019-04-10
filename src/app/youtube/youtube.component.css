@@ -40,10 +40,6 @@
     border: 0;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-
 ::-webkit-scrollbar-track {
     background: #505050; 
 }

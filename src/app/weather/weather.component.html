@@ -33,7 +33,7 @@
 				</div>
 			</div>
 		</div>
-		<div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto">
+		<div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto scroll-light">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item p-0 bg-transparent"
 					*ngFor="let forecast of weatherData.forecast; index as i;">

@@ -34,19 +34,3 @@
 .negative-text {
     color:red;
 }
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #ebebeb; 
-}
-
-::-webkit-scrollbar-thumb {
-    background: grey; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #f8f9fa; 
-}
