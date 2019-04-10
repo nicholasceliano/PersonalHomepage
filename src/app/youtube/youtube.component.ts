@@ -13,7 +13,7 @@ import $ from 'jquery';
 export class YoutubeComponent extends VideoPlayerService implements OnInit {
 
 	constructor(private youtubeService: YoutubeService) {
-		super();
+		super('#youtube-player', 400, 225);
 	}
 
 	public isPanelLoaded = false;
@@ -21,7 +21,6 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 	public subscriptionVideos: YoutubePlaylistItem[];
 	public videoTitle: string;
 	private youtubePlayer: any;
-	private youtubePlayerElement = '#youtube-player';
 
 	ngOnInit() {
 		this.loadVideoPlayerScript(environment.youtubePlayerAPIEndpoint);
@@ -35,10 +34,18 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 	}
 
 	closeVideo() {
-		this.selectedVideo = '';
-		this.videoTitle = '';
-		$(this.youtubePlayerElement).hide();
+		this.selectedVideo = undefined;
+		this.videoTitle = undefined;
+		$(this.videoPlayerElemetId).hide();
 		this.youtubePlayer.stopVideo();
+	}
+
+	protected closeFullscreenVideo() {
+		this.youtubePlayer.setSize(this.videoPlayerWidth, this.videoPlayerHeight);
+	}
+
+	protected openFullscreenVideo() {
+		this.youtubePlayer.setSize($(window).width(), $(window).height());
 	}
 
 	private loadYoutubeVideo(vidId: string) {
@@ -46,11 +53,12 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 			this.youtubePlayer.loadVideoById({ videoId: vidId });
 		} else {
 			this.youtubePlayer = new (window as any).YT.Player('youtube-player', {
-				height: '225', width: '400',
+				height: this.videoPlayerHeight,
+				width: this.videoPlayerWidth,
 				videoId: vidId,
-				playerVars: { autoplay: 1, modestbranding: 1 },
+				playerVars: { autoplay: 1, modestbranding: 1, fs: 0 },
 				events: { onReady: (e) => e.target.playVideo(),
-					onStateChange: (e) => (e.data === 3 ? $(this.youtubePlayerElement).show() : null) }
+						onStateChange: (e) => (e.data === 3 ? $(this.videoPlayerElemetId).show() : null) }
 			});
 		}
 	}

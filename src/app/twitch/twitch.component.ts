@@ -23,16 +23,13 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 	constructor(
 		private twitchService: TwitchService,
 		private twitchChatService: TwitchChatService) {
-			super();
+			super('#twitch-player', 400, 300);
 		}
 
 	private pollSubscription: Subscription;
 	private twitchChatOverlay = '#twitchChatVideoOverlay';
-	private twitchPlayerElement = '#twitch-player';
 	private twitchPanelTabs = '#twitchTabs';
 	private twitchPlayer;
-	private twitchPlayerWidth = 400;
-	private twitchPlayerHeight = 300;
 	private twitchUserInfo: TwitchUser;
 	public chatMsgs: TwitchChatMessage[] = [];
 	public isPanelLoaded = false;
@@ -91,10 +88,10 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 		this.streamTitle = followedStream.channelStatus;
 		this.streamChannel = followedStream.channelDisplayName;
 		this.streamGame = followedStream.game;
-		$(this.twitchPlayerElement).empty();
+		$(this.videoPlayerElemetId).empty();
 		this.twitchPlayer = new (window as any).Twitch.Player('twitch-player', {
-			width: this.twitchPlayerWidth,
-			height: this.twitchPlayerHeight,
+			width: this.videoPlayerWidth,
+			height: this.videoPlayerHeight,
 			channel: followedStream.channelName,
 			allowfullscreen: false,
 		});
@@ -123,40 +120,28 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 	public closeVideo() {
 		this.channelSelected = false;
 		this.showChatTab = false;
-		this.streamTitle = '';
-		this.streamChannel = '';
-		this.streamGame = '';
-		$(this.twitchPlayerElement).empty();
+		this.streamTitle = undefined;
+		this.streamChannel = undefined;
+		this.streamGame = undefined;
+		$(this.videoPlayerElemetId).empty();
 
 		this.twitchChatService.closeTwitchChat();
 		this.chatMsgs = [];
 	}
 
-	public showTwitchFullscreen() {
-		document.onfullscreenchange = () => {
-			if (!(window as any).document.fullscreenElement) {
-				$(this.twitchChatOverlay).hide();
-				$('body').removeClass('overflow-hidden');
+	protected closeFullscreenVideo() {
+		$(this.twitchChatOverlay).hide();
+		$(this.twitchPanelTabs).show();
 
-				$(this.twitchPanelTabs).show();
-				$(this.twitchPlayerElement).removeClass('fixed-top');
+		this.twitchPlayer.setWidth(this.videoPlayerWidth);
+		this.twitchPlayer.setHeight(this.videoPlayerHeight);
+	}
 
-				this.twitchPlayer.setWidth(this.twitchPlayerWidth);
-				this.twitchPlayer.setHeight(this.twitchPlayerHeight);
-			}
-		};
+	protected openFullscreenVideo() {
+		$(this.twitchChatOverlay).show();
+		$(this.twitchPanelTabs).hide();
 
-		document.documentElement.requestFullscreen().then (() => {
-			$(this.twitchChatOverlay).show();
-			$('body').addClass('overflow-hidden');
-
-			$(this.twitchPanelTabs).hide();
-			$(this.twitchPlayerElement).addClass('fixed-top');
-
-			this.twitchPlayer.setWidth($(window).width());
-			this.twitchPlayer.setHeight($(window).height());
-
-			window.scrollTo(0, 0);
-		});
+		this.twitchPlayer.setWidth($(window).width());
+		this.twitchPlayer.setHeight($(window).height());
 	}
 }
