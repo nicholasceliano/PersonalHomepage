@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from '../_services/youtube.service';
 import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
 import { environment } from 'src/environments/environment';
-import { VideoPlayerService } from '../_services/video-player.service';
+import { VideoPlayerPanelService } from '../_services/panel/video-player-panel.service';
 import $ from 'jquery';
 
 @Component({
@@ -10,10 +10,10 @@ import $ from 'jquery';
 	templateUrl: './youtube.component.html',
 	styleUrls: ['./youtube.component.css']
 })
-export class YoutubeComponent extends VideoPlayerService implements OnInit {
+export class YoutubeComponent extends VideoPlayerPanelService implements OnInit {
 
 	constructor(private youtubeService: YoutubeService) {
-		super('#youtube-player', 400, 225);
+		super('#youtube-player', 400, 225, environment.defaultRefreshTime);
 	}
 
 	public isPanelLoaded = false;
@@ -24,7 +24,6 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 
 	ngOnInit() {
 		this.loadVideoPlayerScript(environment.youtubePlayerAPIEndpoint);
-		this.getSubscriptionVideos();
 	}
 
 	watchVideo(videoItem: YoutubePlaylistItem) {
@@ -38,6 +37,10 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 		this.videoTitle = undefined;
 		$(this.videoPlayerElemetId).hide();
 		this.youtubePlayer.stopVideo();
+	}
+
+	protected refreshPanel() {
+		this.getSubscriptionVideos();
 	}
 
 	protected closeFullscreenVideo() {
@@ -65,7 +68,7 @@ export class YoutubeComponent extends VideoPlayerService implements OnInit {
 
 	private getSubscriptionVideos(): void {
 		this.youtubeService.getSubscriptionVideos().subscribe((res) => {
-			this.subscriptionVideos = res;
+			this.subscriptionVideos = this.checkAlerts(this.subscriptionVideos, res);
 			this.isPanelLoaded = true;
 		});
 	}

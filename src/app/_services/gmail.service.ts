@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GmailThread } from '../_models/gmail-thread';
 import { Observable } from 'rxjs';
-import { GoogleService } from './google.service';
+import { GoogleService } from './provider/google.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WeatherService } from '../_services/weather.service';
 import { WeatherData } from '../_models/weather-data';
 import { LocationService } from '../_services/location.service';
 import { Address } from '../_models/address';
+import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-weather',
 	templateUrl: './weather.component.html',
 	styleUrls: ['./weather.component.css']
 })
-export class WeatherComponent implements OnInit {
+export class WeatherComponent extends PanelRefreshService {
 
 	constructor(
 		private weatherService: WeatherService,
-		private locationService: LocationService) { }
+		private locationService: LocationService) {
+			super(environment.defaultRefreshTime);
+		}
 
 	public locationServiceEnabled: boolean;
 	public weatherDataLoaded = false;
@@ -21,7 +25,7 @@ export class WeatherComponent implements OnInit {
 	public weatherData: WeatherData = new WeatherData();
 	public locationData: Address = new Address();
 
-	ngOnInit() {
+	protected refreshPanel() {
 		this.GetWeatherForecast();
 	}
 
@@ -29,12 +33,12 @@ export class WeatherComponent implements OnInit {
 		navigator.geolocation.getCurrentPosition((res) => {
 			this.locationServiceEnabled = true;
 			this.locationService.GetAddressFromCoords(res.coords.latitude, res.coords.longitude).subscribe((locRes) => {
-				this.locationData = locRes;
+				this.locationData = this.checkAlerts(this.locationData, locRes);
 				this.locationDataLoaded = true;
 			});
 
 			this.weatherService.GetWeatherForcast(res.coords.latitude, res.coords.longitude).subscribe((weatherRes) => {
-				this.weatherData = weatherRes;
+				this.weatherData = this.checkAlerts(this.weatherData, weatherRes);
 				this.weatherDataLoaded = true;
 			});
 		});

@@ -5,11 +5,11 @@ import { finalize } from 'rxjs/operators';
 import { Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
-import { TwitchChatService } from '../_services/twitch-chat.service';
+import { TwitchChatService } from '../_services/provider/twitch-chat.service';
 import { TwitchChatMessage } from '../_models/twitch-chat-message';
 import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
 import { TwitchUser } from '../_models/twitch-user';
-import { VideoPlayerService } from '../_services/video-player.service';
+import { VideoPlayerPanelService } from '../_services/panel/video-player-panel.service';
 declare var $: any;
 
 @Component({
@@ -18,15 +18,14 @@ declare var $: any;
 	styleUrls: ['./twitch.component.css']
 })
 
-export class TwitchComponent extends VideoPlayerService implements OnInit {
+export class TwitchComponent extends VideoPlayerPanelService implements OnInit {
 
 	constructor(
 		private twitchService: TwitchService,
 		private twitchChatService: TwitchChatService) {
-			super('#twitch-player', 400, 300);
+			super('#twitch-player', 400, 300, environment.twitchPanelRefreshTime);
 		}
 
-	private pollSubscription: Subscription;
 	private twitchChatOverlay = '#twitchChatVideoOverlay';
 	private twitchPanelTabs = '#twitchTabs';
 	private twitchPlayer;
@@ -44,7 +43,6 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 	public emoteUrl = (id) => `http://static-cdn.jtvnw.net/emoticons/v1/${id}/1.0`;
 
 	ngOnInit() {
-		this.pollSubscription = timer(0, environment.twitchPanelRefreshTime).subscribe(() => this.refreshTwitchPanel());
 		this.loadVideoPlayerScript(environment.twitchPlayerAPIEndpoint);
 	}
 
@@ -52,37 +50,7 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 		window.location.href = this.signInUrl;
 	}
 
-	private refreshTwitchPanel() {
-		const twitchUserAuthUID = this.twitchService.GetUserAuthUID();
-
-		if (twitchUserAuthUID && twitchUserAuthUID.length === 36) {
-			this.twitchService.GetFollowedStreams().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
-				this.twitchAuthenticated = true;
-
-				if (JSON.stringify(this.followedStreams) !== JSON.stringify(res)) {
-					this.followedStreams = res;
-				}
-			});
-
-			if (!this.twitchUserInfo) {
-				this.twitchService.GetTwitchUserInfo().subscribe((res) => {
-					this.twitchUserInfo = res;
-				});
-			}
-		} else {
-			this.failedAuthentication();
-		}
-	}
-
-	private failedAuthentication() {
-		this.twitchAuthenticated = false;
-		this.followedStreams = [];
-		this.twitchService.GetOAuth2SignInUrl().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res: OAuthUrlResponse) => {
-			this.signInUrl = res.url;
-		});
-	}
-
-	public watchVideo(followedStream: TwitchStream) {
+	watchVideo(followedStream: TwitchStream) {
 		this.channelSelected = true;
 		this.showChatTab = true;
 		this.streamTitle = followedStream.channelStatus;
@@ -98,26 +66,18 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 		this.loadChat(followedStream.channelName);
 	}
 
-	public clickChannelsTab() {
+	clickChannelsTab() {
 		this.showChatTab = false;
 	}
 
-	private loadChat(channelName: string) {
-		this.chatMsgs = [];
-		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
-			text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
-		} as TwitchChatMessage);
-		this.twitchChatService.loadTwitchChat(channelName, this.twitchUserInfo.name, this.twitchUserInfo.token, this.setChatMessage.bind(this));
-	}
-
-	public setChatMessage(chatMsg: TwitchChatMessage) {
+	setChatMessage(chatMsg: TwitchChatMessage) {
 		if (this.chatMsgs.length > 75) {
 			this.chatMsgs.pop();
 		}
 		this.chatMsgs.unshift(chatMsg);
 	}
 
-	public closeVideo() {
+	closeVideo() {
 		this.channelSelected = false;
 		this.showChatTab = false;
 		this.streamTitle = undefined;
@@ -127,6 +87,28 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 
 		this.twitchChatService.closeTwitchChat();
 		this.chatMsgs = [];
+	}
+
+	protected refreshPanel() {
+		const twitchUserAuthUID = this.twitchService.GetUserAuthUID();
+
+		if (twitchUserAuthUID && twitchUserAuthUID.length === 36) {
+			this.twitchService.GetFollowedStreams().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
+				this.twitchAuthenticated = true;
+
+				if (JSON.stringify(this.followedStreams) !== JSON.stringify(res)) {
+					this.followedStreams = this.checkAlerts(this.followedStreams, res);
+				}
+			});
+
+			if (!this.twitchUserInfo) {
+				this.twitchService.GetTwitchUserInfo().subscribe((res) => {
+					this.twitchUserInfo = this.checkAlerts(this.twitchUserInfo, res);
+				});
+			}
+		} else {
+			this.failedAuthentication();
+		}
 	}
 
 	protected closeFullscreenVideo() {
@@ -143,5 +125,21 @@ export class TwitchComponent extends VideoPlayerService implements OnInit {
 
 		this.twitchPlayer.setWidth($(window).width());
 		this.twitchPlayer.setHeight($(window).height());
+	}
+
+	private failedAuthentication() {
+		this.twitchAuthenticated = false;
+		this.followedStreams = [];
+		this.twitchService.GetOAuth2SignInUrl().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res: OAuthUrlResponse) => {
+			this.signInUrl = res.url;
+		});
+	}
+
+	private loadChat(channelName: string) {
+		this.chatMsgs = [];
+		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
+			text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
+		} as TwitchChatMessage);
+		this.twitchChatService.loadTwitchChat(channelName, this.twitchUserInfo.name, this.twitchUserInfo.token, this.setChatMessage.bind(this));
 	}
 }

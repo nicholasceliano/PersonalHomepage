@@ -1,13 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { QuoteService } from '../_services/quote.service';
 import { StockQuoteData } from '../_models/stock-quote-data';
+import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-quotes',
 	templateUrl: './quotes.component.html',
 	styleUrls: ['./quotes.component.css']
 })
-export class QuotesComponent implements OnInit {
+export class QuotesComponent extends PanelRefreshService {
 	@ViewChild('collapseDiv') collapseDiv: ElementRef;
 
 	public isPanelLoaded = false;
@@ -18,19 +20,21 @@ export class QuotesComponent implements OnInit {
 	public mostRecentPriceDate: Date;
 	public collapsed = false;
 
-	constructor(private quotes: QuoteService) { }
-
-	ngOnInit() {
-		this.GetStockQuoteData();
+	constructor(private quotes: QuoteService) {
+		super(environment.defaultRefreshTime);
 	}
 
 	toggleQuotePanelCollapse() {
 		this.collapsed = this.collapseDiv.nativeElement.classList.contains('show') ? false : true;
 	}
 
+	protected refreshPanel() {
+		this.GetStockQuoteData();
+	}
+
 	private GetStockQuoteData() {
 		this.quotes.GetStockQuoteData().subscribe((res) => {
-			this.stockQuoteData = res;
+			this.stockQuoteData = this.checkAlerts(this.stockQuoteData, res);
 
 			this.currentStockVal = this.stockQuoteData ? this.getSum('currStockVal') : 0;
 			this.pastStockVal = this.stockQuoteData ? this.getSum('lastStockVal') : 0;

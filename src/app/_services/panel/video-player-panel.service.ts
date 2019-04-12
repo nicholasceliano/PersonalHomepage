@@ -1,12 +1,14 @@
 import $ from 'jquery';
+import { PanelRefreshService } from './panel-refresh.service';
 
-export abstract class VideoPlayerService {
+export abstract class VideoPlayerPanelService extends PanelRefreshService {
 
 	protected videoPlayerElemetId: string;
 	protected videoPlayerWidth: number;
 	protected videoPlayerHeight: number;
 
-	constructor(elementId: string, width: number, height: number) {
+	constructor(elementId: string, width: number, height: number, refreshTime: number) {
+		super(refreshTime);
 		this.videoPlayerElemetId = elementId;
 		this.videoPlayerWidth = width;
 		this.videoPlayerHeight = height;

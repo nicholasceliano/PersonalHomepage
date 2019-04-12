@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OAuthUrlResponse } from '../_models/oauth-url-response';
+import { OAuthUrlResponse } from '../../_models/oauth-url-response';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../environments/environment';
-import { OAuthService } from './utility/oauth-service.service';
+import { environment } from '../../../environments/environment';
+import { OAuthService } from '../utility/oauth-service.service';
 
 @Injectable({
 	providedIn: 'root'

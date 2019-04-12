@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { GoogleService } from './google.service';
+import { GoogleService } from './provider/google.service';
 import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
 
 @Injectable({

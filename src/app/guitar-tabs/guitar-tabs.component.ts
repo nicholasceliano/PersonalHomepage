@@ -3,29 +3,24 @@ import { GuitarTabsService } from '../_services/guitar-tabs.service';
 import { Folder } from '../_models/folder';
 import { MatDialog } from '@angular/material';
 import { FileDialogComponent } from '../structure/file-dialog/file-dialog.component';
+import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
+import { environment } from 'src/environments/environment';
+import { ObjectHelperService } from '../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-guitar-tabs',
 	templateUrl: './guitar-tabs.component.html',
 	styleUrls: ['./guitar-tabs.component.css']
 })
-export class GuitarTabsComponent implements OnInit {
+export class GuitarTabsComponent extends PanelRefreshService {
 
 	constructor(
 		private gts: GuitarTabsService,
-		private dialog: MatDialog) { }
+		private dialog: MatDialog) {
+			super(environment.defaultRefreshTime);
+		}
 
 	public guitarTabsFolders: Folder[] = [];
-
-	ngOnInit() {
-		this.getGuitarTabs();
-	}
-
-	private getGuitarTabs() {
-		this.gts.getGuitarTabs().subscribe((res) => {
-			this.guitarTabsFolders = res;
-		});
-	}
 
 	openGuitarTab(path: string, name: string, type: string) {
 		const fileName = name + type;
@@ -43,6 +38,16 @@ export class GuitarTabsComponent implements OnInit {
 					panelClass: 'files-modalbox'
 				});
 			}
+		});
+	}
+
+	protected refreshPanel() {
+		this.getGuitarTabs();
+	}
+
+	private getGuitarTabs() {
+		this.gts.getGuitarTabs().subscribe((res) => {
+			this.guitarTabsFolders = this.checkAlerts(this.guitarTabsFolders, res);
 		});
 	}
 }

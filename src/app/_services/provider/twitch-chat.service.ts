@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TwitchChatMessage } from '../_models/twitch-chat-message';
-import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
+import { TwitchChatMessage } from '../../_models/twitch-chat-message';
+import { TwitchChatMessageText } from '../../_models/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

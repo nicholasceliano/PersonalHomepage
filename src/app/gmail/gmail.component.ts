@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleService } from '../_services/google.service';
+import { GoogleService } from '../_services/provider/google.service';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { GmailThread } from '../_models/gmail-thread';
 import { finalize, } from 'rxjs/operators';
-import { timer, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GmailService } from '../_services/gmail.service';
+import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
+
 
 @Component({
 	selector: 'app-gmail',
 	templateUrl: './gmail.component.html',
 	styleUrls: ['./gmail.component.css']
 })
-export class GmailComponent implements OnInit {
+export class GmailComponent extends PanelRefreshService {
 
 	constructor(
 		private gmailService: GmailService,
-		private googleService: GoogleService) { }
+		private googleService: GoogleService) {
+			super(environment.mailPanelRefreshTime);
+		}
 
-	private pollSubscription: Subscription;
 	public isPanelLoaded = false;
 	public signInUrl: string;
 	public googleAuthenicated = false;
 	public unreadThreads: GmailThread[];
 
-	ngOnInit() {
-		this.pollSubscription = timer(0, environment.mailPanelRefreshTime).subscribe(() => this.refreshGmailPanel());
-	}
-
 	authenticate() {
 		window.location.href = this.signInUrl;
 	}
 
-	private refreshGmailPanel() {
+	protected refreshPanel() {
 		const googleUserAuthUID = this.googleService.GetUserAuthUID();
 
 		if (googleUserAuthUID && googleUserAuthUID.length === 36) {
@@ -40,7 +38,7 @@ export class GmailComponent implements OnInit {
 				this.googleAuthenicated = true;
 
 				if (JSON.stringify(this.unreadThreads) !== JSON.stringify(res)) {
-					this.unreadThreads = res;
+					this.unreadThreads = this.checkAlerts(this.unreadThreads, res);
 				}
 			});
 		} else {
