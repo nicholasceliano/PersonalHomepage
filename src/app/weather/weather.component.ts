@@ -3,15 +3,16 @@ import { WeatherService } from '../_services/weather.service';
 import { WeatherData } from '../_models/weather-data';
 import { LocationService } from '../_services/location.service';
 import { Address } from '../_models/address';
-import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
 import { environment } from 'src/environments/environment';
+import { RefreshPanel } from '../_logic/panel/refresh-panel';
+import { ObjectHelperService } from '../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-weather',
 	templateUrl: './weather.component.html',
 	styleUrls: ['./weather.component.css']
 })
-export class WeatherComponent extends PanelRefreshService {
+export class WeatherComponent extends RefreshPanel {
 
 	constructor(
 		private weatherService: WeatherService,
@@ -33,12 +34,16 @@ export class WeatherComponent extends PanelRefreshService {
 		navigator.geolocation.getCurrentPosition((res) => {
 			this.locationServiceEnabled = true;
 			this.locationService.GetAddressFromCoords(res.coords.latitude, res.coords.longitude).subscribe((locRes) => {
-				this.locationData = this.checkAlerts(this.locationData, locRes);
+				if (!ObjectHelperService.objectsEqual(this.locationData, locRes)) {
+					this.locationData = locRes;
+				}
 				this.locationDataLoaded = true;
 			});
 
 			this.weatherService.GetWeatherForcast(res.coords.latitude, res.coords.longitude).subscribe((weatherRes) => {
-				this.weatherData = this.checkAlerts(this.weatherData, weatherRes);
+				if (!ObjectHelperService.objectsEqual(this.weatherData, weatherRes)) {
+					this.weatherData = weatherRes;
+				}
 				this.weatherDataLoaded = true;
 			});
 		});

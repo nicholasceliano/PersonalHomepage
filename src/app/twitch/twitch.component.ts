@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { TwitchService } from '../_services/twitch.service';
 import { TwitchStream } from '../_models/twitch-stream';
 import { finalize } from 'rxjs/operators';
-import { Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { TwitchChatService } from '../_services/provider/twitch-chat.service';
 import { TwitchChatMessage } from '../_models/twitch-chat-message';
 import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
 import { TwitchUser } from '../_models/twitch-user';
-import { VideoPlayerPanelService } from '../_services/panel/video-player-panel.service';
+import { AlertsService } from '../_services/alerts.service';
+import { RandomChangingArrayAlertCountStrategy } from '../_logic/AlertCountStrategy/random-changing-array';
+import { VideoPlayerPanel } from '../_logic/panel/video-player-panel';
 declare var $: any;
 
 @Component({
@@ -18,11 +19,12 @@ declare var $: any;
 	styleUrls: ['./twitch.component.css']
 })
 
-export class TwitchComponent extends VideoPlayerPanelService implements OnInit {
+export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 
 	constructor(
 		private twitchService: TwitchService,
-		private twitchChatService: TwitchChatService) {
+		private twitchChatService: TwitchChatService,
+		private alertsService: AlertsService) {
 			super('#twitch-player', 400, 300, environment.twitchPanelRefreshTime);
 		}
 
@@ -96,14 +98,13 @@ export class TwitchComponent extends VideoPlayerPanelService implements OnInit {
 			this.twitchService.GetFollowedStreams().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
 				this.twitchAuthenticated = true;
 
-				if (JSON.stringify(this.followedStreams) !== JSON.stringify(res)) {
-					this.followedStreams = this.checkAlerts(this.followedStreams, res);
-				}
+				this.followedStreams = this.alertsService.checkAlerts('Twitch Stream', new RandomChangingArrayAlertCountStrategy('channelName'),
+																this.followedStreams, res, this.isPanelLoaded);
 			});
 
 			if (!this.twitchUserInfo) {
 				this.twitchService.GetTwitchUserInfo().subscribe((res) => {
-					this.twitchUserInfo = this.checkAlerts(this.twitchUserInfo, res);
+					this.twitchUserInfo = res;
 				});
 			}
 		} else {

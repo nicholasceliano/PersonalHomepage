@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { VideoPlayerPanel } from './video-player-panel';
 
-import { AlertsService } from './alerts.service';
-
-describe('AlertsService', () => {
+describe('VideoPlayerPanel', () => {
 	beforeEach(() => TestBed.configureTestingModule({}));
 
 	it('should be created', () => {
-		const service: AlertsService = TestBed.get(AlertsService);
+		const service: VideoPlayerPanel = TestBed.get(VideoPlayerPanel);
 		expect(service).toBeTruthy();
 	});
 });

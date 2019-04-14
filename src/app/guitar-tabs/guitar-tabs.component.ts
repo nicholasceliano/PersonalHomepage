@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GuitarTabsService } from '../_services/guitar-tabs.service';
 import { Folder } from '../_models/folder';
 import { MatDialog } from '@angular/material';
 import { FileDialogComponent } from '../structure/file-dialog/file-dialog.component';
-import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
 import { environment } from 'src/environments/environment';
+import { RefreshPanel } from '../_logic/panel/refresh-panel';
 import { ObjectHelperService } from '../_services/utility/object-helper.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ObjectHelperService } from '../_services/utility/object-helper.service'
 	templateUrl: './guitar-tabs.component.html',
 	styleUrls: ['./guitar-tabs.component.css']
 })
-export class GuitarTabsComponent extends PanelRefreshService {
+export class GuitarTabsComponent extends RefreshPanel {
 
 	constructor(
 		private gts: GuitarTabsService,
@@ -47,7 +47,9 @@ export class GuitarTabsComponent extends PanelRefreshService {
 
 	private getGuitarTabs() {
 		this.gts.getGuitarTabs().subscribe((res) => {
-			this.guitarTabsFolders = this.checkAlerts(this.guitarTabsFolders, res);
+			if (!ObjectHelperService.objectsEqual(this.guitarTabsFolders, res)) {
+				this.guitarTabsFolders = res;
+			}
 		});
 	}
 }

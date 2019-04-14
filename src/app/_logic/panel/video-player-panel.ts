@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import { PanelRefreshService } from './panel-refresh.service';
+import { RefreshPanel } from './refresh-panel';
 
-export abstract class VideoPlayerPanelService extends PanelRefreshService {
+export abstract class VideoPlayerPanel extends RefreshPanel {
 
 	protected videoPlayerElemetId: string;
 	protected videoPlayerWidth: number;

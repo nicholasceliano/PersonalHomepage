@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { RefreshPanel } from './refresh-panel';
 
-import { PanelRefreshService } from './panel-refresh.service';
-
-describe('PanelRefreshService', () => {
+describe('RefreshPanel', () => {
 	beforeEach(() => TestBed.configureTestingModule({}));
 
 	it('should be created', () => {
-		const service: PanelRefreshService = TestBed.get(PanelRefreshService);
+		const service: RefreshPanel = TestBed.get(RefreshPanel);
 		expect(service).toBeTruthy();
 	});
 });

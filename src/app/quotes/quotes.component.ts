@@ -1,15 +1,16 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { QuoteService } from '../_services/quote.service';
 import { StockQuoteData } from '../_models/stock-quote-data';
-import { PanelRefreshService } from '../_services/panel/panel-refresh.service';
 import { environment } from 'src/environments/environment';
+import { RefreshPanel } from '../_logic/panel/refresh-panel';
+import { ObjectHelperService } from '../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-quotes',
 	templateUrl: './quotes.component.html',
 	styleUrls: ['./quotes.component.css']
 })
-export class QuotesComponent extends PanelRefreshService {
+export class QuotesComponent extends RefreshPanel {
 	@ViewChild('collapseDiv') collapseDiv: ElementRef;
 
 	public isPanelLoaded = false;
@@ -34,7 +35,9 @@ export class QuotesComponent extends PanelRefreshService {
 
 	private GetStockQuoteData() {
 		this.quotes.GetStockQuoteData().subscribe((res) => {
-			this.stockQuoteData = this.checkAlerts(this.stockQuoteData, res);
+			if (!ObjectHelperService.objectsEqual(this.stockQuoteData, res)) {
+				this.stockQuoteData = res;
+			}
 
 			this.currentStockVal = this.stockQuoteData ? this.getSum('currStockVal') : 0;
 			this.pastStockVal = this.stockQuoteData ? this.getSum('lastStockVal') : 0;

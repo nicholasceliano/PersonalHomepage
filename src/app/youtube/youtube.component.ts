@@ -2,17 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from '../_services/youtube.service';
 import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
 import { environment } from 'src/environments/environment';
-import { VideoPlayerPanelService } from '../_services/panel/video-player-panel.service';
 import $ from 'jquery';
+import { AlertsService } from '../_services/alerts.service';
+import { FullOrderedArrayAlertCountStrategy } from '../_logic/AlertCountStrategy/full-ordered-array';
+import { VideoPlayerPanel } from '../_logic/panel/video-player-panel';
 
 @Component({
 	selector: 'app-youtube',
 	templateUrl: './youtube.component.html',
 	styleUrls: ['./youtube.component.css']
 })
-export class YoutubeComponent extends VideoPlayerPanelService implements OnInit {
+export class YoutubeComponent extends VideoPlayerPanel implements OnInit {
 
-	constructor(private youtubeService: YoutubeService) {
+	constructor(
+		private youtubeService: YoutubeService,
+		private alertsService: AlertsService) {
 		super('#youtube-player', 400, 225, environment.defaultRefreshTime);
 	}
 
@@ -68,7 +72,8 @@ export class YoutubeComponent extends VideoPlayerPanelService implements OnInit 
 
 	private getSubscriptionVideos(): void {
 		this.youtubeService.getSubscriptionVideos().subscribe((res) => {
-			this.subscriptionVideos = this.checkAlerts(this.subscriptionVideos, res);
+			this.subscriptionVideos = this.alertsService.checkAlerts('Youtube Video', new FullOrderedArrayAlertCountStrategy(),
+																this.subscriptionVideos, res, this.isPanelLoaded);
 			this.isPanelLoaded = true;
 		});
 	}

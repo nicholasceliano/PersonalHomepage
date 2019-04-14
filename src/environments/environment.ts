@@ -4,6 +4,7 @@
 
 export const environment = {
 	production: false,
+	appTitle: 'Personal Homepage',
 	oauthEndpoint: 'http://localhost:3000/oauth',
 	apiEndpoint: 'http://localhost:3000/api',
 	oauthCookiesName: {
