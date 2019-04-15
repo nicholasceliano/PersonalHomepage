@@ -6,7 +6,7 @@
 		<div class="p-1 header-panel text-center">
 			<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"
 				title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}">
-				{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state_abbr}}</p>
+				{{locationData.city ? locationData.city : locationData.county}}, {{locationData.stateAbbr}}</p>
 			<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
 			<div *ngIf="weatherDataLoaded">
 				<div title="{{weatherData.desc}}">
