@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="d-flex">
+	<div>Settings</div>
+	<div class="ml-auto">
+		<span class="octicon pointer pl-2 align-top" (click)="closeDialog()" title="Hotkey: Esc" octicon="x" width="18px"></span>
+	</div>
+</h1>
+<mat-dialog-content>
+	<div class="custom-control custom-switch">
+		<input type="checkbox" class="custom-control-input" id="swDarkTheme" (change)="changeSetting($event)" tabindex="-1">
+		<label class="custom-control-label" for="swDarkTheme">Dark Theme</label>
+	</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<button type="button" title="Close" class="btn btn-outline-dark ml-auto" (click)="closeDialog()" mat-button (click)="closeDialog()" tabindex="-1">Close</button>
+</mat-dialog-actions>

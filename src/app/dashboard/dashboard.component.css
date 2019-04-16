@@ -1,0 +1,12 @@
+.settings-button {
+	bottom:10px;
+	left:10px;
+}
+
+.settings-button:hover {
+	color: black;
+}
+
+.settings-button:not(:hover) {
+	color: rgba(163,163,163,.5);
+}

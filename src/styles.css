@@ -3,7 +3,12 @@
 @import "~octicons/build/build.css";
 
 .files-modalbox .mat-dialog-content {
-    max-height: calc(95vh - 120px);
+	max-height: calc(95vh - 120px);
+}
+
+.settings-modalbox .mat-dialog-content{
+	min-height: 50vh;
+	min-width: 30vw;
 }
 
 .pointer {

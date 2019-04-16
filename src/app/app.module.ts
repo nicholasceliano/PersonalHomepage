@@ -10,7 +10,7 @@ import { TwitchComponent } from './twitch/twitch.component';
 
 import { PanelComponent } from './structure/panel/panel.component';
 import { TwitchAuthComponent } from './apiAuth/twitch-auth/twitch-auth.component';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, UrlSerializer } from '@angular/router';
 import { GmailComponent } from './gmail/gmail.component';
 import { GoogleAuthComponent } from './apiAuth/google-auth/google-auth.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,11 +24,13 @@ import { GuitarTabsComponent } from './guitar-tabs/guitar-tabs.component';
 import { MatDialogModule } from '@angular/material';
 import { FileDialogComponent } from './structure/file-dialog/file-dialog.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SettingsDialogComponent } from './structure/settings-dialog/settings-dialog.component';
+import { LowerCaseUrlSerializer } from './_logic/utility/lower-case-url-serializer';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
-	{ path: 'twitchAuth', component: TwitchAuthComponent },
-	{ path: 'googleAuth', component: GoogleAuthComponent },
+	{ path: 'twitchauth', component: TwitchAuthComponent },
+	{ path: 'googleauth', component: GoogleAuthComponent },
 	{ path: 'oautherror', component: OAuthErrorComponent },
 	{ path: '**', component: PageNotFoundComponent }
 ];
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
 		OAuthErrorComponent,
 		OcticonDirective,
 		GuitarTabsComponent,
-		FileDialogComponent
+		FileDialogComponent,
+		SettingsDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -68,9 +71,16 @@ const appRoutes: Routes = [
 			useClass: APIMiddlewareInterceptor,
 			multi: true
 		},
+		{
+			provide: UrlSerializer,
+			useClass: LowerCaseUrlSerializer
+		},
 		CookieService
 	],
 	bootstrap: [AppComponent],
-	entryComponents: [FileDialogComponent]
+	entryComponents: [
+		FileDialogComponent,
+		SettingsDialogComponent
+	]
 })
 export class AppModule { }

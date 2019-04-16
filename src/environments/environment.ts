@@ -11,6 +11,9 @@ export const environment = {
 		google: 'googleAuthUID',
 		twitch: 'twitchAuthUID'
 	},
+	localStorage: {
+		dashboardSettings: 'dashboardSettings'
+	},
 	mailPanelRefreshTime: 30000,
 	twitchPanelRefreshTime: 60000,
 	defaultRefreshTime: 900000, // 15 mins

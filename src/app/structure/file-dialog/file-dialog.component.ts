@@ -19,7 +19,6 @@ export class FileDialogComponent implements OnInit {
 	private scrollSpeed = 250;
 	private scrollSpeedInterval = 31.25;
 	private jumpScrollSpeed = 200;
-	private keyMap: KeyMapsService;
 	private scrollingInterval;
 	public scrollMultiplier = () => this.initialScrollSpeed / this.scrollSpeed;
 	public toggleBtnText = () => this.scrollingInterval ? 'Stop' : 'Start';
@@ -31,11 +30,10 @@ export class FileDialogComponent implements OnInit {
 		this.title = data.title;
 		this.titleTooltip = data.titleTooltip;
 		this.content = data.content;
-		this.keyMap = keyMapService;
 
 		this.dialogRef.afterClosed().subscribe(result => {
 			this.stopScrolling();
-			this.keyMap.keys.Escape = false; // Key up event bugged when Mat Dialog is closed with a key press
+			this.keyMapService.keys.Escape = false; // Key up event bugged when Mat Dialog is closed with a key press
 		});
 	}
 
@@ -119,27 +117,22 @@ export class FileDialogComponent implements OnInit {
 
 	@HostListener('window:keydown', ['$event'])
 	keyDownEvent(event: KeyboardEvent) {
-		this.keyMap.keys[event.key] = true;
+		this.keyMapService.keys[event.key] = true;
 
-		if (this.keyMap.keys.Enter) {
+		if (this.keyMapService.keys.Enter) {
 			this.toggleScroll();
-		} else if (this.keyMap.keys['-']) {
+		} else if (this.keyMapService.keys['-']) {
 			this.decreaseScrollSpeed();
-		} else if (this.keyMap.keys['=']) {
+		} else if (this.keyMapService.keys['=']) {
 			this.increaseScrollSpeed();
-		} else if (this.keyMap.keys.Backspace) {
+		} else if (this.keyMapService.keys.Backspace) {
 			this.resetScolling();
-		} else if (this.keyMap.keys.Escape) {
+		} else if (this.keyMapService.keys.Escape) {
 			this.closeDialog();
-		} else if (this.keyMap.keys[' '] && !this.keyMap.keys.Shift) {
+		} else if (this.keyMapService.keys[' '] && !this.keyMapService.keys.Shift) {
 			this.jumpScrollDown();
-		} else if (this.keyMap.keys[' '] && this.keyMap.keys.Shift) {
+		} else if (this.keyMapService.keys[' '] && this.keyMapService.keys.Shift) {
 			this.jumpScrollUp();
 		}
-	}
-
-	@HostListener('window:keyup', ['$event'])
-	keyUpEvent(event: KeyboardEvent) {
-		this.keyMap.keys[event.key] = false;
 	}
 }
