@@ -35,6 +35,7 @@ export class FileDialogComponent implements OnInit {
 
 		this.dialogRef.afterClosed().subscribe(result => {
 			this.stopScrolling();
+			this.keyMap.keys.Escape = false; // Key up event bugged when Mat Dialog is closed with a key press
 		});
 	}
 
