@@ -16,24 +16,26 @@ export class AlertsService {
 	}
 
 	checkAlerts<T>(type: string, alertCountStrategy: AlertCountStrategy, origObj: Array<T>, newObj: Array<T>, panelLoaded: boolean): T[] {
-		if (!ObjectHelperService.objectsEqual(origObj, newObj)) {
-			if (panelLoaded) {
-				this.itemAlertCt = alertCountStrategy.count(origObj, newObj, this.itemAlertCt);
-
+		if (panelLoaded) {
+			const newAlertCt = alertCountStrategy.count(origObj, newObj, this.itemAlertCt);
+			if (newAlertCt > this.itemAlertCt) {
+				this.itemAlertCt = newAlertCt
+			
 				if (this.itemAlertCt > 0) {
 					if (document.title !== environment.appTitle && !(document.title.indexOf(type) > -1)) {
-						const alertCt = parseInt(document.title.split('New Alerts')[0].trim(), 10) + 1;
+						if (document.title.indexOf('New Alerts') > -1) {
+							parseInt(document.title.split('New Alerts')[0].trim(), 10) + 1;
+						}
 
-						document.title = `${alertCt} New Alerts - ${environment.appTitle}`;
+						document.title = `${this.itemAlertCt} New Alerts - ${environment.appTitle}`;
 					} else {
 						document.title = `(${this.itemAlertCt}) New ${type}${this.itemAlertCt > 1 ? 's' : ''} - ${environment.appTitle}`;
 					}
-				}
+				}	
 			}
-			return newObj;
 		}
 
-		return origObj;
+		return (ObjectHelperService.objectsEqual(origObj, newObj)) ? origObj : newObj;
 	}
 
 	private setTitleClearEvents() {

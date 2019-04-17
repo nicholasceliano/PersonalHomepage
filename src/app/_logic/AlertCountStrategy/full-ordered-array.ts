@@ -8,7 +8,6 @@ export class FullOrderedArrayAlertCountStrategy implements AlertCountStrategy {
 			for (const nO of newObj) {
 				const newJSON = JSON.stringify(nO);
 
-				console.log(origJSON === newJSON);
 				if (origJSON === newJSON) {
 					break;
 				} else {
