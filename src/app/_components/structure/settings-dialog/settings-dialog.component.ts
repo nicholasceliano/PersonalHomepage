@@ -38,7 +38,7 @@ export class SettingsDialogComponent implements OnInit {
 			if (item.type === 'panel') { // default panel items to checked if no local storage
 				item.checked = (this.settings && this.settings[item.id] === false) ? false : true;
 			} else {
-				item.checked = (!this.settings || this.settings[item.id] === false) ? false : true;
+				item.checked = (this.settings && this.settings[item.id] === true) ? true : false;
 			}
 		});
 	}
