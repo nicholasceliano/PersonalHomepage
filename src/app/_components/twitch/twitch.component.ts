@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { TwitchService } from '../_services/twitch.service';
-import { TwitchStream } from '../_models/twitch-stream';
+import { TwitchService } from '../../_services/twitch.service';
+import { TwitchStream } from '../../_models/twitch-stream';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { OAuthUrlResponse } from '../_models/oauth-url-response';
-import { TwitchChatService } from '../_services/provider/twitch-chat.service';
-import { TwitchChatMessage } from '../_models/twitch-chat-message';
-import { TwitchChatMessageText } from '../_models/twitch-chat-message-text';
-import { TwitchUser } from '../_models/twitch-user';
-import { AlertsService } from '../_services/alerts.service';
-import { RandomChangingArrayAlertCountStrategy } from '../_logic/AlertCountStrategy/random-changing-array';
-import { VideoPlayerPanel } from '../_logic/panel/video-player-panel';
+import { OAuthUrlResponse } from '../../_models/oauth-url-response';
+import { TwitchChatService } from '../../_services/provider/twitch-chat.service';
+import { TwitchChatMessage } from '../../_models/twitch-chat-message';
+import { TwitchChatMessageText } from '../../_models/twitch-chat-message-text';
+import { TwitchUser } from '../../_models/twitch-user';
+import { AlertsService } from '../../_services/alerts.service';
+import { RandomChangingArrayAlertCountStrategy } from '../../_logic/AlertCountStrategy/random-changing-array';
+import { VideoPlayerPanel } from '../../_logic/panel/video-player-panel';
 declare var $: any;
 
 @Component({

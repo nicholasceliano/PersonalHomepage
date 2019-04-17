@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { QuoteService } from '../_services/quote.service';
-import { StockQuoteData } from '../_models/stock-quote-data';
+import { QuoteService } from '../../_services/quote.service';
+import { StockQuoteData } from '../../_models/stock-quote-data';
 import { environment } from 'src/environments/environment';
-import { RefreshPanel } from '../_logic/panel/refresh-panel';
-import { ObjectHelperService } from '../_services/utility/object-helper.service';
+import { RefreshPanel } from '../../_logic/panel/refresh-panel';
+import { ObjectHelperService } from '../../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-quotes',

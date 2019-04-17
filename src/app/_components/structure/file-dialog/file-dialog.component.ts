@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import $ from 'jquery';
-import { KeyMapsService } from 'src/app/_services/utility/key-maps.service';
+import { KeyMapsService } from '../../../_services/utility/key-maps.service';
 
 @Component({
 	selector: 'app-file-dialog',

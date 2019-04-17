@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { WeatherService } from '../_services/weather.service';
-import { WeatherData } from '../_models/weather-data';
-import { LocationService } from '../_services/location.service';
-import { Address } from '../_models/address';
+import { WeatherService } from '../../_services/weather.service';
+import { WeatherData } from '../../_models/weather-data';
+import { LocationService } from '../../_services/location.service';
+import { Address } from '../../_models/address';
 import { environment } from 'src/environments/environment';
-import { RefreshPanel } from '../_logic/panel/refresh-panel';
-import { ObjectHelperService } from '../_services/utility/object-helper.service';
+import { RefreshPanel } from '../../_logic/panel/refresh-panel';
+import { ObjectHelperService } from '../../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-weather',

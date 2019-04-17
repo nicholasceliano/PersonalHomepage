@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { GuitarTabsService } from '../_services/guitar-tabs.service';
-import { Folder } from '../_models/folder';
+import { GuitarTabsService } from '../../_services/guitar-tabs.service';
+import { Folder } from '../../_models/folder';
 import { MatDialog } from '@angular/material';
 import { FileDialogComponent } from '../structure/file-dialog/file-dialog.component';
 import { environment } from 'src/environments/environment';
-import { RefreshPanel } from '../_logic/panel/refresh-panel';
-import { ObjectHelperService } from '../_services/utility/object-helper.service';
+import { RefreshPanel } from '../../_logic/panel/refresh-panel';
+import { ObjectHelperService } from '../../_services/utility/object-helper.service';
 
 @Component({
 	selector: 'app-guitar-tabs',

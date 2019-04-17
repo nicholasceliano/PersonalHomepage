@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleService } from '../_services/provider/google.service';
-import { OAuthUrlResponse } from '../_models/oauth-url-response';
-import { GmailThread } from '../_models/gmail-thread';
+import { GoogleService } from '../../_services/provider/google.service';
+import { OAuthUrlResponse } from '../../_models/oauth-url-response';
+import { GmailThread } from '../../_models/gmail-thread';
 import { finalize, } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { GmailService } from '../_services/gmail.service';
-import { AlertsService } from '../_services/alerts.service';
-import { GrowingArrayAlertCountStrategy } from '../_logic/AlertCountStrategy/growing-array';
-import { RefreshPanel } from '../_logic/panel/refresh-panel';
+import { GmailService } from '../../_services/gmail.service';
+import { AlertsService } from '../../_services/alerts.service';
+import { GrowingArrayAlertCountStrategy } from '../../_logic/AlertCountStrategy/growing-array';
+import { RefreshPanel } from '../../_logic/panel/refresh-panel';
 
 @Component({
 	selector: 'app-gmail',

@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material';
 import { SettingsDialogComponent } from '../structure/settings-dialog/settings-dialog.component';
-import { LocalStorageService } from '../_services/utility/local-storage.service';
+import { LocalStorageService } from '../../_services/utility/local-storage.service';
 
 @Component({
 	selector: 'app-dashboard',

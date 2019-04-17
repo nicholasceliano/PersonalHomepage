@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { YoutubeService } from '../_services/youtube.service';
-import { YoutubePlaylistItem } from '../_models/youtube-playlist-item';
+import { YoutubeService } from '../../_services/youtube.service';
+import { YoutubePlaylistItem } from '../../_models/youtube-playlist-item';
 import { environment } from 'src/environments/environment';
 import $ from 'jquery';
-import { AlertsService } from '../_services/alerts.service';
-import { FullOrderedArrayAlertCountStrategy } from '../_logic/AlertCountStrategy/full-ordered-array';
-import { VideoPlayerPanel } from '../_logic/panel/video-player-panel';
+import { AlertsService } from '../../_services/alerts.service';
+import { FullOrderedArrayAlertCountStrategy } from '../../_logic/AlertCountStrategy/full-ordered-array';
+import { VideoPlayerPanel } from '../../_logic/panel/video-player-panel';
 
 @Component({
 	selector: 'app-youtube',
