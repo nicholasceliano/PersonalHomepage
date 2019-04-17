@@ -2,11 +2,11 @@ import { Directive, Input, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import * as octicons from 'octicons';
 
 @Directive({
-	selector: '[octicon]'
+	selector: '[appOcticon]'
 })
 export class OcticonDirective implements OnInit {
 
-	@Input() octicon: string;
+	@Input() appOcticon: string;
 	@Input() color: string;
 	@Input() width: number;
 
@@ -14,7 +14,7 @@ export class OcticonDirective implements OnInit {
 
 	ngOnInit(): void {
 		const el: HTMLElement = this.elementRef.nativeElement;
-		el.innerHTML = octicons[this.octicon].toSVG();
+		el.innerHTML = octicons[this.appOcticon].toSVG();
 
 		const icon: Node = el.firstChild;
 		if (this.color) {

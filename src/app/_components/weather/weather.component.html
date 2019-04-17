@@ -3,9 +3,9 @@
 		<p class="text-center">Location Services must be enabled to retrieve weather data.</p>
 	</div>
 	<div *ngIf="locationServiceEnabled === true">
-		<div class="p-1 header-panel text-center">
+		<div class="p-1 header-panel text-center" appThemeItem>
 			<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"
-				title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}">
+				title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}" appThemeItem>
 				{{locationData.city ? locationData.city : locationData.county}}, {{locationData.stateAbbr}}</p>
 			<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
 			<div *ngIf="weatherDataLoaded">
@@ -13,8 +13,8 @@
 					<img class="d-inline-block align-top"
 						src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
 					<div class="d-inline-block">
-						<p class="m-0 d-block">{{weatherData.main}}</p>
-						<p class="m-0 d-block">{{weatherData.tempCurr}}°</p>
+						<p class="m-0 d-block" appThemeItem>{{weatherData.main}}</p>
+						<p class="m-0 d-block" appThemeItem>{{weatherData.tempCurr}}°</p>
 					</div>
 				</div>
 				<p class="m-0 sub-header d-block text-truncate w-100">Min: {{weatherData.tempMin}}° Max:

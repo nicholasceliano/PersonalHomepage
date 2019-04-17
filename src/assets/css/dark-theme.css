@@ -1,0 +1,30 @@
+.dark-theme,
+body.dark-theme mat-dialog-container {
+	background-color: #505050 !important;
+}
+
+p.dark-theme, 
+small.dark-theme, 
+label.dark-theme,
+span.dark-theme,
+h4.dark-theme,
+h5.dark-theme {
+	color:#fff;
+}
+
+.dark-theme.border {
+	border-color:black !important;
+}
+
+.dark-theme::-webkit-scrollbar-track {
+    background: #505050;
+}
+
+.dark-theme::-webkit-scrollbar-thumb {
+    background: #232127;
+}
+
+.dark-theme::-webkit-scrollbar-thumb:hover {
+    background: #b8b5c0;
+}
+

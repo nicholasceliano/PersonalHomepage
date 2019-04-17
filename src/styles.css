@@ -1,6 +1,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~octicons/build/build.css";
+@import "assets/css/dark-theme.css";
 
 .files-modalbox .mat-dialog-content {
 	max-height: calc(95vh - 120px);
@@ -23,14 +24,17 @@
     width: 8px;
 }
 
+body::-webkit-scrollbar-track,
 .scroll-light::-webkit-scrollbar-track {
     background: rgba(242, 245, 245, 0)
 }
 
+body::-webkit-scrollbar-thumb,
 .scroll-light::-webkit-scrollbar-thumb {
-    background: grey; 
+    background: #505050; 
 }
 
+body::-webkit-scrollbar-thumb:hover,
 .scroll-light::-webkit-scrollbar-thumb:hover {
-    background: #f8f9fa; 
+    background: #d5d5d6; 
 }

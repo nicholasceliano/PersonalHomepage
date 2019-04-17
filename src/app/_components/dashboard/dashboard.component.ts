@@ -24,15 +24,7 @@ export class DashboardComponent implements OnInit {
 		this.panelSettings = this.localStorageService.get(environment.localStorage.dashboardSettings);
 
 		this.localStorageService.watchStorage().subscribe((localStorageItem) => {
-			const settings = localStorageItem[environment.localStorage.dashboardSettings];
-			if (settings) {
-				this.panelSettings = settings;
-
-				// const darkTheme = settings.swDarkTheme;
-				// need to load dark theme
-
-				console.log(`load dark them: ${this.panelSettings.swDarkTheme}`);
-			}
+			this.panelSettings = localStorageItem[environment.localStorage.dashboardSettings];
 		});
 	}
 

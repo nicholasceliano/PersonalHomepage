@@ -1,5 +1,5 @@
-<span class="octicon pointer position-fixed settings-button" octicon="gear" width="33px" (click)="showSettings()" title="Settings"></span>
-<div class="container-fluid">
+<span class="octicon pointer position-fixed settings-button" appOcticon="gear" width="33px" (click)="showSettings()" title="Settings"></span>
+<div class="container-fluid" appThemeItem>
 	<div class="d-flex flex-wrap justify-content-center">
 		<div>
 			<app-panel *ngIf="panelSettings?.swPanelGmail !== false" panelName="gmail" panelTitle="Gmail" panelLogo="assets/img/gmaillogo.png"></app-panel>

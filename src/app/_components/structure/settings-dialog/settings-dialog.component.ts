@@ -19,23 +19,27 @@ export class SettingsDialogComponent implements OnInit {
 	) { }
 
 	public settings: any[];
-	public themeItems: any[] = [{id: 'swDarkTheme', text: 'Dark Theme'}];
-	public panelItems: any[] = [
-		{id: 'swPanelGmail', text: 'Gmail Panel'},
-		{id: 'swPanelQuotes', text: 'Quotes Panel'},
-		{id: 'swPanelFinancial', text: 'Financial Panel'},
-		{id: 'swPanelYoutube', text: 'Youtube Panel'},
-		{id: 'swPanelPodcasts', text: 'Podcasts Panel'},
-		{id: 'swPanelWeather', text: 'Weather Panel'},
-		{id: 'swPanelTabs', text: 'Guitar Tabs Panel'},
-		{id: 'swPanelTwitch', text: 'Twitch Panel'},
-		{id: 'swPanelGoogleDrive', text: 'Google Drive Panel'},
+	public settingItems: any[] = [
+		{id: 'swDarkTheme', text: 'Dark Theme', type: 'theme'},
+		{id: 'swPanelGmail', text: 'Gmail Panel', type: 'panel'},
+		{id: 'swPanelQuotes', text: 'Quotes Panel', type: 'panel'},
+		{id: 'swPanelFinancial', text: 'Financial Panel', type: 'panel'},
+		{id: 'swPanelYoutube', text: 'Youtube Panel', type: 'panel'},
+		{id: 'swPanelPodcasts', text: 'Podcasts Panel', type: 'panel'},
+		{id: 'swPanelWeather', text: 'Weather Panel', type: 'panel'},
+		{id: 'swPanelTabs', text: 'Guitar Tabs Panel', type: 'panel'},
+		{id: 'swPanelTwitch', text: 'Twitch Panel', type: 'panel'},
+		{id: 'swPanelGoogleDrive', text: 'Google Drive Panel', type: 'panel'},
 	];
 
 	ngOnInit() {
 		this.settings = this.localStorageService.get(environment.localStorage.dashboardSettings);
-		this.panelItems.forEach(item => { // default panel items to visible if no local storage
-			item.checked = (this.settings && this.settings[item.id] === false) ? false : true;
+		this.settingItems.forEach(item => {
+			if (item.type === 'panel') { // default panel items to checked if no local storage
+				item.checked = (this.settings && this.settings[item.id] === false) ? false : true;
+			} else {
+				item.checked = (!this.settings || this.settings[item.id] === false) ? false : true;
+			}
 		});
 	}
 

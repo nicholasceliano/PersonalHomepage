@@ -26,6 +26,7 @@ import { FileDialogComponent } from './_components/structure/file-dialog/file-di
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SettingsDialogComponent } from './_components/structure/settings-dialog/settings-dialog.component';
 import { LowerCaseUrlSerializer } from './_logic/utility/lower-case-url-serializer';
+import { ThemeItemDirective } from './_directives/theme-item.directive';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
 		OcticonDirective,
 		GuitarTabsComponent,
 		FileDialogComponent,
-		SettingsDialogComponent
+		SettingsDialogComponent,
+		ThemeItemDirective
 	],
 	imports: [
 		BrowserModule,

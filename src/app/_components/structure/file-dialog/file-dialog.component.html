@@ -1,9 +1,9 @@
 <h1 mat-dialog-title class="d-flex m-0">
 	<div title="{{titleTooltip}}">{{title}}</div>
 	<div class="ml-auto">
-		<span [hidden]=isFullScreen class="octicon pointer pl-2 align-top" octicon="screen-full" width="21px" (click)="fullScreenDialog()"></span>
-		<span [hidden]=!isFullScreen class="octicon pointer pl-2 align-top" octicon="screen-normal" width="21px" (click)="exitFullScreenDialog()"></span>
-		<span class="octicon pointer pl-2 align-top" title="Hotkey: Esc" octicon="x" width="18px" (click)="closeDialog()"></span>
+		<span [hidden]=isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-full" width="21px" (click)="fullScreenDialog()"></span>
+		<span [hidden]=!isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-normal" width="21px" (click)="exitFullScreenDialog()"></span>
+		<span class="octicon pointer pl-2 align-top" title="Hotkey: Esc" appOcticon="x" width="18px" (click)="closeDialog()"></span>
 	</div>
 </h1>
 <mat-dialog-content>
