@@ -17,15 +17,21 @@ export class DashboardComponent implements OnInit {
 		private dialog: MatDialog,
 		private localStorageService: LocalStorageService) { }
 
+	public panelSettings: any;
+
 	ngOnInit() {
 		this.title.setTitle(environment.appTitle);
+		this.panelSettings = this.localStorageService.get(environment.localStorage.dashboardSettings);
 
 		this.localStorageService.watchStorage().subscribe((localStorageItem) => {
-			if (localStorageItem[environment.localStorage.dashboardSettings]) {
-				const darkTheme = localStorageItem[environment.localStorage.dashboardSettings].swDarkTheme;
-				// need to load this through abstract factory
+			const settings = localStorageItem[environment.localStorage.dashboardSettings];
+			if (settings) {
+				this.panelSettings = settings;
 
-				console.log(`load dark them: ${darkTheme}`);
+				// const darkTheme = settings.swDarkTheme;
+				// need to load dark theme
+
+				console.log(`load dark them: ${this.panelSettings.swDarkTheme}`);
 			}
 		});
 	}

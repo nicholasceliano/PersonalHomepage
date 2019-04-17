@@ -2,21 +2,21 @@
 <div class="container-fluid">
 	<div class="d-flex flex-wrap justify-content-center">
 		<div>
-			<app-panel panelName="gmail" panelTitle="Gmail" panelLogo="assets/img/gmaillogo.png"></app-panel>
-			<app-panel panelName="quotes" panelTitle="Quotes" panelLogo="assets/img/quoteslogo.png"></app-panel>
-			<app-panel panelName="financial" panelTitle="Financials"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelGmail !== false" panelName="gmail" panelTitle="Gmail" panelLogo="assets/img/gmaillogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelQuotes !== false" panelName="quotes" panelTitle="Quotes" panelLogo="assets/img/quoteslogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelFinancial !== false" panelName="financial" panelTitle="Financials"></app-panel>
 		</div>
 		<div>
-			<app-panel panelName="youtube" panelTitle="Youtube" panelLogo="assets/img/youtubelogo.png"></app-panel>
-			<app-panel panelName="podcasts" panelTitle="Podcasts"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelYoutube !== false" panelName="youtube" panelTitle="Youtube" panelLogo="assets/img/youtubelogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelPodcasts !== false" panelName="podcasts" panelTitle="Podcasts"></app-panel>
 		</div>
 		<div>
-			<app-panel panelName="weather" panelTitle="Weather" panelLogo="assets/img/weatherlogo.png"></app-panel>
-			<app-panel panelName="guitar-tabs" panelTitle="Tabs" panelLogo="assets/img/guitartabslogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelWeather !== false" panelName="weather" panelTitle="Weather" panelLogo="assets/img/weatherlogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelTabs !== false" panelName="guitar-tabs" panelTitle="Tabs" panelLogo="assets/img/guitartabslogo.png"></app-panel>
 		</div>
 		<div>
-			<app-panel panelName="twitch" panelTitle="Twitch" panelLogo="assets/img/twitchlogo.png"></app-panel>
-			<app-panel panelName="drive" panelTitle="Google Drive"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelTwitch !== false" panelName="twitch" panelTitle="Twitch" panelLogo="assets/img/twitchlogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelGoogleDrive !== false" panelName="drive" panelTitle="Google Drive"></app-panel>
 		</div>
 		<!-- <app-panel panelName="links" panelTitle="Links"></app-panel>
 		<app-panel panelName="voice" panelTitle="Google Voice"></app-panel>

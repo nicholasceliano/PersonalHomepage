@@ -5,10 +5,20 @@
 	</div>
 </h1>
 <mat-dialog-content>
-	<div class="custom-control custom-switch">
-		<input type="checkbox" class="custom-control-input" id="swDarkTheme" (change)="changeSetting($event)" tabindex="-1">
-		<label class="custom-control-label" for="swDarkTheme">Dark Theme</label>
-	</div>
+	<h4>Theme</h4>
+	<ng-container *ngFor="let t of themeItems">
+		<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="{{t.id}}" (change)="changeSetting($event)" tabindex="-1">
+			<label class="custom-control-label" for="{{t.id}}">{{t.text}}</label>
+		</div>
+	</ng-container>
+	<h4>Panels</h4>
+	<ng-container *ngFor="let p of panelItems">
+		<div class="custom-control custom-switch">
+			<input [attr.checked]="p.checked ? 'checked' : null" type="checkbox" class="custom-control-input" id="{{p.id}}" (change)="changeSetting($event)" tabindex="-1">
+			<label class="custom-control-label" for="{{p.id}}">{{p.text}}</label>
+		</div>
+	</ng-container>
 </mat-dialog-content>
 <mat-dialog-actions>
 	<button type="button" title="Close" class="btn btn-outline-dark ml-auto" (click)="closeDialog()" mat-button (click)="closeDialog()" tabindex="-1">Close</button>

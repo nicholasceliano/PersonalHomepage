@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { KeyMapsService } from 'src/app/_services/utility/key-maps.service';
 import { LocalStorageService } from 'src/app/_services/utility/local-storage.service';
-import $ from 'jquery';
 import { environment } from 'src/environments/environment';
 import { IDictionary } from 'src/app/_models/idictionary';
 
@@ -19,8 +18,25 @@ export class SettingsDialogComponent implements OnInit {
 		private localStorageService: LocalStorageService
 	) { }
 
+	public settings: any[];
+	public themeItems: any[] = [{id: 'swDarkTheme', text: 'Dark Theme'}];
+	public panelItems: any[] = [
+		{id: 'swPanelGmail', text: 'Gmail Panel'},
+		{id: 'swPanelQuotes', text: 'Quotes Panel'},
+		{id: 'swPanelFinancial', text: 'Financial Panel'},
+		{id: 'swPanelYoutube', text: 'Youtube Panel'},
+		{id: 'swPanelPodcasts', text: 'Podcasts Panel'},
+		{id: 'swPanelWeather', text: 'Weather Panel'},
+		{id: 'swPanelTabs', text: 'Guitar Tabs Panel'},
+		{id: 'swPanelTwitch', text: 'Twitch Panel'},
+		{id: 'swPanelGoogleDrive', text: 'Google Drive Panel'},
+	];
+
 	ngOnInit() {
-		this.loadSettings();
+		this.settings = this.localStorageService.get(environment.localStorage.dashboardSettings);
+		this.panelItems.forEach(item => { // default panel items to visible if no local storage
+			item.checked = (this.settings && this.settings[item.id] === false) ? false : true;
+		});
 	}
 
 	public changeSetting(e) {
@@ -32,14 +48,6 @@ export class SettingsDialogComponent implements OnInit {
 
 	public closeDialog() {
 		this.dialogRef.close();
-	}
-
-	private loadSettings() {
-		const lsJSON = this.localStorageService.get(environment.localStorage.dashboardSettings);
-
-		Object.keys(lsJSON).forEach((key) => {
-			$(`#${key}`).prop('checked', lsJSON[key]); // Only checkboxes for now...will extend if other setting types
-		});
 	}
 
 	@HostListener('window:keydown', ['$event'])
