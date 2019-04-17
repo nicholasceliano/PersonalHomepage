@@ -4,7 +4,7 @@
 		<span class="octicon pointer pl-2 align-top" (click)="closeDialog()" title="Hotkey: Esc" appOcticon="x" width="18px" appThemeItem></span>
 	</div>
 </div>
-<mat-dialog-content>
+<mat-dialog-content appThemeItem>
 	<h5 class="mt-2" appThemeItem>Theme</h5>
 	<ng-container *ngFor="let s of settingItems">
 		<div *ngIf="s.type == 'theme'" class="custom-control custom-switch">

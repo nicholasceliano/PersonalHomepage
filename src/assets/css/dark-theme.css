@@ -7,6 +7,7 @@ p.dark-theme,
 small.dark-theme, 
 label.dark-theme,
 span.dark-theme,
+.dark-theme pre,
 h4.dark-theme,
 h5.dark-theme {
 	color:#fff;
@@ -17,14 +18,14 @@ h5.dark-theme {
 }
 
 .dark-theme::-webkit-scrollbar-track {
-    background: #505050;
+    background: #505050 !important;
 }
 
 .dark-theme::-webkit-scrollbar-thumb {
-    background: #232127;
+    background: #232127 !important;
 }
 
 .dark-theme::-webkit-scrollbar-thumb:hover {
-    background: #b8b5c0;
+    background: #b8b5c0 !important;
 }
 

@@ -1,19 +1,19 @@
 <h1 mat-dialog-title class="d-flex m-0">
-	<div title="{{titleTooltip}}">{{title}}</div>
+	<h5 title="{{titleTooltip}}" appThemeItem>{{title}}</h5>
 	<div class="ml-auto">
-		<span [hidden]=isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-full" width="21px" (click)="fullScreenDialog()"></span>
-		<span [hidden]=!isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-normal" width="21px" (click)="exitFullScreenDialog()"></span>
-		<span class="octicon pointer pl-2 align-top" title="Hotkey: Esc" appOcticon="x" width="18px" (click)="closeDialog()"></span>
+		<span [hidden]=isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-full" width="21px" (click)="fullScreenDialog()" appThemeItem></span>
+		<span [hidden]=!isFullScreen class="octicon pointer pl-2 align-top" appOcticon="screen-normal" width="21px" (click)="exitFullScreenDialog()" appThemeItem></span>
+		<span class="octicon pointer pl-2 align-top" title="Hotkey: Esc" appOcticon="x" width="18px" (click)="closeDialog()" appThemeItem></span>
 	</div>
 </h1>
-<mat-dialog-content>
-	<div [innerHtml]="content"></div>
+<mat-dialog-content appThemeItem>
+	<div [innerHtml]="content" appThemeItem></div>
 </mat-dialog-content>
 <mat-dialog-actions>
 	<div class="mr-3">
-		<span>Scroll Speed(x{{scrollMultiplier() | number:'1.0-2'}}): </span>
-		<button type="button" title="Hotkey: -" class="btn btn-outline-dark ml-1 mr-1" (click)="decreaseScrollSpeed()" mat-button tabindex="-1">-</button>
-		<button type="button" title="Hotkey: =" class="btn btn-outline-dark ml-1 mr-1" (click)="increaseScrollSpeed()" mat-button tabindex="-1">+</button>
+		<span appThemeItem>Scroll Speed(x{{scrollMultiplier() | number:'1.0-2'}}): </span>
+		<button type="button" title="Hotkey: -" class="btn btn-secondary ml-1 mr-1" (click)="decreaseScrollSpeed()" mat-button tabindex="-1">-</button>
+		<button type="button" title="Hotkey: =" class="btn btn-secondary ml-1 mr-1" (click)="increaseScrollSpeed()" mat-button tabindex="-1">+</button>
 	</div>
-	<button type="button" title="Hotkey: Enter" class="btn btn-outline-dark" (click)="toggleScroll()" mat-button tabindex="-1">{{ toggleBtnText() }}</button>
+	<button type="button" title="Hotkey: Enter" class="btn btn-secondary" (click)="toggleScroll()" mat-button tabindex="-1">{{ toggleBtnText() }}</button>
 </mat-dialog-actions>
