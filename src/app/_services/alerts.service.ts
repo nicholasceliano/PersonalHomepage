@@ -19,19 +19,15 @@ export class AlertsService {
 		if (panelLoaded) {
 			const newAlertCt = alertCountStrategy.count(origObj, newObj, this.itemAlertCt);
 			if (newAlertCt > this.itemAlertCt) {
-				this.itemAlertCt = newAlertCt
-			
+				this.itemAlertCt = newAlertCt;
+
 				if (this.itemAlertCt > 0) {
 					if (document.title !== environment.appTitle && !(document.title.indexOf(type) > -1)) {
-						if (document.title.indexOf('New Alerts') > -1) {
-							parseInt(document.title.split('New Alerts')[0].trim(), 10) + 1;
-						}
-
 						document.title = `${this.itemAlertCt} New Alerts - ${environment.appTitle}`;
 					} else {
 						document.title = `(${this.itemAlertCt}) New ${type}${this.itemAlertCt > 1 ? 's' : ''} - ${environment.appTitle}`;
 					}
-				}	
+				}
 			}
 		}
 
