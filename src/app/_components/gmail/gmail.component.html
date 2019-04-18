@@ -19,7 +19,7 @@
 							<p class="m-0 sub-header d-block text-truncate w-100">{{message.from}}</p>
 							<p class="m-0 sub-header d-block text-truncate w-100">{{message.date | date:'medium'}}</p>
 							<small class="d-block text-truncate w-100"
-								title={{message.snippet}} appThemeItem>{{message.snippet}}</small>
+								[attr.title]="message.snippet | htmlEntitiyDecode" appThemeItem>{{message.snippet | htmlEntitiyDecode}}</small>
 						</div>
 					</div>
 					<div class="collapse" id="gmailCollapse{{unreadThread.id}}">
