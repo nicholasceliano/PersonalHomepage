@@ -5,7 +5,8 @@
 			<div class="d-flex flex-row">
 				<p class="h5 m-0 text-nowrap text-truncate pr-1 text-light w-100" data-toggle="tooltip" title="{{videoTitle}}">{{videoTitle}}
 				</p>
-				<span class="octicon pointer" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
+				<span class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
+				<span class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
 				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Stream"></span>
 			</div>
 		</div>
@@ -49,5 +50,11 @@
 		<div class="spinner-border text-light" role="status">
 			<span class="sr-only">Loading...</span>
 		</div>
+	</div>
+</div>
+<div id="youtubeOverlay" class="position-absolute">
+	<div class="d-flex flex-row mr-2">
+		<div class="w-100"></div>
+		<span class="octicon pointer" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
 	</div>
 </div>

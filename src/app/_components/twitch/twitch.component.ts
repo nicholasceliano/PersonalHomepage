@@ -112,7 +112,7 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 		}
 	}
 
-	protected closeFullscreenVideo() {
+	protected reduceVideoSize() {
 		$(this.twitchChatOverlay).hide();
 		$(this.twitchPanelTabs).show();
 
@@ -120,7 +120,7 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 		this.twitchPlayer.setHeight(this.videoPlayerHeight);
 	}
 
-	protected openFullscreenVideo() {
+	protected expandVideoSize() {
 		$(this.twitchChatOverlay).show();
 		$(this.twitchPanelTabs).hide();
 

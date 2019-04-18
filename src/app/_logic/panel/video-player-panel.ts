@@ -16,25 +16,40 @@ export abstract class VideoPlayerPanel extends RefreshPanel {
 
 	public abstract watchVideo(videData: any);
 	public abstract closeVideo();
-	protected abstract openFullscreenVideo();
-	protected abstract closeFullscreenVideo();
+	protected abstract expandVideoSize();
+	protected abstract reduceVideoSize();
 
 	public fullscreenVideo() {
 		document.onfullscreenchange = () => {
 			if (!(window as any).document.fullscreenElement) {
-				$('body').removeClass('overflow-hidden');
-				$(this.videoPlayerElemetId).removeClass('fixed-top');
-				this.closeFullscreenVideo();
+				this.reduceVideo();
 			}
 		};
 
 		document.documentElement.requestFullscreen().then (() => {
-			$('body').addClass('overflow-hidden');
-			$(this.videoPlayerElemetId).addClass('fixed-top');
-			this.openFullscreenVideo();
-
+			this.expandVideo();
 			window.scrollTo(0, 0);
 		});
+	}
+
+	public widescreenVideo() {
+		this.expandVideo();
+	}
+
+	public reduceVideo() {
+		if ((window as any).document.fullscreenElement) {
+			document.exitFullscreen();
+		} else {
+			$('body').removeClass('overflow-hidden');
+			$(this.videoPlayerElemetId).removeClass('fixed-top');
+			this.reduceVideoSize();
+		}
+	}
+
+	protected expandVideo() {
+		$('body').addClass('overflow-hidden');
+		$(this.videoPlayerElemetId).addClass('fixed-top');
+		this.expandVideoSize();
 	}
 
 	protected loadVideoPlayerScript(apiEndpoint: string) {

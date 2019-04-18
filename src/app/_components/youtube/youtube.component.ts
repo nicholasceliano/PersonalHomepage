@@ -20,6 +20,7 @@ export class YoutubeComponent extends VideoPlayerPanel implements OnInit {
 		super('#youtube-player', 400, 225, environment.defaultRefreshTime);
 	}
 
+	private youtubeOverlay = '#youtubeOverlay';
 	public isPanelLoaded = false;
 	public selectedVideo: string;
 	public subscriptionVideos: YoutubePlaylistItem[];
@@ -47,11 +48,15 @@ export class YoutubeComponent extends VideoPlayerPanel implements OnInit {
 		this.getSubscriptionVideos();
 	}
 
-	protected closeFullscreenVideo() {
+	protected reduceVideoSize() {
+		$(this.youtubeOverlay).hide();
+
 		this.youtubePlayer.setSize(this.videoPlayerWidth, this.videoPlayerHeight);
 	}
 
-	protected openFullscreenVideo() {
+	protected expandVideoSize() {
+		$(this.youtubeOverlay).show();
+
 		this.youtubePlayer.setSize($(window).width(), $(window).height());
 	}
 
