@@ -24,4 +24,8 @@ export class GoogleService extends OAuthService {
 	GetOAuth2SignInUrl(): Observable<OAuthUrlResponse> {
 		return this.http.get<OAuthUrlResponse>(`${environment.oauthEndpoint}/google/getUserOAuth2Url`);
 	}
+
+	isValidAuthUID(googleUserAuthUID: string): boolean {
+		return (googleUserAuthUID && googleUserAuthUID.length === 36);
+	}
 }

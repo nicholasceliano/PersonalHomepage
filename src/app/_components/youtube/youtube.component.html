@@ -1,5 +1,5 @@
 <div class="youtube-panel-width">
-	<div>
+	<div [hidden]="!isPanelLoaded">
 		<div id="youtube-player"></div>
 		<div class="m-1" [hidden]="!selectedVideo"> 
 			<div class="d-flex flex-row">
@@ -10,39 +10,41 @@
 				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Video"></span>
 			</div>
 		</div>
-		<div [hidden]="!isPanelLoaded || selectedVideo">
+		<div *ngIf="panelAuthenticated" [hidden]="selectedVideo">
 			<p class="h5 mb-2 text-center text-light">Select a video to start watching</p>
 		</div>
-	</div>
-	<div [hidden]="!isPanelLoaded">
-		<div class="row">
-			<div class="col-12">
-				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" id="list-subscriptions-list" data-toggle="list"
-							href="#list-subscriptions" role="tab" aria-controls="subscriptions">Subscriptions</a>
-					</li>
-				</ul>
+		<button *ngIf="!panelAuthenticated" type="button" class="btn btn-success btn-block"
+				(click)="authenticate()">Authenticate</button>
+		<div *ngIf="panelAuthenticated">
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link active" id="list-subscriptions-list" data-toggle="list"
+								href="#list-subscriptions" role="tab" aria-controls="subscriptions">Subscriptions</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div class="tab-content overflow-auto" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="list-subscriptions" role="tabpanel"
-				aria-labelledby="list-subscriptions-list">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item pointer p-0" [ngClass]="{'selected': selectedVideo == subscriptionVideo.videoId}"
-						*ngFor="let subscriptionVideo of subscriptionVideos"
-						(click)=watchVideo(subscriptionVideo)>
-						<div class="d-inline-block float-left m-1" title="{{subscriptionVideo.videoDesc}}">
-							<img src={{subscriptionVideo.thumbnail.url}} width="80" height="60">
-						</div>
-						<div class="d-flex-fill m-1">
-							<p class="m-0 text-truncate font-weight-bold text-light"
-								title="{{subscriptionVideo.videoTitle}}">{{subscriptionVideo.videoTitle}}</p>
-							<p class="m-0 text-truncate sub-header">{{subscriptionVideo.channelTitle}}</p>
-							<p class="m-0 text-truncate sub-header">{{subscriptionVideo.videoDate | date:'medium'}}</p>
-						</div>
-					</li>
-				</ul>
+			<div class="tab-content overflow-auto" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="list-subscriptions" role="tabpanel"
+					aria-labelledby="list-subscriptions-list">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item pointer p-0" [ngClass]="{'selected': selectedVideo == subscriptionVideo.videoId}"
+							*ngFor="let subscriptionVideo of subscriptionVideos"
+							(click)=watchVideo(subscriptionVideo)>
+							<div class="d-inline-block float-left m-1" title="{{subscriptionVideo.videoDesc}}">
+								<img src={{subscriptionVideo.thumbnail.url}} width="80" height="60">
+							</div>
+							<div class="d-flex-fill m-1">
+								<p class="m-0 text-truncate font-weight-bold text-light"
+									title="{{subscriptionVideo.videoTitle}}">{{subscriptionVideo.videoTitle}}</p>
+								<p class="m-0 text-truncate sub-header">{{subscriptionVideo.channelTitle}}</p>
+								<p class="m-0 text-truncate sub-header">{{subscriptionVideo.videoDate | date:'medium'}}</p>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

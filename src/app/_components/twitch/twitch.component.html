@@ -11,12 +11,12 @@
 			</div>
 			<small class="text-nowrap text-truncate d-inline">{{streamChannel}} - {{streamGame}}</small>
 		</div>
-		<div *ngIf="twitchAuthenticated" [hidden]="channelSelected">
+		<div *ngIf="panelAuthenticated" [hidden]="channelSelected">
 			<p class="h5 mb-2 text-center">Select a channel to start watching</p>
 		</div>
-		<button *ngIf="!twitchAuthenticated" type="button" class="btn btn-success btn-block"
+		<button *ngIf="!panelAuthenticated" type="button" class="btn btn-success btn-block"
 			(click)="authenticate()">Authenticate</button>
-		<div id="twitchTabs" *ngIf="twitchAuthenticated">
+		<div id="twitchTabs" *ngIf="panelAuthenticated">
 			<div class="row">
 				<div class="col-12">
 					<ul class="nav nav-tabs border-0">

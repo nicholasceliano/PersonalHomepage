@@ -16,9 +16,9 @@ export abstract class VideoPlayerPanel extends RefreshPanel {
 	}
 
 	public isFullscreen = false;
+	protected isVideoExpanded = false;
 	public abstract watchVideo(videData: any);
 	public abstract closeVideo();
-	protected isVideoExpanded = false;
 	protected abstract expandVideoSize();
 	protected abstract reduceVideoSize();
 

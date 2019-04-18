@@ -1,8 +1,8 @@
 <div class="gmail-panel-width">
 	<div [hidden]="!isPanelLoaded">
-		<button class="btn btn-success btn-block" *ngIf=!googleAuthenicated
+		<button class="btn btn-success btn-block" *ngIf=!panelAuthenticated
 			(click)="authenticate()">Authenticate</button>
-		<h5 *ngIf="googleAuthenicated">Unread Emails ({{unreadThreads ? unreadThreads.length : 0}})</h5>
+		<h5 *ngIf="panelAuthenticated">Unread Emails ({{unreadThreads ? unreadThreads.length : 0}})</h5>
 		<div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item p-0 bg-transparent" *ngFor="let unreadThread of unreadThreads">

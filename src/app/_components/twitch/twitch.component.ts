@@ -10,8 +10,8 @@ import { TwitchChatMessageText } from '../../_models/twitch-chat-message-text';
 import { TwitchUser } from '../../_models/twitch-user';
 import { AlertsService } from '../../_services/alerts.service';
 import { RandomChangingArrayAlertCountStrategy } from '../../_logic/AlertCountStrategy/random-changing-array';
-import { VideoPlayerPanel } from '../../_logic/panel/video-player-panel';
-declare var $: any;
+import { OAuthVideoPlayerPanel } from 'src/app/_logic/panel/oauth-video-player-panel';
+import $ from 'jquery';
 
 @Component({
 	selector: 'app-twitch',
@@ -19,7 +19,7 @@ declare var $: any;
 	styleUrls: ['./twitch.component.css']
 })
 
-export class TwitchComponent extends VideoPlayerPanel implements OnInit {
+export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 
 	constructor(
 		private twitchService: TwitchService,
@@ -34,8 +34,6 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 	private twitchUserInfo: TwitchUser;
 	public chatMsgs: TwitchChatMessage[] = [];
 	public isPanelLoaded = false;
-	public signInUrl: string;
-	public twitchAuthenticated = false;
 	public followedStreams: TwitchStream[];
 	public channelSelected = false;
 	public showChatTab = false;
@@ -46,10 +44,6 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 
 	ngOnInit() {
 		this.loadVideoPlayerScript(environment.twitchPlayerAPIEndpoint);
-	}
-
-	authenticate() {
-		window.location.href = this.signInUrl;
 	}
 
 	watchVideo(followedStream: TwitchStream) {
@@ -96,7 +90,7 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 
 		if (twitchUserAuthUID && twitchUserAuthUID.length === 36) {
 			this.twitchService.GetFollowedStreams().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
-				this.twitchAuthenticated = true;
+				this.panelAuthenticated = true;
 
 				this.followedStreams = this.alertsService.checkAlerts('Twitch Stream', new RandomChangingArrayAlertCountStrategy('channelName'),
 																this.followedStreams, res, this.isPanelLoaded);
@@ -128,8 +122,8 @@ export class TwitchComponent extends VideoPlayerPanel implements OnInit {
 		this.twitchPlayer.setHeight($(window).height());
 	}
 
-	private failedAuthentication() {
-		this.twitchAuthenticated = false;
+	protected failedAuthentication() {
+		super.failedAuthentication();
 		this.followedStreams = [];
 		this.twitchService.GetOAuth2SignInUrl().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res: OAuthUrlResponse) => {
 			this.signInUrl = res.url;
