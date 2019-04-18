@@ -7,7 +7,7 @@
 				</p>
 				<span class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
 				<span class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
-				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Stream"></span>
+				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Video"></span>
 			</div>
 		</div>
 		<div [hidden]="!isPanelLoaded || selectedVideo">
@@ -55,6 +55,8 @@
 <div id="youtubeOverlay" class="position-absolute">
 	<div class="d-flex flex-row mr-2">
 		<div class="w-100"></div>
-		<span class="octicon pointer" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
+		<span *ngIf="isFullscreen" class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
+		<span *ngIf="!isFullscreen" class="octicon pointer" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
+		<span class="octicon pointer pl-1" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
 	</div>
 </div>

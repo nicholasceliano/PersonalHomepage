@@ -11,11 +11,11 @@
 }
 
 #twitchChatVideoOverlay {
-	height:calc(35%);
+	height:calc(33%);
 	width:calc(20%);
 	display:none;
 	left:calc(80%);
-	top:calc(50% - 200px);
+	top:calc(33%);
 	z-index:1040;
 }
 

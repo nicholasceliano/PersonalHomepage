@@ -45,10 +45,13 @@
 	right:0px;
 	top:calc(50%);
 	z-index:1040;
+}
+
+#youtubeOverlay span {
 	opacity: 0.25;
 }
 
-#youtubeOverlay:hover {
+#youtubeOverlay span:hover {
 	opacity: 1;
 }
 
