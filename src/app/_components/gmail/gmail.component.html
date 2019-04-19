@@ -7,19 +7,27 @@
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item p-0 bg-transparent" *ngFor="let unreadThread of unreadThreads">
 					<div *ngFor="let message of unreadThread.messages; first as isFirst">
-						<div class="bold bg-white p-1"
+						<div class="bold bg-white d-flex flex-row"
 							[ngClass]="{'pointer': unreadThread.messages.length > 1}" *ngIf="isFirst"
-							data-toggle="collapse"
-							[attr.data-target]="unreadThread.messages.length > 1 ? '#gmailCollapse' + unreadThread.id : null" appThemeItem>
-							<p class="m-0 d-block text-truncate w-100 font-weight-bold" title={{message.subject}} appThemeItem>
-								<span class="multi-thread-email-count align-middle"
-									*ngIf="unreadThread.messages.length > 1">({{unreadThread.messages.length}})</span>
-								{{message.subject}}
-							</p>
-							<p class="m-0 sub-header d-block text-truncate w-100">{{message.from}}</p>
-							<p class="m-0 sub-header d-block text-truncate w-100">{{message.date | date:'medium'}}</p>
-							<small class="d-block text-truncate w-100"
-								[attr.title]="message.snippet | htmlEntitiyDecode" appThemeItem>{{message.snippet | htmlEntitiyDecode}}</small>
+							(mouseenter) ="mouseEnterThread($event)" (mouseleave)="mouseLeaveThread($event)" appThemeItem>
+							<div class="text-truncate p-1" data-toggle="collapse" 
+								[attr.data-target]="unreadThread.messages.length > 1 ? '#gmailCollapse' + unreadThread.id : null">
+								<p class="m-0 d-block text-truncate w-100 font-weight-bold" title={{message.subject}} appThemeItem>
+									<span class="multi-thread-email-count align-middle"
+										*ngIf="unreadThread.messages.length > 1">({{unreadThread.messages.length}})</span>
+									{{message.subject}}
+								</p>
+								<p class="m-0 sub-header d-block text-truncate w-100">{{message.from}}</p>
+								<p class="m-0 sub-header d-block text-truncate w-100">{{message.date | date:'medium'}}</p>
+								<small class="d-block text-truncate w-100"
+									[attr.title]="message.snippet | htmlEntitiyDecode" appThemeItem>{{message.snippet | htmlEntitiyDecode}}</small>
+							</div>
+							<div class="threadRead bg-warning pointer" (click)="readThreadDisabled ? '' : readThread(unreadThread.id)">
+								<div *ngIf="readThreadDisabled" class="spinner-border text-dark ml-2 spinner-border-sm" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+								<span *ngIf="!readThreadDisabled" class="octicon pointer pl-1 w-100 mt-4" appOcticon="mail-read" color="#343a40" width="25px" title="Mark as Read"></span>
+							</div>
 						</div>
 					</div>
 					<div class="collapse" id="gmailCollapse{{unreadThread.id}}">

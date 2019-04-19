@@ -2,7 +2,7 @@ import { VideoPlayerPanel } from './video-player-panel';
 import { IOAuthPanel } from 'src/app/_interfaces/ioauth-panel';
 
 export abstract class OAuthVideoPlayerPanel extends VideoPlayerPanel implements IOAuthPanel {
-	
+
 	constructor(elementId: string, width: number, height: number, refreshTime: number) {
 		super(elementId, width, height, refreshTime);
 	}

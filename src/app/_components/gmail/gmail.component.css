@@ -10,3 +10,20 @@
 .multi-thread-email-count {
     font-size: 10px;
 }
+
+.threadRead {
+    -webkit-transition: width .5s ease;
+    -moz-transition: width .5s ease;
+    -o-transition: width .5s ease;
+    transition: width .5s ease;
+    display: inline-block;
+    overflow: hidden;
+    width: 0px;
+}
+.threadRead.visible {
+    width: 150px;
+}
+
+div.spinner-border {
+	margin-top:33px
+}

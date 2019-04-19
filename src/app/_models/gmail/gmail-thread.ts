@@ -1,4 +1,4 @@
-import { GmailEmail } from '../_models/gmail-email';
+import { GmailEmail } from './gmail-email';
 
 export class GmailThread {
 	id: string;
