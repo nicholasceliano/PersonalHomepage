@@ -81,7 +81,8 @@
 </div>
 
 <div id="twitchChatVideoOverlay" class="position-absolute">
-	<div class="overflow-x-hidden pb-2 pt-2">
+	<div class="overflow-x-hidden pb-2 pt-2" [style.background]="color" [(cpToggle)]="cpToggle"
+			[(colorPicker)]="color" [cpPosition]="'left'" [cpDisableInput]="'true'">
 		<p *ngFor="let msg of chatMsgs" class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}: 
 			<small class="twitch-chat-message text-light">
 				<ng-container *ngFor="let m of msg.msg">
@@ -90,10 +91,12 @@
 			</small>
 		</p>
 	</div>
-	<div class="d-flex flex-row mr-2">
+	<div class="d-flex flex-row mr-2" #ignoredButton>
 		<div class="w-100"></div>
-		<span *ngIf="isFullscreen" class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
-		<span *ngIf="!isFullscreen" class="octicon pointer" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
+		<span *ngIf="!cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="cpToggle=true" title="Background Color"></span>
+		<span *ngIf="cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="cpToggle=false" title="Background Color"></span>
+		<span *ngIf="isFullscreen" class="octicon pointer pl-1" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
+		<span *ngIf="!isFullscreen" class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
 		<span class="octicon pointer pl-1" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
 	</div>
 </div>

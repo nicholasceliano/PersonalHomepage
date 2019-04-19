@@ -28,6 +28,7 @@ import { SettingsDialogComponent } from './_components/structure/settings-dialog
 import { LowerCaseUrlSerializer } from './_logic/utility/lower-case-url-serializer';
 import { ThemeItemDirective } from './_directives/theme-item.directive';
 import { HtmlEntitiyDecodePipe } from './_pipes/html-entitiy-decode.pipe';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
 			{ enableTracing: false } // <-- debugging purposes only
 		),
 		MatDialogModule,
-		NoopAnimationsModule
+		NoopAnimationsModule,
+		ColorPickerModule
 	],
 	providers: [
 		{
