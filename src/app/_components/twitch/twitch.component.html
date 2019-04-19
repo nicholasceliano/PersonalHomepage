@@ -81,8 +81,8 @@
 </div>
 
 <div id="twitchChatVideoOverlay" class="position-absolute">
-	<div class="overflow-x-hidden pb-2 pt-2" [style.background]="color" [(cpToggle)]="cpToggle"
-			[(colorPicker)]="color" [cpPosition]="'left'" [cpDisableInput]="'true'">
+	<div class="overflow-x-hidden pb-2 pt-2" [style.background]="cpColor" [(cpToggle)]="cpToggle"
+			[(colorPicker)]="cpColor" [cpColorMode]="'grayscale'" [cpPosition]="'left'" [cpPositionOffset]="'100%'" [cpDisableInput]="'true'">
 		<p *ngFor="let msg of chatMsgs" class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}: 
 			<small class="twitch-chat-message text-light">
 				<ng-container *ngFor="let m of msg.msg">
