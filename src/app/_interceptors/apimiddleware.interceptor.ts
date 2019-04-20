@@ -13,7 +13,7 @@ export class APIMiddlewareInterceptor implements HttpInterceptor {
 				if (event instanceof HttpResponse) {
 					if (this.isAPIResponse(event.body)) {
 						if (event.body.err) {
-							console.log(event.body.msg);
+							throw ({ url: req.url, status: event.status, message: event.body.msg } as HttpErrorResponse);
 						}
 						const apiResponse = event.clone({ body: event.body.data });
 						return apiResponse;
@@ -21,7 +21,7 @@ export class APIMiddlewareInterceptor implements HttpInterceptor {
 					return event;
 				}
 			}),
-			retry(1),
+			// retry(1),
 			catchError((error: HttpErrorResponse) => {
 				let errorMessage = '';
 				if (error.error instanceof ErrorEvent) {
@@ -29,7 +29,7 @@ export class APIMiddlewareInterceptor implements HttpInterceptor {
 					errorMessage = `Error: ${error.error.message}`;
 				} else {
 					// server-side error
-					errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+					errorMessage = `${error.url} - ${error.status}\nMessage: ${error.message}`;
 				}
 				return throwError(errorMessage);
 			}));

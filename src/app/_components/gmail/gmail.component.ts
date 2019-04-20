@@ -21,8 +21,8 @@ export class GmailComponent extends OAuthPanel {
 		private gmailService: GmailService,
 		private googleService: GoogleService,
 		private alertsService: AlertsService) {
-			super(environment.mailPanelRefreshTime);
-		}
+		super(environment.mailPanelRefreshTime);
+	}
 
 	public isPanelLoaded = false;
 	public unreadThreads: GmailThread[];
@@ -33,13 +33,12 @@ export class GmailComponent extends OAuthPanel {
 	public readThread(threadId: string) {
 		this.readThreadDisabled = true;
 
-		this.gmailService.MarkThreadAsRead(threadId).subscribe((res) => {
+		this.gmailService.MarkThreadAsRead(threadId).pipe(finalize(() => this.readThreadDisabled = false)).subscribe((res) => {
 			if (res.id === threadId) {
 				this.unreadThreads = this.unreadThreads.filter((thread) => {
 					return (thread.id !== res.id);
 				});
 			}
-			this.readThreadDisabled = false;
 		});
 	}
 
@@ -58,7 +57,7 @@ export class GmailComponent extends OAuthPanel {
 			this.gmailService.GetUnreadThreads().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
 				this.panelAuthenticated = true;
 				this.unreadThreads = this.alertsService.checkAlerts('Gmail Email', new GrowingArrayAlertCountStrategy(),
-																	this.unreadThreads, res, this.isPanelLoaded);
+					this.unreadThreads, res, this.isPanelLoaded);
 			});
 		} else {
 			this.failedAuthentication();
