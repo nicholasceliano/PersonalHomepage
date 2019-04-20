@@ -17,11 +17,19 @@ export class PanelComponent {
 
 	constructor() { }
 
+	private rotateIconClass = 'rotateIcon';
+	private refreshing = false;
+
 	refreshPanel() {
-		this.panel.refreshPanel();
-		$('[panelname="' + this.panelName + '"]').find('.refresh-icon').addClass('rotateIcon')
-				.one('webkitAnimationEnd mozAnimationEnd oAnimationEnd msAnimationEnd animationend', () => {
-			$(this).removeClass('rotateIcon');
+		if (!this.refreshing) {
+			this.refreshing = true;
+			this.panel.refreshPanel();
+		}
+		
+		const refreshIcon = $('[panelname="' + this.panelName + '"]').find('.refresh-icon');
+		refreshIcon.addClass(this.rotateIconClass).one('animationend', () => {
+			refreshIcon.removeClass(this.rotateIconClass);
+			this.refreshing = false;
 		});
 	}
 }
