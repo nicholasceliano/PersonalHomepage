@@ -10,7 +10,7 @@ span.dark-theme,
 .dark-theme pre,
 h4.dark-theme,
 h5.dark-theme {
-	color:#fff;
+	color:#fff !important;
 }
 
 .dark-theme.border {

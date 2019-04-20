@@ -4,11 +4,11 @@
 	</div>
 	<div *ngIf="locationServiceEnabled === true">
 		<div class="p-1 header-panel text-center" appThemeItem>
-			<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"
-				title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}" appThemeItem>
-				{{locationData.city ? locationData.city : locationData.county}}, {{locationData.stateAbbr}}</p>
-			<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
-			<div *ngIf="weatherDataLoaded">
+			<div *ngIf="isPanelLoaded">
+				<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"
+					title="{{locationData.city ? locationData.city : locationData.county}}, {{locationData.state}}" appThemeItem>
+					{{locationData.city ? locationData.city : locationData.county}}, {{locationData.stateAbbr}}</p>
+				<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
 				<div title="{{weatherData.desc}}">
 					<img class="d-inline-block align-top"
 						src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
@@ -27,7 +27,7 @@
 				<p *ngIf="weatherData.forecast[0].snow3h > 0" class="m-0 sub-header d-block text-truncate w-100">Snow
 					3h: {{weatherData.forecast[0].snow3h}}mm</p>
 			</div>
-			<app-panel-loading [isPanelLoaded]="weatherDataLoaded" [paddingValue]="4"></app-panel-loading>
+			<app-panel-loading [isPanelLoaded]="isPanelLoaded" [paddingValue]="4"></app-panel-loading>
 		</div>
 		<div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto scroll-light">
 			<ul class="list-group list-group-flush">

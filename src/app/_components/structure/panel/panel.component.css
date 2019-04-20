@@ -9,3 +9,21 @@
 .youtube-panel {
     background-color: #1c1c1c;
 }
+
+.refresh-icon {
+	right: 0;
+	opacity: .15;
+	background-color: transparent !important;
+}
+
+.refresh-icon:hover {
+	opacity: 1;
+}
+
+.rotateIcon {
+	animation:spin 1s ease-in-out;
+ }
+
+@keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } 
+}

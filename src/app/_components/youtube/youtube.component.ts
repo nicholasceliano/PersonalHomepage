@@ -48,6 +48,20 @@ export class YoutubeComponent extends OAuthVideoPlayerPanel implements OnInit {
 		this.youtubePlayer.stopVideo();
 	}
 
+	refreshPanel(): void {
+		const googleUserAuthUID = this.googleService.GetUserAuthUID();
+
+		if (this.googleService.isValidAuthUID(googleUserAuthUID)) {
+			this.youtubeService.getSubscriptionVideos().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
+				this.panelAuthenticated = true;
+				this.subscriptionVideos = this.alertsService.checkAlerts('Youtube Video', new FullOrderedArrayAlertCountStrategy(),
+					this.subscriptionVideos, res, this.isPanelLoaded);
+			});
+		} else {
+			this.failedAuthentication();
+		}
+	}
+
 	protected reduceVideoSize() {
 		$(this.youtubeOverlay).hide();
 
@@ -58,21 +72,6 @@ export class YoutubeComponent extends OAuthVideoPlayerPanel implements OnInit {
 		$(this.youtubeOverlay).show();
 
 		this.youtubePlayer.setSize($(window).width(), $(window).height());
-	}
-
-	protected refreshPanel(): void {
-		const googleUserAuthUID = this.googleService.GetUserAuthUID();
-
-		if (this.googleService.isValidAuthUID(googleUserAuthUID)) {
-			this.youtubeService.getSubscriptionVideos().subscribe((res) => {
-				this.panelAuthenticated = true;
-				this.subscriptionVideos = this.alertsService.checkAlerts('Youtube Video', new FullOrderedArrayAlertCountStrategy(),
-					this.subscriptionVideos, res, this.isPanelLoaded);
-				this.isPanelLoaded = true;
-			});
-		} else {
-			this.failedAuthentication();
-		}
 	}
 
 	protected failedAuthentication() {

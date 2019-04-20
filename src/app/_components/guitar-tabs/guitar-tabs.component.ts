@@ -6,6 +6,7 @@ import { FileDialogComponent } from '../structure/file-dialog/file-dialog.compon
 import { environment } from 'src/environments/environment';
 import { RefreshPanel } from '../../_logic/panel/refresh-panel';
 import { ObjectHelperService } from '../../_services/utility/object-helper.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-guitar-tabs',
@@ -41,12 +42,12 @@ export class GuitarTabsComponent extends RefreshPanel {
 		});
 	}
 
-	protected refreshPanel() {
+	refreshPanel() {
 		this.getGuitarTabs();
 	}
 
 	private getGuitarTabs() {
-		this.gts.getGuitarTabs().subscribe((res) => {
+		this.gts.getGuitarTabs().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
 			if (!ObjectHelperService.objectsEqual(this.guitarTabsFolders, res)) {
 				this.guitarTabsFolders = res;
 			}

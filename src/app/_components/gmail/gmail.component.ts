@@ -24,7 +24,6 @@ export class GmailComponent extends OAuthPanel {
 		super(environment.mailPanelRefreshTime);
 	}
 
-	public isPanelLoaded = false;
 	public unreadThreads: GmailThread[];
 	public readThreadDisabled = false;
 	private threadReadClass = '.threadRead';
@@ -50,7 +49,7 @@ export class GmailComponent extends OAuthPanel {
 		$(event.target).children(this.threadReadClass).removeClass(this.threadReadVisibleClass);
 	}
 
-	protected refreshPanel() {
+	public refreshPanel() {
 		const googleUserAuthUID = this.googleService.GetUserAuthUID();
 
 		if (this.googleService.isValidAuthUID(googleUserAuthUID)) {

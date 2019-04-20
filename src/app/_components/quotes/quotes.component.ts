@@ -4,6 +4,7 @@ import { StockQuoteData } from '../../_models/stock-quote-data';
 import { environment } from 'src/environments/environment';
 import { RefreshPanel } from '../../_logic/panel/refresh-panel';
 import { ObjectHelperService } from '../../_services/utility/object-helper.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-quotes',
@@ -13,7 +14,6 @@ import { ObjectHelperService } from '../../_services/utility/object-helper.servi
 export class QuotesComponent extends RefreshPanel {
 	@ViewChild('collapseDiv') collapseDiv: ElementRef;
 
-	public isPanelLoaded = false;
 	public stockQuoteData: StockQuoteData[];
 	public currentStockVal: number;
 	public pastStockVal: number;
@@ -29,12 +29,12 @@ export class QuotesComponent extends RefreshPanel {
 		this.collapsed = this.collapseDiv.nativeElement.classList.contains('show') ? false : true;
 	}
 
-	protected refreshPanel() {
+	refreshPanel() {
 		this.GetStockQuoteData();
 	}
 
 	private GetStockQuoteData() {
-		this.quotes.GetStockQuoteData().subscribe((res) => {
+		this.quotes.GetStockQuoteData().pipe(finalize(() => this.isPanelLoaded = true)).subscribe((res) => {
 			if (!ObjectHelperService.objectsEqual(this.stockQuoteData, res)) {
 				this.stockQuoteData = res;
 			}
@@ -47,8 +47,6 @@ export class QuotesComponent extends RefreshPanel {
 					return new Date(e.currPriceDate);
 				})));
 			}
-
-			this.isPanelLoaded = true;
 		});
 	}
 

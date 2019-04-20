@@ -6,7 +6,8 @@ export abstract class RefreshPanel {
 		this.setRefreshTime(refreshTime);
 	}
 
-	protected abstract refreshPanel(): void;
+	public isPanelLoaded = false;
+	public abstract refreshPanel(): void;
 
 	protected setRefreshTime(refreshTime) {
 		timer(0, refreshTime).subscribe(() => this.refreshPanel());

@@ -33,7 +33,6 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 	private twitchPlayer;
 	private twitchUserInfo: TwitchUser;
 	public chatMsgs: TwitchChatMessage[] = [];
-	public isPanelLoaded = false;
 	public followedStreams: TwitchStream[];
 	public channelSelected = false;
 	public showChatTab = false;
@@ -87,7 +86,7 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 		this.chatMsgs = [];
 	}
 
-	protected refreshPanel() {
+	refreshPanel() {
 		const twitchUserAuthUID = this.twitchService.GetUserAuthUID();
 
 		if (twitchUserAuthUID && twitchUserAuthUID.length === 36) {
