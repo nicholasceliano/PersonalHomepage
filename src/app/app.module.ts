@@ -29,6 +29,9 @@ import { LowerCaseUrlSerializer } from './_logic/utility/lower-case-url-serializ
 import { ThemeItemDirective } from './_directives/theme-item.directive';
 import { HtmlEntitiyDecodePipe } from './_pipes/html-entitiy-decode.pipe';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { VideoOptionsOverlayComponent } from './_components/structure/video-options-overlay/video-options-overlay.component';
+import { PanelLoadingComponent } from './_components/structure/panel-loading/panel-loading.component';
+import { VideoOptionsComponent } from './_components/structure/video-options/video-options.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -57,7 +60,10 @@ const appRoutes: Routes = [
 		FileDialogComponent,
 		SettingsDialogComponent,
 		ThemeItemDirective,
-		HtmlEntitiyDecodePipe
+		HtmlEntitiyDecodePipe,
+		VideoOptionsOverlayComponent,
+		PanelLoadingComponent,
+		VideoOptionsComponent
 	],
 	imports: [
 		BrowserModule,

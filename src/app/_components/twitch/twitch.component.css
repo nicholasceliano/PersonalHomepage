@@ -26,14 +26,6 @@
 	flex-direction:column-reverse;
 }
 
-#twitchChatVideoOverlay span {
-	opacity: 0.25;
-}
-
-#twitchChatVideoOverlay span:hover {
-	opacity: 1;
-}
-
 .twitch-chat-username, .twitch-chat-message {
 	font-family: 'Comic Sans MS', sans-serif;
 	font-size: 12px;

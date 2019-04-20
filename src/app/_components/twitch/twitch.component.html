@@ -1,14 +1,8 @@
 <div class="twitch-panel-width">
 	<div [hidden]="!isPanelLoaded">
 		<div id="twitch-player"></div>
-		<div class="m-1" [hidden]="!channelSelected"> 
-			<div class="d-flex flex-row">
-				<p class="h5 m-0 text-nowrap text-truncate pr-1 w-100" data-toggle="tooltip" title="{{streamTitle}}">{{streamTitle}}
-				</p>
-				<span class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
-				<span class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
-				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Stream"></span>
-			</div>
+		<div class="m-1" [hidden]="!channelSelected">
+			<app-video-options [videoTitle]="streamTitle" (widescreen)="widescreenVideo()" (fullscreen)="fullscreenVideo()" (closescreen)="closeVideo()"></app-video-options>
 			<small class="text-nowrap text-truncate d-inline">{{streamChannel}} - {{streamGame}}</small>
 		</div>
 		<div *ngIf="panelAuthenticated" [hidden]="channelSelected">
@@ -73,11 +67,7 @@
 			</div>
 		</div>
 	</div>
-	<div [hidden]="isPanelLoaded" class="text-center p-5">
-		<div class="spinner-border text-light" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
+	<app-panel-loading [isPanelLoaded]="isPanelLoaded"></app-panel-loading>
 </div>
 
 <div id="twitchChatVideoOverlay" class="position-absolute">
@@ -93,10 +83,6 @@
 	</div>
 	<div class="d-flex flex-row mr-2">
 		<div class="w-100"></div>
-		<span *ngIf="!cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="cpToggle=true" title="Background Color"></span>
-		<span *ngIf="cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="cpToggle=false" title="Background Color"></span>
-		<span *ngIf="isFullscreen" class="octicon pointer pl-1" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
-		<span *ngIf="!isFullscreen" class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
-		<span class="octicon pointer pl-1" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
+		<app-video-options-overlay [(cpToggle)]="cpToggle" [isFullscreen]="isFullscreen" (widescreen)="widescreenVideo()" (fullscreen)="fullscreenVideo()" (normalscreen)="reduceVideo()"></app-video-options-overlay>
 	</div>
 </div>

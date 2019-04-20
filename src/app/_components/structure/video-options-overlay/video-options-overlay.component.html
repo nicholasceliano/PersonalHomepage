@@ -1,0 +1,7 @@
+<ng-container *ngIf="enableColorPicker">
+	<span *ngIf="!cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="toggleCp(true)" title="Background Color"></span>
+	<span *ngIf="cpToggle" class="octicon pointer" appOcticon="paintcan" color="#fff" width="14px" (click)="toggleCp(false)" title="Background Color"></span>
+</ng-container>
+<span *ngIf="isFullscreen" class="octicon pointer pl-1 pt-1" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
+<span *ngIf="!isFullscreen" class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
+<span class="octicon pointer pl-1" appOcticon="screen-normal" color="#fff" width="18px" (click)="normalscreenVideo();" title="Normal Screen"></span>

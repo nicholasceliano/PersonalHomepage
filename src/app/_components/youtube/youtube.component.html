@@ -2,13 +2,7 @@
 	<div [hidden]="!isPanelLoaded">
 		<div id="youtube-player"></div>
 		<div class="m-1" [hidden]="!selectedVideo"> 
-			<div class="d-flex flex-row">
-				<p class="h5 m-0 text-nowrap text-truncate pr-1 text-light w-100" data-toggle="tooltip" title="{{videoTitle}}">{{videoTitle}}
-				</p>
-				<span class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
-				<span class="octicon pointer pl-1" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
-				<span class="octicon pointer pl-1" appOcticon="x" color="#fff" width="18px" (click)="closeVideo();" title="Close Video"></span>
-			</div>
+			<app-video-options [videoTitle]="videoTitle" (widescreen)="widescreenVideo()" (fullscreen)="fullscreenVideo()" (closescreen)="closeVideo()"></app-video-options>
 		</div>
 		<div *ngIf="panelAuthenticated" [hidden]="selectedVideo">
 			<p class="h5 mb-2 text-center text-light">Select a video to start watching</p>
@@ -48,17 +42,8 @@
 			</div>
 		</div>
 	</div>
-	<div [hidden]="isPanelLoaded" class="youtube-panel-loading text-center">
-		<div class="spinner-border text-light" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
+	<app-panel-loading [isPanelLoaded]="isPanelLoaded"></app-panel-loading>
 </div>
-<div id="youtubeOverlay" class="position-absolute">
-	<div class="d-flex flex-row mr-2">
-		<div class="w-100"></div>
-		<span *ngIf="isFullscreen" class="octicon pointer" appOcticon="arrow-both" color="#fff" width="18px" (click)="widescreenVideo();" title="Widescreen"></span>
-		<span *ngIf="!isFullscreen" class="octicon pointer" appOcticon="screen-full" color="#fff" width="18px" (click)="fullscreenVideo();" title="Fullscreen"></span>
-		<span class="octicon pointer pl-1" appOcticon="screen-normal" color="#fff" width="18px" (click)="reduceVideo();" title="Normal Screen"></span>
-	</div>
+<div id="youtubeOverlay" class="position-absolute mr-2">
+	<app-video-options-overlay [isFullscreen]="isFullscreen" (widescreen)="widescreenVideo()" (fullscreen)="fullscreenVideo()" (normalscreen)="reduceVideo()"></app-video-options-overlay>
 </div>

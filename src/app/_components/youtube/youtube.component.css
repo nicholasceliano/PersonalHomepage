@@ -2,11 +2,6 @@
     width:400px;
 }
 
-.youtube-panel-loading {
-    height:247px;
-    padding:100px;
-}
-
 .tab-content {
     height: 206px;
     background-color: #333333;
@@ -45,14 +40,6 @@
 	right:0px;
 	top:calc(50%);
 	z-index:1040;
-}
-
-#youtubeOverlay span {
-	opacity: 0.25;
-}
-
-#youtubeOverlay span:hover {
-	opacity: 1;
 }
 
 ::-webkit-scrollbar-track {

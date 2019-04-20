@@ -44,9 +44,5 @@
 			</div>
 		</div>
 	</div>
-	<div [hidden]="isPanelLoaded" class="text-center p-2">
-		<div class="spinner-border text-dark" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
+	<app-panel-loading [isPanelLoaded]="isPanelLoaded" [paddingValue]="2"></app-panel-loading>
 </div>

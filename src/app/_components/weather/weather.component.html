@@ -27,11 +27,7 @@
 				<p *ngIf="weatherData.forecast[0].snow3h > 0" class="m-0 sub-header d-block text-truncate w-100">Snow
 					3h: {{weatherData.forecast[0].snow3h}}mm</p>
 			</div>
-			<div [hidden]="weatherDataLoaded" class="p-4 text-center">
-				<div class="spinner-border text-dark" role="status">
-					<span class="sr-only">Loading...</span>
-				</div>
-			</div>
+			<app-panel-loading [isPanelLoaded]="weatherDataLoaded" [paddingValue]="4"></app-panel-loading>
 		</div>
 		<div [hidden]="!weatherDataLoaded" class="sub-panel overflow-auto scroll-light">
 			<ul class="list-group list-group-flush">

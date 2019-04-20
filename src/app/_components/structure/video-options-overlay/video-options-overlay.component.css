@@ -1,0 +1,7 @@
+span {
+	opacity: 0.25;
+}
+
+span:hover {
+	opacity: 1;
+}
