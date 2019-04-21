@@ -31,7 +31,6 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 	private twitchChatOverlay = '#twitchChatVideoOverlay';
 	private twitchPanelTabs = '#twitchTabs';
 	private twitchPlayer;
-	private twitchUserInfo: TwitchUser;
 	public chatMsgs: TwitchChatMessage[] = [];
 	public followedStreams: TwitchStream[];
 	public channelSelected = false;
@@ -39,8 +38,7 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 	public streamTitle: string;
 	public streamChannel: string;
 	public streamGame: string;
-	public cpToggle = false;
-	public cpColor: string;
+	public cpColor = 'rgba(0,0,0,0)';
 	public emoteUrl = (id) => `http://static-cdn.jtvnw.net/emoticons/v1/${id}/1.0`;
 
 	ngOnInit() {
@@ -96,12 +94,6 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 				this.followedStreams = this.alertsService.checkAlerts('Twitch Stream', new RandomChangingArrayAlertCountStrategy('channelName'),
 																this.followedStreams, res, this.isPanelLoaded);
 			});
-
-			if (!this.twitchUserInfo) {
-				this.twitchService.GetTwitchUserInfo().subscribe((res) => {
-					this.twitchUserInfo = res;
-				});
-			}
 		} else {
 			this.failedAuthentication();
 		}
@@ -132,10 +124,14 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 	}
 
 	private loadChat(channelName: string) {
-		this.chatMsgs = [];
-		this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
-			text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
-		} as TwitchChatMessage);
-		this.twitchChatService.loadTwitchChat(channelName, this.twitchUserInfo.name, this.twitchUserInfo.token, this.setChatMessage.bind(this));
+		this.twitchService.GetTwitchUserInfo().subscribe((res) => {
+			const twitchUserInfo: TwitchUser = res;
+
+			this.chatMsgs = [];
+			this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
+				text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
+			} as TwitchChatMessage);
+			this.twitchChatService.loadTwitchChat(channelName, twitchUserInfo.name, twitchUserInfo.token, this.setChatMessage.bind(this));
+		});
 	}
 }

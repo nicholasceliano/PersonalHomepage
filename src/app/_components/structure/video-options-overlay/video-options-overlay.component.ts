@@ -7,8 +7,8 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class VideoOptionsOverlayComponent implements OnInit {
 	@Input() isFullscreen: boolean;
-	@Input() cpToggle?: boolean;
-	@Output() cpToggleChange?: EventEmitter<boolean> = new EventEmitter();
+	@Input() cpColor?: string;
+	@Output() cpColorChange?: EventEmitter<string> = new EventEmitter();
 	@Output() widescreen: EventEmitter<any> = new EventEmitter();
 	@Output() fullscreen: EventEmitter<any> = new EventEmitter();
 	@Output() normalscreen: EventEmitter<any> = new EventEmitter();
@@ -16,15 +16,16 @@ export class VideoOptionsOverlayComponent implements OnInit {
 	constructor() { }
 
 	public enableColorPicker = false;
+	public cpToggle = false;
 
 	ngOnInit() {
-		if (this.cpToggle !== undefined) {
+		if (this.cpColor !== undefined) {
 			this.enableColorPicker = true;
 		}
 	}
 
-	toggleCp(value: boolean) {
-		this.cpToggleChange.emit(value);
+	changeCpColor(value: string) {
+		this.cpColorChange.emit(value);
 	}
 
 	widescreenVideo() {

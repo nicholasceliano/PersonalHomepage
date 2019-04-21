@@ -1,0 +1,8 @@
+- bugs
+	- youtube alerts is messed up? -- worked one time, another time 50
+	- api folders are in nick/home and not in bin
+- enhancments		
+	- alert toasts
+	- database 
+		- storing tokens & state abbrev data
+		- most popular guitar tabs - top 10...track opens in database?
