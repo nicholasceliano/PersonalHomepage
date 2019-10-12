@@ -1,5 +1,4 @@
 export class TwitchStream {
-	public channelDisplayName: string;
 	public channelLogo: string;
 	public channelName: string;
 	public channelStatus: string;

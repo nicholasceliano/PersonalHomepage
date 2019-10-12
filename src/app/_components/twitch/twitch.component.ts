@@ -49,7 +49,7 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 		this.channelSelected = true;
 		this.showChatTab = true;
 		this.streamTitle = followedStream.channelStatus;
-		this.streamChannel = followedStream.channelDisplayName;
+		this.streamChannel = followedStream.channelName;
 		this.streamGame = followedStream.game;
 		$(this.videoPlayerElemetId).empty();
 		this.twitchPlayer = new (window as any).Twitch.Player('twitch-player', {
