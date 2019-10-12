@@ -11,7 +11,7 @@
 				<p *ngIf="!locationDataLoaded" class="m-0 d-block text-truncate w-100">...</p>
 				<div title="{{weatherData.desc}}">
 					<img class="d-inline-block align-top"
-						src="http://openweathermap.org/img/w/{{weatherData.icon}}.png">
+						src="https://openweathermap.org/img/w/{{weatherData.icon}}.png">
 					<div class="d-inline-block">
 						<p class="m-0 d-block" appThemeItem>{{weatherData.main}}</p>
 						<p class="m-0 d-block" appThemeItem>{{weatherData.tempCurr}}°</p>
@@ -37,7 +37,7 @@
 						class="m-0 d-block text-center">{{forecast.date | date: "EEE h"}}<small>{{forecast.date | date: "a"}}</small></small>
 					<div title="{{forecast.desc}}">
 						<img class="d-inline-block align-top"
-							src="http://openweathermap.org/img/w/{{forecast.icon}}.png">
+							src="https://openweathermap.org/img/w/{{forecast.icon}}.png">
 						<div class="d-inline-block">
 							<p class="m-0 sub-header d-block text-truncate w-100">Temp: {{forecast.tempCurr}}°</p>
 							<p class="m-0 sub-header d-block text-truncate w-100">Wind: {{forecast.windSpeed}}

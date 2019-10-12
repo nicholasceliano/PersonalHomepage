@@ -131,7 +131,7 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 			this.chatMsgs.push({ color: '', username: this.streamChannel, msg: [{
 				text: 'Joining my Channel :D', isEmote: false } as TwitchChatMessageText]
 			} as TwitchChatMessage);
-			this.twitchChatService.loadTwitchChat(channelName, twitchUserInfo.name, twitchUserInfo.token, this.setChatMessage.bind(this));
+			this.twitchChatService.loadTwitchChat(channelName.toLowerCase(), twitchUserInfo.name, twitchUserInfo.token, this.setChatMessage.bind(this));
 		});
 	}
 }
