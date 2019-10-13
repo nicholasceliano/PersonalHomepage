@@ -2,12 +2,12 @@
 	"name": "personal-homepage",
 	"version": "0.0.0",
 	"scripts": {
-		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",
-		"e2e": "ng e2e"
+		"e2e": "ng e2e",
+		"deploy_prod": "ng build --prod && ssh pi@192.168.0.200 rm -rf \/var\/www\/html\/* && scp -r %cd%\\dist\\PersonalHomepage\\* pi@192.168.0.200:\/var\/www\/html"
 	},
 	"private": true,
 	"dependencies": {
