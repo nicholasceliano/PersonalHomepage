@@ -25,7 +25,7 @@ export class PanelComponent {
 			this.refreshing = true;
 			this.panel.refreshPanel();
 		}
-		
+
 		const refreshIcon = $('[panelname="' + this.panelName + '"]').find('.refresh-icon');
 		refreshIcon.addClass(this.rotateIconClass).one('animationend', () => {
 			refreshIcon.removeClass(this.rotateIconClass);

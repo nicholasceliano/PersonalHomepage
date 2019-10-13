@@ -39,7 +39,6 @@ export class TwitchComponent extends OAuthVideoPlayerPanel implements OnInit {
 	public streamChannel: string;
 	public streamGame: string;
 	public cpColor = 'rgba(0,0,0,0)';
-	public emoteUrl = (id) => `http://static-cdn.jtvnw.net/emoticons/v1/${id}/1.0`;
 
 	ngOnInit() {
 		this.loadVideoPlayerScript(environment.twitchPlayerAPIEndpoint);

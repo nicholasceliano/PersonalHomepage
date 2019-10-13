@@ -56,12 +56,12 @@
 					aria-labelledby="list-twitch-chat-list">
 					<div id="twitch-chat-panel" class="overflow-auto twitch-panel-width text-secondary">
 						<div *ngFor="let msg of chatMsgs">
-							<p class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}: 
+							<p class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}:
 								<small class="twitch-chat-message">
 									<ng-container *ngFor="let m of msg.msg">
-										{{ !m.isEmote ? m.text : '' }}<img *ngIf="m.isEmote" class="twitch-chat-emote" [src]=emoteUrl(m.emoteId) title="{{m.text}}" />
+										{{ !m.isEmote ? m.text : '' }}<img *ngIf="m.isEmote" class="twitch-chat-emote" [src]="m.emoteId" title="{{m.text}}" />
 									</ng-container>
-								</small>	
+								</small>
 							</p>
 						</div>
 					</div>
@@ -74,10 +74,10 @@
 
 <div id="twitchChatVideoOverlay" class="position-absolute">
 	<div class="overflow-x-hidden pb-2 pt-2" [style.background]="cpColor" >
-		<p *ngFor="let msg of chatMsgs" class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}: 
+		<p *ngFor="let msg of chatMsgs" class="m-0 twitch-chat-username" [ngStyle]="{'color': msg.color}">{{msg.username}}:
 			<small class="twitch-chat-message text-light">
 				<ng-container *ngFor="let m of msg.msg">
-					{{ !m.isEmote ? m.text : '' }}<img *ngIf="m.isEmote" class="twitch-chat-emote" [src]=emoteUrl(m.emoteId) title="{{m.text}}" />
+					{{ !m.isEmote ? m.text : '' }}<img *ngIf="m.isEmote" class="twitch-chat-emote" [src]="m.emoteId" title="{{m.text}}" />
 				</ng-container>
 			</small>
 		</p>

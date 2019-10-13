@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { TwitchChatMessage } from '../../_models/twitch-chat-message';
 import { TwitchChatMessageText } from '../../_models/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
+import { BTTVService } from './bttv.service';
+import { FrankerFaceZService } from './franker-face-z.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class TwitchChatService {
 
-	constructor() { }
+	constructor(private bttv: BTTVService) { }
 
 	private socket: WebSocket = null;
 
@@ -42,12 +44,13 @@ export class TwitchChatService {
 
 				const tagInfoHash = this.getMessageTagInfo(tagInfo);
 				const chatMsg = this.getChatText(chatInfo, channelName);
+				const nameColor = tagInfoHash.color;
 				/* tslint:disable: no-string-literal */
-				const nameColor = tagInfoHash['color'];
 				const displayName = tagInfoHash['display-name'];
-				const emotes = tagInfoHash['emotes'];
+				const emotes = tagInfoHash.emotes;
 
-				const chatArray = this.setEmotesChatArray(emotes, chatMsg);
+				let chatArray = this.setEmotesChatArray(emotes, chatMsg);
+				chatArray = this.bttv.setEmotes(channelName, chatArray);
 
 				callback({ username: displayName, msg: chatArray, color: nameColor } as TwitchChatMessage);
 			}
@@ -65,7 +68,7 @@ export class TwitchChatService {
 		};
 	}
 
-	private getMessageTagInfo(tagInfo: string) {
+	private getMessageTagInfo(tagInfo: string): any {
 		const tagInfoArray = tagInfo.split(';');
 		const tagHash = {};
 
@@ -115,7 +118,7 @@ export class TwitchChatService {
 				const first = chatMsg.substring(lastStart, loc.s);
 
 				chatMsgTextArray.push({ text: first, isEmote: false } as TwitchChatMessageText);
-				chatMsgTextArray.push({ text: chatString, isEmote: true, emoteId: loc.id } as TwitchChatMessageText);
+				chatMsgTextArray.push({ text: chatString, isEmote: true, emoteId: `http://static-cdn.jtvnw.net/emoticons/v1/${loc.id}/1.0` } as TwitchChatMessageText);
 
 				lastStart = loc.e + 1;
 			});
