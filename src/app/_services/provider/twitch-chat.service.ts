@@ -3,6 +3,7 @@ import { TwitchChatMessage } from '../../_models/twitch/twitch-chat-message';
 import { TwitchChatMessageText } from '../../_models/twitch/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
 import { BTTVService } from './bttv.service';
+import { FrankerFaceZService } from './franker-face-z.service';
 
 @Injectable({
 	providedIn: 'root'
