@@ -3,7 +3,6 @@ import { TwitchChatMessage } from '../../_models/twitch/twitch-chat-message';
 import { TwitchChatMessageText } from '../../_models/twitch/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
 import { BTTVService } from './bttv.service';
-import { FrankerFaceZService } from './franker-face-z.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -119,7 +118,7 @@ export class TwitchChatService {
 				const first = chatMsg.substring(lastStart, loc.s);
 
 				chatMsgTextArray.push({ text: first, isEmote: false } as TwitchChatMessageText);
-				chatMsgTextArray.push({ text: chatString, isEmote: true, emoteId: `http://static-cdn.jtvnw.net/emoticons/v1/${loc.id}/1.0` } as TwitchChatMessageText);
+				chatMsgTextArray.push({ text: chatString, isEmote: true, emoteId: `https://static-cdn.jtvnw.net/emoticons/v1/${loc.id}/1.0` } as TwitchChatMessageText);
 
 				lastStart = loc.e + 1;
 			});
