@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BTTVEmotesResponse } from 'src/app/_models/BTTV/bttv-emotes-response';
+import { BTTVEmotesResponse } from 'src/app/_models/bttv/bttv-emotes-response';
 import { TwitchChatMessageText } from 'src/app/_models/twitch/twitch-chat-message-text';
 import { Observable } from 'rxjs';
 import { ChatEmote } from './logic/chat-emote';
