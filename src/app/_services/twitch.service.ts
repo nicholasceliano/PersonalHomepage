@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { OAuthUrlResponse } from '../_models/oauth-url-response';
 import { CookieService } from 'ngx-cookie-service';
-import { TwitchStream } from '../_models/twitch-stream';
+import { TwitchStream } from '../_models/twitch/twitch-stream';
 import { OAuthService } from './utility/oauth-service.service';
-import { TwitchUser } from '../_models/twitch-user';
+import { TwitchUser } from '../_models/twitch/twitch-user';
 
 @Injectable({
 	providedIn: 'root'

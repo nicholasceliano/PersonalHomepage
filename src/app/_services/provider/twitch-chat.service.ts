@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TwitchChatMessage } from '../../_models/twitch-chat-message';
-import { TwitchChatMessageText } from '../../_models/twitch-chat-message-text';
+import { TwitchChatMessage } from '../../_models/twitch/twitch-chat-message';
+import { TwitchChatMessageText } from '../../_models/twitch/twitch-chat-message-text';
 import { environment } from 'src/environments/environment';
 import { BTTVService } from './bttv.service';
 import { FrankerFaceZService } from './franker-face-z.service';
@@ -10,7 +10,7 @@ import { FrankerFaceZService } from './franker-face-z.service';
 })
 export class TwitchChatService {
 
-	constructor(private bttv: BTTVService) { }
+	constructor(private bttv: BTTVService, private ffz: FrankerFaceZService) { }
 
 	private socket: WebSocket = null;
 
@@ -50,7 +50,8 @@ export class TwitchChatService {
 				const emotes = tagInfoHash.emotes;
 
 				let chatArray = this.setEmotesChatArray(emotes, chatMsg);
-				chatArray = this.bttv.setEmotes(channelName, chatArray);
+				chatArray = this.ffz.setEmotes(channelName, chatArray); // 1 Ordered in Priority
+				chatArray = this.bttv.setEmotes(channelName, chatArray); // 2
 
 				callback({ username: displayName, msg: chatArray, color: nameColor } as TwitchChatMessage);
 			}
