@@ -12,6 +12,7 @@
 		</div>
 		<div>
 			<app-panel *ngIf="panelSettings?.swPanelWeather !== false" panelName="weather" panelTitle="Weather" panelLogo="assets/img/weatherlogo.png"></app-panel>
+			<app-panel *ngIf="panelSettings?.swPanelTemperature !== false" panelName="temperature" panelTitle="Temperature" panelLogo="assets/img/temperature.png"></app-panel>
 			<app-panel *ngIf="panelSettings?.swPanelTabs !== false" panelName="guitar-tabs" panelTitle="Tabs" panelLogo="assets/img/guitartabslogo.png"></app-panel>
 		</div>
 		<div>

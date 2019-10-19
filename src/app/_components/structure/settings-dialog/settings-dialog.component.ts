@@ -30,6 +30,7 @@ export class SettingsDialogComponent implements OnInit {
 		{id: 'swPanelTabs', text: 'Guitar Tabs Panel', type: 'panel'},
 		{id: 'swPanelTwitch', text: 'Twitch Panel', type: 'panel'},
 		{id: 'swPanelGoogleDrive', text: 'Google Drive Panel', type: 'panel'},
+		{id: 'swPanelTemperature', text: 'Temperature Panel', type: 'panel'},
 	];
 
 	ngOnInit() {

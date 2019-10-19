@@ -1,0 +1,10 @@
+<div class="temperature-panel-width">
+	<div [hidden]="!isPanelLoaded">
+		<div class="p-1 text-center">
+			<div class="font-weight-bold">{{ temperatureData.name }}</div>
+			<div class="d-inline-block">Temp: <i>{{ temperatureData.temp }}°F</i></div>
+			<div class="d-inline-block">Humidity: <i>{{ temperatureData.humidity }}%</i></div>
+		</div>
+	</div>
+	<app-panel-loading [isPanelLoaded]="isPanelLoaded" [paddingValue]="4"></app-panel-loading>
+</div>

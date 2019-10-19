@@ -32,6 +32,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { VideoOptionsOverlayComponent } from './_components/structure/video-options-overlay/video-options-overlay.component';
 import { PanelLoadingComponent } from './_components/structure/panel-loading/panel-loading.component';
 import { VideoOptionsComponent } from './_components/structure/video-options/video-options.component';
+import { TemperatureComponent } from './_components/temperature/temperature.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: DashboardComponent },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
 		HtmlEntitiyDecodePipe,
 		VideoOptionsOverlayComponent,
 		PanelLoadingComponent,
-		VideoOptionsComponent
+		VideoOptionsComponent,
+		TemperatureComponent
 	],
 	imports: [
 		BrowserModule,
