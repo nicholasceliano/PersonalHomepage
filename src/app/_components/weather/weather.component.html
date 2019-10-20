@@ -2,7 +2,7 @@
 	<div *ngIf="locationServiceEnabled === false">
 		<p class="text-center">Location Services must be enabled to retrieve weather data.</p>
 	</div>
-	<div *ngIf="locationServiceEnabled === true">
+	<div *ngIf="locationServiceEnabled === true && weatherData">
 		<div class="p-1 header-panel text-center" appThemeItem>
 			<div *ngIf="isPanelLoaded">
 				<p *ngIf="locationDataLoaded" class="m-0 d-block text-truncate w-100"

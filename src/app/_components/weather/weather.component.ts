@@ -24,7 +24,7 @@ export class WeatherComponent extends RefreshPanel {
 	public locationServiceEnabled: boolean;
 	public weatherDataLoaded = false;
 	public locationDataLoaded = false;
-	public weatherData: WeatherData = new WeatherData();
+	public weatherData: WeatherData;
 	public locationData: Address = new Address();
 
 	refreshPanel() {
